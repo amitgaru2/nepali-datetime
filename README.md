@@ -11,14 +11,15 @@ You can install the Nepali Date from PyPI:
 
 ### How to use
 
-1)  BS Date today
+>  BS Date today
 
         from nepali_date import NepaliDate
         
         # print today BS date
         print(NepaliDate.today())
 
-2)  Creating NepaliDate instance
+
+>  Creating NepaliDate instance
 
         from nepali_date import NepaliDate
         
@@ -26,7 +27,7 @@ You can install the Nepali Date from PyPI:
         # or
         my_birthday = NepaliDate('2051', '10', '1')
 
-3) Adding/Subtracting datetime.timedelta to NepaliDate instance
+> Adding/Subtracting datetime.timedelta to NepaliDate instance
         
         import datetime
         
@@ -37,7 +38,7 @@ You can install the Nepali Date from PyPI:
         hundred_days_after_my_birthday = my_birthday + timedelta(days=100)
         hundred_days_before_my_birthday = my_birthday - timedelta(days=100)
 
-4) Converting datetime.date to NepaliDate or vice-versa
+> Converting datetime.date to NepaliDate or vice-versa
         
         import datetime
         
