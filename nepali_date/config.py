@@ -1,0 +1,4 @@
+FILE_NAME = 'calendar_bs.csv'
+
+REFERENCE_DATE_BS = '1975-01-01'
+REFERENCE_DATE_AD = '1918-04-13'
