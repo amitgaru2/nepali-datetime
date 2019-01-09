@@ -35,8 +35,8 @@ You can install the Nepali Date from PyPI:
         
         my_birthday = NepaliDate(2051, 10, 1)
         
-        hundred_days_after_my_birthday = my_birthday + timedelta(days=100)
-        hundred_days_before_my_birthday = my_birthday - timedelta(days=100)
+        hundred_days_after_my_birthday = my_birthday + datetime.timedelta(days=100)
+        hundred_days_before_my_birthday = my_birthday - datetime.timedelta(days=100)
 
 > Converting datetime.date to NepaliDate or vice-versa
         
