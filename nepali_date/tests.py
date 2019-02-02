@@ -13,9 +13,9 @@ class NepaliDateTest(unittest.TestCase):
             date_nepali = NepaliDate(MIN_DATE['year'], MIN_DATE['month'], MIN_DATE['day'])
             date_english = date_nepali.to_english_date()
 
-            assert date_english.year == REFERENCE_DATE_AD['year'], "Years did not match"
-            assert date_english.month == REFERENCE_DATE_AD['month'], "Months did not match"
-            assert date_english.day == REFERENCE_DATE_AD['day'],  "Days did not match"
+            self.assertEqual(date_english.year, REFERENCE_DATE_AD['year'])
+            self.assertEqual(date_english.month, REFERENCE_DATE_AD['month'])
+            self.assertEqual(date_english.day, REFERENCE_DATE_AD['day'])
             # TODO: add more tests
 
 
@@ -23,9 +23,9 @@ class NepaliDateTest(unittest.TestCase):
             date_english = datetime.date(REFERENCE_DATE_AD['year'], REFERENCE_DATE_AD['month'], REFERENCE_DATE_AD['day'])
             date_nepali = NepaliDate.to_nepali_date(date_ad=date_english)
 
-            assert date_nepali.year == MIN_DATE['year'], "Years did not match"
-            assert date_nepali.month == MIN_DATE['month'], "Months did not match"
-            assert date_nepali.day == MIN_DATE['day'], "Days did not match"
+            self.assertEqual(date_nepali.year, MIN_DATE['year'])
+            self.assertEqual(date_nepali.month, MIN_DATE['month'])
+            self.assertEqual(date_nepali.day, MIN_DATE['day'])
             # TODO: add more tests
 
 
