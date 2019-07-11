@@ -46,9 +46,10 @@ my_birthday_in_bs = NepaliDate.to_nepali_date(my_birthday_in_ad)
 my_birthday = NepaliDate(2051, 10, 1)
 my_birthday_in_ad = my_birthday.to_english_date()
 ```
- ### Monthly Calendar
- > Current nepali month calendar
- ```python
- from nepali_date import NepaliDate
- NepaliDate.calendar()
- ```
+### Monthly Calendar
+> Current nepali month calendar
+```python
+from nepali_date import NepaliDate
+NepaliDate.calendar()
+```
+![Screenshot](screenshots/nepali_monthly_calendar.PNG)
