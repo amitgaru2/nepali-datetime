@@ -4,7 +4,6 @@ import datetime
 
 BASE_DIR = os.path.join(os.path.dirname(__file__))
 CALENDAR_PATH = os.path.join(BASE_DIR, 'data', 'calendar_bs.csv')
-
 MIN_DATE = {
     'year': 1975,
     'month': 1,
@@ -22,6 +21,18 @@ REFERENCE_DATE_AD = {
     'month': 4,
     'day': 13
 }
+
+WEEKDAYS_MAPPER = {
+    5: ('Sat', 'Sa'),
+    6: ('Sun', 'Su'),
+    0: ('Mon', 'Mo'),
+    1: ('Tue', 'Tu'),
+    2: ('Wed', 'We'),
+    3: ('Thu', 'Th'),
+    4: ('Fri', 'Fr')
+}
+
+NEPALI_MONTHS = ("Baisakh", "Jestha", "Ashar", "Shrawan", "Bhadra", "Asoj", "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chait")
 
 # TODO: document the code
 # TODO: format specifier for different output date results
@@ -44,7 +55,7 @@ class NepaliDateMeta(type):
     def __init__(cls, cls_name, superclasses, attr_dict):
         cls.min = cls(**MIN_DATE, meta=True)
         cls.max = cls(**MAX_DATE, meta=True)
-        cls.calendar = cls.load_calendar()
+        cls.calendar_data = cls.load_calendar()
         super().__init__(cls_name, superclasses, attr_dict)
 
 
@@ -120,7 +131,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
         if self.max < self:
             raise ValueError("Date {} is out of range.".format(self))
 
-        if self.__day > NepaliDate.calendar[self.__year][self.__month-1]:
+        if self.__day > NepaliDate.calendar_data[self.__year][self.__month-1]:
             raise ValueError("Invalid nepali date {}.".format(self))
 
     def __eq__(self, other):
@@ -161,7 +172,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
         total_remaining_days_this_year = NepaliDate.total_days(self.year) - (
                 sum(
-                    NepaliDate.calendar[self.year][:self.month - 1]
+                    NepaliDate.calendar_data[self.year][:self.month - 1]
                 ) + self.day
         )
         from_year, from_month, from_day = self.year, self.month, self.day
@@ -191,13 +202,13 @@ class NepaliDate(metaclass=NepaliDateMeta):
             raise OverflowError("Resulting date out of range.")
 
         if from_year == self.year:
-            total_remaining_days_this_month = NepaliDate.calendar[from_year][from_month - 1] - from_day
+            total_remaining_days_this_month = NepaliDate.calendar_data[from_year][from_month - 1] - from_day
             if delta_days > total_remaining_days_this_month:
                 delta_days -= total_remaining_days_this_month
                 from_month += 1
                 from_day = 0
 
-        for month_days in NepaliDate.calendar[from_year][from_month - 1:]:
+        for month_days in NepaliDate.calendar_data[from_year][from_month - 1:]:
             if delta_days > month_days:
                 delta_days -= month_days
                 delta_months += 1
@@ -221,7 +232,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
         delta_days = other.days
 
         total_passed_days_this_year = sum(
-            NepaliDate.calendar[self.year][:self.month - 1]
+            NepaliDate.calendar_data[self.year][:self.month - 1]
         ) + self.day
 
         from_year, from_month, from_day = self.year, self.month, self.day
@@ -234,7 +245,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
             if from_year < MIN_DATE['year']:
                 raise OverflowError("Resulting date out of range.")
 
-            from_day = NepaliDate.calendar[from_year][11]
+            from_day = NepaliDate.calendar_data[from_year][11]
 
         if delta_days >= NepaliDate.total_days(from_year):
             for year in range(from_year, MIN_DATE['year'] - 1, -1):
@@ -255,13 +266,13 @@ class NepaliDate(metaclass=NepaliDateMeta):
             if delta_days >= total_passed_days_this_month:
                 delta_days -= total_passed_days_this_month
                 from_month -= 1
-                from_day = NepaliDate.calendar[from_year][from_month-1]
+                from_day = NepaliDate.calendar_data[from_year][from_month-1]
 
-        for month_days in NepaliDate.calendar[from_year][from_month-1::-1]:
+        for month_days in NepaliDate.calendar_data[from_year][from_month-1::-1]:
             if delta_days >= month_days:
                 delta_days -= month_days
                 from_month -= 1
-                from_day = NepaliDate.calendar[from_year][from_month-1]
+                from_day = NepaliDate.calendar_data[from_year][from_month-1]
 
             else:
                 break
@@ -272,8 +283,8 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     @staticmethod
     def total_days(year):
-        assert year in NepaliDate.calendar, "Year {} not in range.".format(year)
-        return sum(NepaliDate.calendar[year])
+        assert year in NepaliDate.calendar_data, "Year {} not in range.".format(year)
+        return sum(NepaliDate.calendar_data[year])
 
     @staticmethod
     def delta_with_reference_ad(date: datetime.date) -> datetime.timedelta:
@@ -286,7 +297,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
             delta += NepaliDate.total_days(year)
 
         for month in range(1, self.__month):
-            delta += NepaliDate.calendar[self.__year][month-1]
+            delta += NepaliDate.calendar_data[self.__year][month-1]
 
         delta += self.__day - 1
         return datetime.timedelta(days=delta)
@@ -297,6 +308,32 @@ class NepaliDate(metaclass=NepaliDateMeta):
         delta = NepaliDate.delta_with_reference_ad(date_today_ad)
         date_today_bs = NepaliDate.min + delta
         return date_today_bs
+
+    @staticmethod
+    def weekday():
+        return WEEKDAYS_MAPPER[datetime.datetime.today().weekday()][0]
+
+    @staticmethod
+    def calendar():
+        today = NepaliDate.today()
+        weekdays = ' '.join(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'])
+        month_year = '{} {}'.format(NEPALI_MONTHS[today.month-1], today.year).center(len(weekdays))
+        start_day = (NepaliDate(year=today.year, month=today.month, day=1).to_english_date().weekday() + 1) % 7
+        total_days_this_month = NepaliDate.calendar_data[today.year][today.month-1]
+        days = ['  ' for i in range(start_day)]
+        days += [str(i).rjust(2) for i in range(1, total_days_this_month+1)]
+        days[days.index(str(today.day).rjust(2))] = '\033[1;31;40m{}\033[0m'.format(today.day).rjust(2)
+        week_days, temp = list(), list()
+        for i, v in enumerate(days, 1):
+            temp.append(v)
+            if i % 7 == 0:
+                week_days.append(temp)
+                temp = []
+        if len(temp) > 0:
+            week_days.append(temp)
+        days_disp = '\n'.join([' '.join(i) for i in week_days])
+        os.system("COLOR 07")
+        print("{}\n{}\n{}".format(month_year, weekdays, days_disp))
 
     @staticmethod
     def to_nepali_date(date_ad: datetime.date):
