@@ -1,6 +1,7 @@
 import os
 import csv
 import datetime
+import platform
 
 BASE_DIR = os.path.join(os.path.dirname(__file__))
 CALENDAR_PATH = os.path.join(BASE_DIR, 'data', 'calendar_bs.csv')
@@ -332,7 +333,8 @@ class NepaliDate(metaclass=NepaliDateMeta):
         if len(temp) > 0:
             week_days.append(temp)
         days_disp = '\n'.join([' '.join(i) for i in week_days])
-        os.system("COLOR 07")
+        if platform.system() == 'Windows':
+            os.system("COLOR 07")
         print("{}\n{}\n{}".format(month_year, weekdays, days_disp))
 
     @staticmethod

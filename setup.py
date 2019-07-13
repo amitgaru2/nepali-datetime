@@ -14,6 +14,7 @@ setup(
     author_email="amitgaru2@gmail.com",
     license="MIT",
     packages=find_packages(),
-    keywords=['Nepali', 'BS', 'B.S', 'Date', 'Nepal'],
-    include_package_data=True,
+    keywords=['Nepali', 'BS', 'B.S', 'Date', 'Nepal', 'Bikram', 'Sambat',
+              'Year', 'Month', 'Day'],
+    include_package_data=True
 )
