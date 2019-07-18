@@ -53,3 +53,11 @@ from nepali_date import NepaliDate
 NepaliDate.calendar()
 ```
 ![Screenshot](screenshots/nepali_monthly_calendar.PNG)
+
+
+### Date in isoformat() 'YYYY-MM-DD'
+```python
+dt = NepaliDate(2076, 4, 2)
+print(dt.isoformat())
+# outputs 2076-04-02
+```

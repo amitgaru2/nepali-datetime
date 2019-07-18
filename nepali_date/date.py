@@ -76,6 +76,13 @@ class NepaliDate(metaclass=NepaliDateMeta):
     def __repr__(self):
         return "nepali_datetime.NepaliDate({}, {}, {})".format(self.year, self.month, self.day)
 
+    def isoformat(self):
+        year = str(self.year)
+        month = '0{}'.format(self.month) if self.month < 10 else self.month
+        day = '0{}'.format(self.day) if self.day < 10 else self.day
+
+        return "{}-{}-{}".format(year, month, day)
+
     @staticmethod
     def clean_attrs(year, month, day):
         year, month, day = str(year), str(month), str(day)
