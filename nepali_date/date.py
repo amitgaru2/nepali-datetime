@@ -33,7 +33,31 @@ WEEKDAYS_MAPPER = {
     4: ('Fri', 'Fr')
 }
 
-NEPALI_MONTHS = ("Baisakh", "Jestha", "Ashar", "Shrawan", "Bhadra", "Asoj", "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chait")
+NEPALI_MONTHS = ("Baisakh",
+                 "Jestha",
+                 "Ashar",
+                 "Shrawan",
+                 "Bhadra",
+                 "Asoj",
+                 "Kartik",
+                 "Mangsir",
+                 "Poush",
+                 "Magh",
+                 "Falgun",
+                 "Chait")
+
+NEPALI_MONTHS_ABB = ("Bai",
+                     "Jes",
+                     "Ash",
+                     "Shr",
+                     "Bha",
+                     "Aso",
+                     "Kar",
+                     "Man",
+                     "Pou",
+                     "Mag",
+                     "Fal",
+                     "Cha")
 
 # TODO: document the code
 # TODO: format specifier for different output date results
@@ -76,6 +100,20 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     def __repr__(self):
         return "nepali_datetime.NepaliDate({}, {}, {})".format(self.year, self.month, self.day)
+
+    def __format__(self, format_spec):
+        if format_spec == 'Y':
+            return str(self.year)
+        elif format_spec == 'y':
+            return str(self.year)[2:]
+        elif format_spec == 'm':
+            return '0{}'.format(self.month) if self.month < 10 else self.month
+        elif format_spec == 'b':
+            return NEPALI_MONTHS_ABB[self.month-1]
+        elif format_spec == 'B':
+            return NEPALI_MONTHS[self.month-1]
+        elif format_spec == 'd':
+            return '0{}'.format(self.day) if self.day < 10 else self.day
 
     def isoformat(self):
         year = str(self.year)

@@ -61,3 +61,19 @@ dt = NepaliDate(2076, 4, 2)
 print(dt.isoformat())
 # outputs 2076-04-02
 ```
+
+### Date display format
+Format Specifier | Meaning | Example
+--- | --- | ---
+```{:d}``` | Day of the month as a zero-padded decimal number. | 01, 02, ..., 32
+```{:b}``` | Month as abbreviated name. | Bai, Jes, ..., Cha
+```{:B}``` | Month as full name. | Baishak, Jestha, ..., Chait
+```{:m}``` | Month as a zero-padded decimal number. | 01, 02, ..., 12
+```{:y}``` | Year without century as a zero-padded decimal number. | 00, 01, ..., 99
+```{:Y}``` | Year with century as a decimal number. | 0001, 0002, ..., 2075, 2076, ..., 9999
+
+```python
+dt = NepaliDate(2076, 4, 7)
+print("{0:B} {0:d}".format(dt))
+# outputs Shrawan 07
+```
