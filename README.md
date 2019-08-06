@@ -52,7 +52,7 @@ my_birthday_in_ad = my_birthday.to_english_date()
 from nepali_date import NepaliDate
 NepaliDate.calendar()
 ```
-![Screenshot](screenshots/nepali_monthly_calendar.PNG)
+![Screenshot](https://raw.githubusercontent.com/arneec/nepali-date/master/screenshots/nepali_monthly_calendar.PNG)
 
 
 ### Date in isoformat() 'YYYY-MM-DD'
