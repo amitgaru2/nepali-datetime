@@ -5,83 +5,34 @@ import platform
 
 BASE_DIR = os.path.join(os.path.dirname(__file__))
 CALENDAR_PATH = os.path.join(BASE_DIR, 'data', 'calendar_bs.csv')
-MIN_DATE = {
-    'year': 1975,
-    'month': 1,
-    'day': 1
-}
-
-MAX_DATE = {
-    'year': 2100,
-    'month': 12,
-    'day': 32
-}
-
-REFERENCE_DATE_AD = {
-    'year': 1918,
-    'month': 4,
-    'day': 13
-}
-
-WEEKDAYS_MAPPER = {
-    5: ('Sat', 'Sa'),
-    6: ('Sun', 'Su'),
-    0: ('Mon', 'Mo'),
-    1: ('Tue', 'Tu'),
-    2: ('Wed', 'We'),
-    3: ('Thu', 'Th'),
-    4: ('Fri', 'Fr')
-}
-
-NEPALI_MONTHS = ("Baisakh",
-                 "Jestha",
-                 "Ashar",
-                 "Shrawan",
-                 "Bhadra",
-                 "Asoj",
-                 "Kartik",
-                 "Mangsir",
-                 "Poush",
-                 "Magh",
-                 "Falgun",
-                 "Chait")
-
-NEPALI_MONTHS_ABB = ("Bai",
-                     "Jes",
-                     "Ash",
-                     "Shr",
-                     "Bha",
-                     "Aso",
-                     "Kar",
-                     "Man",
-                     "Pou",
-                     "Mag",
-                     "Fal",
-                     "Cha")
-
-# TODO: document the code
-# TODO: format specifier for different output date results
-# TODO: write tests
+MIN_DATE = {'year': 1975, 'month': 1, 'day': 1}
+MAX_DATE = {'year': 2100, 'month': 12, 'day': 32}
+REFERENCE_DATE_AD = {'year': 1918, 'month': 4, 'day': 13}
+WEEKDAYS_MAPPER = {5: ('Sat', 'Sa'), 6: ('Sun', 'Su'), 0: ('Mon', 'Mo'), 1: ('Tue', 'Tu'), 2: ('Wed', 'We'),
+                   3: ('Thu', 'Th'), 4: ('Fri', 'Fr')}
+NEPALI_MONTHS = (("Baisakh", "Bai"), ("Jestha", "Jes"), ("Ashar", "Ash"), ("Shrawan", "Shr"), ("Bhadra", "Bha"),
+                 ("Asoj", "Aso"), ("Kartik", "Kar"), ("Mangsir", "Man"), ("Poush", "Pou"), ("Magh", "Mag"),
+                 ("Falgun", "Fal"), ("Chait", "Cha"))
 
 
 class NepaliDateMeta(type):
 
     @staticmethod
     def load_calendar():
+        calendar = dict()
         with open(CALENDAR_PATH, 'r') as calendar_file:
             file = csv.reader(calendar_file)
             headers = next(file)
-            calendar = {}
             for row in file:
                 calendar[int(row[0])] = [int(days) for days in row[1:]]
 
-            return calendar
+        return calendar
 
-    def __init__(cls, cls_name, superclasses, attr_dict):
+    def __init__(cls, what, bases=None, dict=None):
         cls.min = cls(**MIN_DATE, meta=True)
         cls.max = cls(**MAX_DATE, meta=True)
         cls.calendar_data = cls.load_calendar()
-        super().__init__(cls_name, superclasses, attr_dict)
+        super().__init__(what, bases, dict)
 
 
 class NepaliDate(metaclass=NepaliDateMeta):
@@ -90,37 +41,6 @@ class NepaliDate(metaclass=NepaliDateMeta):
         self.year, self.month, self.day = self.clean_attrs(year=year, month=month, day=day)
         if not ('meta' in kwargs and kwargs['meta']):
             self.post_validation()
-
-    def __str__(self):
-        year = str(self.year)
-        month = '0{}'.format(self.month) if self.month < 10 else self.month
-        day = '0{}'.format(self.day) if self.day < 10 else self.day
-
-        return "BS {}/{}/{}".format(year, month, day)
-
-    def __repr__(self):
-        return "nepali_datetime.NepaliDate({}, {}, {})".format(self.year, self.month, self.day)
-
-    def __format__(self, format_spec):
-        if format_spec == 'Y':
-            return str(self.year)
-        elif format_spec == 'y':
-            return str(self.year)[2:]
-        elif format_spec == 'm':
-            return '0{}'.format(self.month) if self.month < 10 else self.month
-        elif format_spec == 'b':
-            return NEPALI_MONTHS_ABB[self.month-1]
-        elif format_spec == 'B':
-            return NEPALI_MONTHS[self.month-1]
-        elif format_spec == 'd':
-            return '0{}'.format(self.day) if self.day < 10 else self.day
-
-    def isoformat(self):
-        year = str(self.year)
-        month = '0{}'.format(self.month) if self.month < 10 else self.month
-        day = '0{}'.format(self.day) if self.day < 10 else self.day
-
-        return "{}-{}-{}".format(year, month, day)
 
     @staticmethod
     def clean_attrs(year, month, day):
@@ -177,20 +97,53 @@ class NepaliDate(metaclass=NepaliDateMeta):
         if self.max < self:
             raise ValueError("Date {} is out of range.".format(self))
 
-        if self.__day > NepaliDate.calendar_data[self.__year][self.__month-1]:
+        if self.__day > NepaliDate.calendar_data[self.__year][self.__month - 1]:
             raise ValueError("Invalid nepali date {}.".format(self))
+
+    def __str__(self):
+        year = str(self.year)
+        month = '0{}'.format(self.month) if self.month < 10 else self.month
+        day = '0{}'.format(self.day) if self.day < 10 else self.day
+
+        return "BS {}/{}/{}".format(year, month, day)
+
+    def __repr__(self):
+        return "nepali_datetime.NepaliDate({}, {}, {})".format(self.year, self.month, self.day)
+
+    def __format__(self, format_spec):
+        if format_spec == 'Y':
+            return str(self.year)
+        elif format_spec == 'y':
+            return str(self.year)[2:]
+        elif format_spec == 'm':
+            return '0{}'.format(self.month) if self.month < 10 else self.month
+        elif format_spec == 'b':
+            return NEPALI_MONTHS[self.month - 1][1]
+        elif format_spec == 'B':
+            return NEPALI_MONTHS[self.month - 1][0]
+        elif format_spec == 'd':
+            return '0{}'.format(self.day) if self.day < 10 else self.day
+
+    def isoformat(self):
+        year = str(self.year)
+        month = '0{}'.format(self.month) if self.month < 10 else self.month
+        day = '0{}'.format(self.day) if self.day < 10 else self.day
+
+        return "{}-{}-{}".format(year, month, day)
 
     def __eq__(self, other):
         if not isinstance(other, NepaliDate):
             raise TypeError(
-                "'==' not supported between instances of '{.__name__}' and '{.__name__}'".format(type(self), type(other)))
+                "'==' not supported between instances of '{.__name__}' and '{.__name__}'".format(type(self),
+                                                                                                 type(other)))
 
         return self.__year == other.__year and self.__month == other.__month and self.__day == other.__day
 
     def __lt__(self, other):
         if not isinstance(other, NepaliDate):
             raise TypeError(
-                "'<' not supported between instances of '{.__name__}' and '{.__name__}'".format(type(self), type(other)))
+                "'<' not supported between instances of '{.__name__}' and '{.__name__}'".format(type(self),
+                                                                                                type(other)))
 
         if self.__year == other.__year:
             if self.__month == other.__month:
@@ -312,13 +265,13 @@ class NepaliDate(metaclass=NepaliDateMeta):
             if delta_days >= total_passed_days_this_month:
                 delta_days -= total_passed_days_this_month
                 from_month -= 1
-                from_day = NepaliDate.calendar_data[from_year][from_month-1]
+                from_day = NepaliDate.calendar_data[from_year][from_month - 1]
 
-        for month_days in NepaliDate.calendar_data[from_year][from_month-1::-1]:
+        for month_days in NepaliDate.calendar_data[from_year][from_month - 1::-1]:
             if delta_days >= month_days:
                 delta_days -= month_days
                 from_month -= 1
-                from_day = NepaliDate.calendar_data[from_year][from_month-1]
+                from_day = NepaliDate.calendar_data[from_year][from_month - 1]
 
             else:
                 break
@@ -343,7 +296,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
             delta += NepaliDate.total_days(year)
 
         for month in range(1, self.__month):
-            delta += NepaliDate.calendar_data[self.__year][month-1]
+            delta += NepaliDate.calendar_data[self.__year][month - 1]
 
         delta += self.__day - 1
         return datetime.timedelta(days=delta)
@@ -363,11 +316,11 @@ class NepaliDate(metaclass=NepaliDateMeta):
     def calendar():
         today = NepaliDate.today()
         weekdays = ' '.join(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'])
-        month_year = '{} {}'.format(NEPALI_MONTHS[today.month-1], today.year).center(len(weekdays))
+        month_year = '{} {}'.format(NEPALI_MONTHS[today.month - 1][0], today.year).center(len(weekdays))
         start_day = (NepaliDate(year=today.year, month=today.month, day=1).to_english_date().weekday() + 1) % 7
-        total_days_this_month = NepaliDate.calendar_data[today.year][today.month-1]
+        total_days_this_month = NepaliDate.calendar_data[today.year][today.month - 1]
         days = ['  ' for i in range(start_day)]
-        days += [str(i).rjust(2) for i in range(1, total_days_this_month+1)]
+        days += [str(i).rjust(2) for i in range(1, total_days_this_month + 1)]
         days[days.index(str(today.day).rjust(2))] = '\033[1;31;40m{}\033[0m'.format(today.day).rjust(2)
         week_days, temp = list(), list()
         for i, v in enumerate(days, 1):
