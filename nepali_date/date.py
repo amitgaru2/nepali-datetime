@@ -116,13 +116,13 @@ class NepaliDate(metaclass=NepaliDateMeta):
         elif format_spec == 'y':
             return str(self.year)[2:]
         elif format_spec == 'm':
-            return '0{}'.format(self.month) if self.month < 10 else self.month
+            return '0{}'.format(self.month) if self.month < 10 else str(self.month)
         elif format_spec == 'b':
             return NEPALI_MONTHS[self.month - 1][1]
         elif format_spec == 'B':
             return NEPALI_MONTHS[self.month - 1][0]
         elif format_spec == 'd':
-            return '0{}'.format(self.day) if self.day < 10 else self.day
+            return '0{}'.format(self.day) if self.day < 10 else str(self.day)
 
     def isoformat(self):
         year = str(self.year)
