@@ -6,7 +6,7 @@ import platform
 BASE_DIR = os.path.join(os.path.dirname(__file__))
 CALENDAR_PATH = os.path.join(BASE_DIR, 'data', 'calendar_bs.csv')
 MIN_DATE = {'year': 1975, 'month': 1, 'day': 1}
-MAX_DATE = {'year': 2100, 'month': 12, 'day': 32}
+MAX_DATE = {'year': 2100, 'month': 12, 'day': 30}
 REFERENCE_DATE_AD = {'year': 1918, 'month': 4, 'day': 13}
 WEEKDAYS_MAPPER = {5: ('Sat', 'Sa'), 6: ('Sun', 'Su'), 0: ('Mon', 'Mo'), 1: ('Tue', 'Tu'), 2: ('Wed', 'We'),
                    3: ('Thu', 'Th'), 4: ('Fri', 'Fr')}
@@ -29,23 +29,23 @@ class NepaliDateMeta(type):
         return calendar
 
     def __init__(cls, what, bases=None, dict=None):
-        cls.min = cls(**MIN_DATE, meta=True)
-        cls.max = cls(**MAX_DATE, meta=True)
         cls.calendar_data = cls.load_calendar()
+        cls.min = cls(**MIN_DATE)
+        cls.max = cls(**MAX_DATE)
         super().__init__(what, bases, dict)
 
 
 class NepaliDate(metaclass=NepaliDateMeta):
 
-    def __init__(self, year, month, day, **kwargs):
+    def __init__(self, year, month, day):
         self.year, self.month, self.day = self.clean_attrs(year=year, month=month, day=day)
-        if not ('meta' in kwargs and kwargs['meta']):
-            self.post_validation()
+
+        if self.day > self.calendar_data[self.year][self.month - 1]:
+            raise ValueError("Trying to create invalid Nepali Date.")
 
     @staticmethod
     def clean_attrs(year, month, day):
         year, month, day = str(year), str(month), str(day)
-
         if not (year.isnumeric() and month.isnumeric() and day.isnumeric()):
             raise ValueError("Invalid year or month or day.")
 
@@ -60,6 +60,9 @@ class NepaliDate(metaclass=NepaliDateMeta):
         if len(str(year)) != 4:
             raise ValueError("Invalid year. Expected 4 digits year like -> 2075.")
 
+        elif not MIN_DATE['year'] <= year <= MAX_DATE['year']:
+            raise ValueError("Year {} is out of range.".format(year))
+
         self.__year = year
 
     @property
@@ -71,7 +74,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
         if len(str(month)) not in [1, 2]:
             raise ValueError("Invalid month. Expected 1 or 2 digits month like -> 1 or 01.")
 
-        elif int(month) > 12 or int(month) < 1:
+        elif not 1 <= month <= 12:
             raise ValueError("Invalid month.")
 
         self.__month = month
@@ -85,20 +88,10 @@ class NepaliDate(metaclass=NepaliDateMeta):
         if len(str(day)) not in [1, 2]:
             raise ValueError("Invalid day. Expected 1 or 2 digits day like -> 1 or 01.")
 
-        elif int(day) > 32 or int(day) < 0:
+        elif not 1 <= day <= 32:
             raise ValueError("Invalid day.")
 
         self.__day = day
-
-    def post_validation(self):
-        if self.min > self:
-            raise ValueError("Date {} is out of range.".format(self))
-
-        if self.max < self:
-            raise ValueError("Date {} is out of range.".format(self))
-
-        if self.__day > NepaliDate.calendar_data[self.__year][self.__month - 1]:
-            raise ValueError("Invalid nepali date {}.".format(self))
 
     def __str__(self):
         year = str(self.year)
@@ -108,7 +101,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
         return "BS {}/{}/{}".format(year, month, day)
 
     def __repr__(self):
-        return "nepali_datetime.NepaliDate({}, {}, {})".format(self.year, self.month, self.day)
+        return "nepali_date.NepaliDate({}, {}, {})".format(self.year, self.month, self.day)
 
     def __format__(self, format_spec):
         if format_spec == 'Y':
