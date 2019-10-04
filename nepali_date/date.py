@@ -57,10 +57,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     @year.setter
     def year(self, year):
-        if len(str(year)) != 4:
-            raise ValueError("Invalid year. Expected 4 digits year like -> 2075.")
-
-        elif not MIN_DATE['year'] <= year <= MAX_DATE['year']:
+        if not MIN_DATE['year'] <= year <= MAX_DATE['year']:
             raise ValueError("Year {} is out of range.".format(year))
 
         self.__year = year
@@ -71,10 +68,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     @month.setter
     def month(self, month):
-        if len(str(month)) not in [1, 2]:
-            raise ValueError("Invalid month. Expected 1 or 2 digits month like -> 1 or 01.")
-
-        elif not 1 <= month <= 12:
+        if not 1 <= month <= 12:
             raise ValueError("Invalid month.")
 
         self.__month = month
@@ -85,10 +79,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     @day.setter
     def day(self, day):
-        if len(str(day)) not in [1, 2]:
-            raise ValueError("Invalid day. Expected 1 or 2 digits day like -> 1 or 01.")
-
-        elif not 1 <= day <= 32:
+        if not 1 <= day <= 32:
             raise ValueError("Invalid day.")
 
         self.__day = day
