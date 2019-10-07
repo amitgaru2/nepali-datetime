@@ -2,6 +2,9 @@ import os
 import csv
 import datetime
 import platform
+import re
+
+from functools import reduce
 
 BASE_DIR = os.path.join(os.path.dirname(__file__))
 CALENDAR_PATH = os.path.join(BASE_DIR, 'data', 'calendar_bs.csv')
@@ -13,6 +16,12 @@ WEEKDAYS_MAPPER = {5: ('Sat', 'Sa'), 6: ('Sun', 'Su'), 0: ('Mon', 'Mo'), 1: ('Tu
 NEPALI_MONTHS = (("Baisakh", "Bai"), ("Jestha", "Jes"), ("Ashar", "Ash"), ("Shrawan", "Shr"), ("Bhadra", "Bha"),
                  ("Asoj", "Aso"), ("Kartik", "Kar"), ("Mangsir", "Man"), ("Poush", "Pou"), ("Magh", "Mag"),
                  ("Falgun", "Fal"), ("Chait", "Cha"))
+FORMAT_MAP = {'Y': lambda x: str(x.year),
+              'y': lambda x: str(x.year)[2:],
+              'm': lambda x: '0{}'.format(x.month) if x.month < 10 else str(x.month),
+              'b': lambda x: NEPALI_MONTHS[x.month - 1][1],
+              'B': lambda x: NEPALI_MONTHS[x.month - 1][0],
+              'd': lambda x: '0{}'.format(x.day) if x.day < 10 else str(x.day)}
 
 
 class NepaliDateMeta(type):
@@ -95,18 +104,8 @@ class NepaliDate(metaclass=NepaliDateMeta):
         return "nepali_date.NepaliDate({}, {}, {})".format(self.year, self.month, self.day)
 
     def __format__(self, format_spec):
-        if format_spec == 'Y':
-            return str(self.year)
-        elif format_spec == 'y':
-            return str(self.year)[2:]
-        elif format_spec == 'm':
-            return '0{}'.format(self.month) if self.month < 10 else str(self.month)
-        elif format_spec == 'b':
-            return NEPALI_MONTHS[self.month - 1][1]
-        elif format_spec == 'B':
-            return NEPALI_MONTHS[self.month - 1][0]
-        elif format_spec == 'd':
-            return '0{}'.format(self.day) if self.day < 10 else str(self.day)
+        formatter = FORMAT_MAP.get(format_spec, None)
+        return formatter(self) if formatter is not None else ''
 
     def isoformat(self):
         year = str(self.year)
@@ -330,3 +329,10 @@ class NepaliDate(metaclass=NepaliDateMeta):
     def to_english_date(self):
         delta = self.delta_with_reference_bs()
         return datetime.date(**REFERENCE_DATE_AD) + delta
+
+    def strfdate(self, format: str) -> str:
+        """Nepali Date object to formatted string."""
+        pattern = r'%({})'.format(reduce(lambda x, y: '{}|{}'.format(x, y), FORMAT_MAP.keys()))
+        for fmt in re.findall(pattern, format):
+            format = format.replace('%{}'.format(fmt), FORMAT_MAP[fmt](self))
+        return format
