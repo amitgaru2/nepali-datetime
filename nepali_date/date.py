@@ -331,8 +331,41 @@ class NepaliDate(metaclass=NepaliDateMeta):
         return datetime.date(**REFERENCE_DATE_AD) + delta
 
     def strfdate(self, format: str) -> str:
-        """Nepali Date object to formatted string."""
+        """API similar to datetime.datetime.strftime.
+        format: the resulting string format with accordance to format specifier.
+        Nepali Date object to formatted string."""
+
         pattern = r'%({})'.format(reduce(lambda x, y: '{}|{}'.format(x, y), FORMAT_MAP.keys()))
         for fmt in re.findall(pattern, format):
             format = format.replace('%{}'.format(fmt), FORMAT_MAP[fmt](self))
         return format
+
+    @classmethod
+    def strpdate(cls, string: str, format="%Y/%m/%d"):
+        """API similar to datetime.datetime.strptime.
+        string: NepaliDate in string format.
+        format: format matching the string with accordance to format specifier.
+        Returns NepaliDate instance if the string and format matches."""
+
+        pattern = r'%({})'.format(reduce(lambda x, y: '{}|{}'.format(x, y), FORMAT_MAP.keys()))
+        params = re.findall(pattern, format)
+        if len(params) != len(set(params)):
+            raise ValueError("Duplicate format specifier not allowed.")
+
+        for fmt in params:
+            if fmt == 'Y':
+                format = format.replace('%{}'.format(fmt), r'(?P<year>\d{4})')
+            elif fmt == 'y':
+                format = format.replace('%{}'.format(fmt), r'(?P<year>\d{2})')
+            elif fmt == 'm':
+                format = format.replace('%{}'.format(fmt), r'(?P<month>\d{1,2})')
+            elif fmt == 'd':
+                format = format.replace('%{}'.format(fmt), r'(?P<day>\d{1,2})')
+
+        format = '^{}$'.format(format)
+        if re.match(format, string) is None:
+            raise ValueError('Mismatch in "string" and "format".')
+
+        _ = {**MIN_DATE}
+        _.update(re.match(format, string).groupdict())
+        return cls(**_)

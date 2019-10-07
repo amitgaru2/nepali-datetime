@@ -80,8 +80,15 @@ print("{0:B} {0:d}".format(dt))
 ```
 
 ### strfdate
-Similar API to datetime.strftime(). Date to formatted string. Follow the formatting table to know the formatting string.
+Similar API to ```datetime.datetime.strftime```. NepaliDate to formatted string. Follow the formatting table to know the formatting string.
 ```python
 dt = NepaliDate(2075, 10, 10)
-print(dt.strfdate('%Y/%M/%d'))
+print(dt.strfdate('%Y/%m/%d'))
+```
+
+### strpdate
+Similar API to ```datetime.datetime.strptime```. Return NepaliDate instance if string and format matches. Follow the formatting table to know the formatting string.
+```python
+nepali_date = NepaliDate.strpdate('06/20/2076', '%m/%d/%Y')
+print(nepali_date, type(nepali_date))
 ```
