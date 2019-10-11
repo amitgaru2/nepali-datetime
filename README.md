@@ -9,10 +9,10 @@ The API similar to datetime.date() that works on the BS date instead of AD.
 You can install the Nepali Date from PyPI: ```pip install nepali-date```
 
 
-### How to use
+### Usage
 ---
 
->  BS Date today
+**B.S Date today**
 ```python
 from nepali_date import NepaliDate
 
@@ -20,7 +20,7 @@ print(NepaliDate.today())
 print(NepaliDate.today(lang='nep'))   # for date in nepali language format
 ```
 
->  Creating NepaliDate object (instance)
+**Creating NepaliDate object (instance)**
 ```python
 from nepali_date import NepaliDate
         
@@ -35,7 +35,7 @@ new_year_2053 = NepaliDate('2053', '1', '1', lang='nep')
 
 print(new_year_2052, new_year_2053)
 ```
-> Adding/Subtracting datetime.timedelta to NepaliDate instance
+**Adding/Subtracting datetime.timedelta to NepaliDate instance**
 ```python 
 import datetime
 
@@ -45,7 +45,7 @@ new_year_2051 = NepaliDate(2051, 1, 1)
 hundred_days_after_new_year_2051 = new_year_2051 + datetime.timedelta(days=100)
 hundred_days_before_new_year_2051 = new_year_2051 - datetime.timedelta(days=100)
 ```
-> Converting datetime.date to NepaliDate or vice-versa
+**Converting datetime.date to NepaliDate or vice-versa**
 ```python
 import datetime
 
@@ -59,7 +59,7 @@ my_birthday_in_ad = my_birthday.to_english_date()
 ```
 ### Monthly Calendar
 ---
-> Current nepali month calendar highlighting today's date
+**Current nepali month calendar highlighting today's date**
 ```python
 from nepali_date import NepaliDate
 NepaliDate.calendar()
