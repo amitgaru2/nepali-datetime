@@ -66,6 +66,16 @@ NepaliDate.calendar()
 ```
 ![Screenshot](https://raw.githubusercontent.com/arneec/nepali-date/master/screenshots/nepali_monthly_calendar.PNG)
 
+Justify the output by providing keyword argument ```justify```
+```python
+NepaliDate.calendar(justify=50)
+```
+
+Display the calendar in nepali language format by providing keyword argument ```lang```
+```python
+NepaliDate.calendar(lang='nep')
+```
+
 
 ### Date in iso-format ie. 'YYYY-MM-DD'
 ---
@@ -79,6 +89,8 @@ print(dt_nep.isoformat())   # २०७६-०६-२४
 
 ### Date display formatting
 ---
+Format specifier for ```lang=eng```
+
 Format Specifier | Meaning | Example
 --- | --- | ---
 ```%d``` | Day of the month as a zero-padded decimal number. | 01, 02, ..., 32
@@ -86,7 +98,18 @@ Format Specifier | Meaning | Example
 ```%B``` | Month as full name. | Baishak, Jestha, ..., Chait
 ```%m``` | Month as a zero-padded decimal number. | 01, 02, ..., 12
 ```%y``` | Year without century as a zero-padded decimal number. | 00, 01, ..., 99
-```%Y``` | Year with century as a decimal number. | 0001, 0002, ..., 2075, 2076, ..., 9999
+```%Y``` | Year with century as a decimal number. | 1975, 1976, ..., 2075, 2076, 2077, 2078, ..., 2100
+
+Format specifier for ```lang=nep```
+
+Format Specifier | Meaning | Example
+--- | --- | ---
+```%d``` | Day of the month as a zero-padded decimal number. | ०१, ०२, ..., ३२
+```%b``` | Month as abbreviated name. | बैशाख, जेष्ठ, ..., चैत्र
+```%B``` | Month as full name. | बैशाख, जेष्ठ, ..., चैत्र
+```%m``` | Month as a zero-padded decimal number. | ०१, ०२, ..., १२
+```%y``` | Year without century as a zero-padded decimal number. | ००, ०१, ..., ९९
+```%Y``` | Year with century as a decimal number. | १९७५, १९७६, ..., २०७५, २०७६, २०७७, २०७८, ..., २१००
 
 ```python
 dt = NepaliDate(2076, 4, 7)
