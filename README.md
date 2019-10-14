@@ -89,7 +89,6 @@ print(dt_nep.isoformat())   # २०७६-०६-२४
 
 ### Date display formatting
 ---
-Format specifier for ```lang=eng```
 
 Format Specifier | Meaning | lang='eng' *(default)* | lang='nep'
 --- | --- | --- | ---
@@ -100,9 +99,15 @@ Format Specifier | Meaning | lang='eng' *(default)* | lang='nep'
 ```%y``` | Year without century as a zero-padded decimal number. | ```00```, ```01```, ..., ```99``` | ```००```, ```०१```, ..., ```९९```
 ```%Y``` | Year with century as a decimal number. | ```1975```, ```1976```, ..., ```2075```, ```2076```, ```2077```, ```2078```, ..., ```2100``` | ```१९७५```, ```१९७६```, ..., ```२०७५```, ```२०७६```, ```२०७७```, ```२०७८```, ..., ```२१००```
 
-
+Format specifier for ```lang='eng'```
 ```python
 dt = NepaliDate(2076, 4, 7)
+print("{0:B} {0:d}".format(dt))
+```
+
+Format specifier for ```lang='nep'```
+```python
+dt = NepaliDate(2076, 4, 7, lang='nep')
 print("{0:B} {0:d}".format(dt))
 ```
 
