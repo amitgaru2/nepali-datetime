@@ -117,7 +117,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     @property
     def weekday_translated(self) -> str:
-        return NepaliDate.translate(self.lang, str(self.__weekday),
+        return NepaliDate.translate(self.lang, self.__weekday,
                                     to_translate='day') if self.lang == 'nep' else self.__weekday
 
     @property
