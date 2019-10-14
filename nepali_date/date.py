@@ -11,8 +11,7 @@ CALENDAR_PATH = os.path.join(BASE_DIR, 'data', 'calendar_bs.csv')
 MIN_DATE = {'year': 1975, 'month': 1, 'day': 1}
 MAX_DATE = {'year': 2100, 'month': 12, 'day': 30}
 REFERENCE_DATE_AD = {'year': 1918, 'month': 4, 'day': 13}
-WEEKDAYS_MAPPER = {6: ('Sun', 'Su'), 0: ('Mon', 'Mo'), 1: ('Tue', 'Tu'), 2: ('Wed', 'We'), 3: ('Thu', 'Th'),
-                   4: ('Fri', 'Fr'), 5: ('Sat', 'Sa')}
+WEEKDAYS = [('Mon', 'Mo'), ('Tue', 'Tu'), ('Wed', 'We'), ('Thu', 'Th'), ('Fri', 'Fr'), ('Sat', 'Sa'), ('Sun', 'Su')]
 NEPALI_MONTHS = (("Baisakh", "Bai"), ("Jestha", "Jes"), ("Ashar", "Ash"), ("Shrawan", "Shr"), ("Bhadra", "Bha"),
                  ("Asoj", "Aso"), ("Kartik", "Kar"), ("Mangsir", "Man"), ("Poush", "Pou"), ("Magh", "Mag"),
                  ("Falgun", "Fal"), ("Chait", "Cha"))
@@ -22,11 +21,11 @@ TRANSLATION_MAP = {
               'Chait': 'चैत्र', 'Bai': 'बैशाख', 'Jes': 'जेष्ठ', 'Ash': 'आषाढ', 'Shr': 'श्रावन', 'Bha': 'भाद्र',
               'Aso': 'असोज', 'Kar': 'कार्तिक', 'Man': 'मंसिर', 'Pou': 'पौष', 'Mag': 'माघ', 'Fal': 'फागुन',
               'Cha': 'चैत्र'},
-        'day': {'Sun': 'आइत', 'Mon': 'सोम', 'Tue': 'मंगल', 'Wed': 'बुध', 'Thu': 'बिहि', 'Fri': 'शक्र', 'Sat': 'शनि'},
+    'day': {'Sun': 'आइत', 'Mon': 'सोम', 'Tue': 'मंगल', 'Wed': 'बुध', 'Thu': 'बिहि', 'Fri': 'शक्र', 'Sat': 'शनि'},
     'digits': {'0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९'}
 }
 
-FORMAT_MAP = {'Y': lambda x: x.translated_year,
+FORMAT_MAP = {'Y': lambda x: x.year_translated,
               'y': lambda x: NepaliDate.translate(x.lang, str(x.year)[2:]),
               'm': lambda x: NepaliDate.translate(x.lang, '0{}'.format(x.month) if x.month < 10 else str(x.month)),
               'b': lambda x: NepaliDate.translate(x.lang, NEPALI_MONTHS[x.month - 1][1], to_translate='month'),
@@ -59,6 +58,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
     def __init__(self, year, month, day, lang='eng'):
         self.lang = lang
         self.year, self.month, self.day = self.clean_attrs(year=year, month=month, day=day)
+        self.__weekday = WEEKDAYS[datetime.datetime.today().weekday()][0]
         if self.day > self.calendar_data[self.year][self.month - 1]:
             raise ValueError("Trying to create invalid Nepali Date.")
 
@@ -70,7 +70,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
         return int(year), int(month), int(day)
 
     @property
-    def year(self):
+    def year(self) -> int:
         return self.__year
 
     @year.setter
@@ -80,11 +80,11 @@ class NepaliDate(metaclass=NepaliDateMeta):
         self.__year = year
 
     @property
-    def translated_year(self):
+    def year_translated(self) -> str:
         return NepaliDate.translate(self.lang, str(self.__year)) if self.lang == 'nep' else str(self.__year)
 
     @property
-    def month(self):
+    def month(self) -> int:
         return self.__month
 
     @month.setter
@@ -94,11 +94,11 @@ class NepaliDate(metaclass=NepaliDateMeta):
         self.__month = month
 
     @property
-    def translated_month(self):
+    def month_translated(self) -> str:
         return NepaliDate.translate(self.lang, str(self.__month)) if self.lang == 'nep' else str(self.__month)
 
     @property
-    def day(self):
+    def day(self) -> int:
         return self.__day
 
     @day.setter
@@ -108,8 +108,17 @@ class NepaliDate(metaclass=NepaliDateMeta):
         self.__day = day
 
     @property
-    def translated_day(self):
+    def day_translated(self) -> str:
         return NepaliDate.translate(self.lang, str(self.__day)) if self.lang == 'nep' else str(self.__day)
+
+    @property
+    def weekday(self) -> str:
+        return self.__weekday
+
+    @property
+    def weekday_translated(self) -> str:
+        return NepaliDate.translate(self.lang, str(self.__weekday),
+                                    to_translate='day') if self.lang == 'nep' else self.__weekday
 
     @property
     def lang(self):
@@ -140,8 +149,8 @@ class NepaliDate(metaclass=NepaliDateMeta):
                                     NepaliDate.translate(self.lang, day))
 
     def __repr__(self):
-        return "nepali_date.NepaliDate({}, {}, {})".format(self.translated_year, self.translated_month,
-                                                           self.translated_day)
+        return "nepali_date.NepaliDate({}, {}, {})".format(self.year_translated, self.month_translated,
+                                                           self.day_translated)
 
     def __format__(self, format_spec):
         formatter = FORMAT_MAP.get(format_spec, None)
@@ -332,10 +341,6 @@ class NepaliDate(metaclass=NepaliDateMeta):
         date_today_bs = NepaliDate.min + delta
         date_today_bs.lang = lang
         return date_today_bs
-
-    @staticmethod
-    def weekday():
-        return WEEKDAYS_MAPPER[datetime.datetime.today().weekday()][0]
 
     @staticmethod
     def calendar(lang='eng', justify=4):
