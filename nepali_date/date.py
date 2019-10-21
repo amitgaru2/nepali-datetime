@@ -345,8 +345,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
     @staticmethod
     def calendar(lang='eng', justify=4):
         today = NepaliDate.today()
-        weekdays = ' '.join(
-            [NepaliDate.translate(lang, i[0], to_translate='day').rjust(justify) for i in WEEKDAYS_MAPPER.values()])
+        weekdays = ' '.join([NepaliDate.translate(lang, i[0], to_translate='day').rjust(justify) for i in WEEKDAYS])
         month_year = '{} {}'.format(NepaliDate.translate(lang, NEPALI_MONTHS[today.month - 1][0], to_translate='month'),
                                     NepaliDate.translate(lang, str(today.year))).center(len(weekdays))
         start_day = (NepaliDate(year=today.year, month=today.month, day=1).to_english_date().weekday() + 1) % 7
