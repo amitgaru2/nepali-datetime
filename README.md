@@ -64,7 +64,7 @@ my_birthday_in_ad = my_birthday.to_english_date()
 from nepali_date import NepaliDate
 NepaliDate.calendar()
 ```
-![Screenshot](https://raw.githubusercontent.com/arneec/nepali-date/master/screenshots/nepali_monthly_calendar.PNG)
+![Screenshot](https://raw.githubusercontent.com/arneec/nepali-date/master/screenshots/NepaliDate_calendar_v2.PNG)
 
 Justify the output by providing keyword argument ```justify```
 ```python
