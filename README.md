@@ -65,7 +65,9 @@ from nepali_date import NepaliDate
 NepaliDate.calendar()
 ```
 ![Screenshot](https://raw.githubusercontent.com/arneec/nepali-date/master/screenshots/v2_calendar_1.PNG)
+
 ![Screenshot](https://raw.githubusercontent.com/arneec/nepali-date/master/screenshots/v2_calendar_2.PNG)
+
 ![Screenshot](https://raw.githubusercontent.com/arneec/nepali-date/master/screenshots/v2_calendar_3.PNG)
 
 Justify the output by providing keyword argument ```justify```
