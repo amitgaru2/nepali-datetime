@@ -96,6 +96,8 @@ print(dt_nep.isoformat())   # २०७६-०६-२४
 
 Format Specifier | Meaning | lang='eng' *(default)* | lang='nep'
 --- | --- | --- | ---
+```%a``` | Weekday abbreviated name. | ```Sun```, ```Mon```, ..., ```Sat``` | ```आइत```, ```सोम```, ..., ```शनि```
+```%A``` | Weekday full name. | ```Sunday```, ```Monday```, ..., ```Saturday``` | ```आइतबार```, ```सोमबार```, ..., ```शनिबार```
 ```%d``` | Day of the month as a zero-padded decimal number. | ```01```, ```02```, ..., ```32``` | ```०१```, ```०२```, ..., ```३२```
 ```%b``` | Month as abbreviated name. | ```Bai```, ```Jes```, ..., ```Cha``` | ```बैशाख```, ```जेष्ठ```, ..., ```चैत्र```
 ```%B``` | Month as full name. | ```Baishak```, ```Jestha```, ..., ```Chait``` | ```बैशाख```, ```जेष्ठ```, ..., ```चैत्र```
