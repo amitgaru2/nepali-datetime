@@ -236,7 +236,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     @property
     def day_translated(self) -> str:
-        return NepaliDate.translate(self.lang, str(self.__day)) if self.lang == 'nep' else str(self.__day)
+        return NepaliDate.translate(self.lang, str(self.day)) if self.lang == 'nep' else str(self.day)
 
     @property
     def lang(self):
@@ -248,7 +248,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     @property
     def month_translated(self) -> str:
-        return NepaliDate.translate(self.lang, str(self.__month)) if self.lang == 'nep' else str(self.__month)
+        return NepaliDate.translate(self.lang, str(self.month)) if self.lang == 'nep' else str(self.month)
 
     @property
     def weekday(self) -> str:
@@ -264,7 +264,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     @property
     def year_translated(self) -> str:
-        return NepaliDate.translate(self.lang, str(self.__year)) if self.lang == 'nep' else str(self.__year)
+        return NepaliDate.translate(self.lang, str(self.year)) if self.lang == 'nep' else str(self.year)
 
     @day.setter
     def day(self, day):
@@ -357,11 +357,11 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     def delta_with_reference_bs(self):
         delta = 0
-        for year in range(self.min.__year, self.__year):
+        for year in range(self.min.year, self.year):
             delta += NepaliDate.total_days(year)
-        for month in range(1, self.__month):
-            delta += NepaliDate.calendar_data[self.__year][month - 1]
-        delta += self.__day - 1
+        for month in range(1, self.month):
+            delta += NepaliDate.calendar_data[self.year][month - 1]
+        delta += self.day - 1
         return datetime.timedelta(days=delta)
 
     def isoformat(self):
