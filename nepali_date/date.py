@@ -323,15 +323,6 @@ class NepaliDate(metaclass=NepaliDateMeta):
         delta = date - datetime.date(**REFERENCE_DATE_AD)
         return delta
 
-    def delta_with_reference_bs(self):
-        delta = 0
-        for year in range(self.min.__year, self.__year):
-            delta += NepaliDate.total_days(year)
-        for month in range(1, self.__month):
-            delta += NepaliDate.calendar_data[self.__year][month - 1]
-        delta += self.__day - 1
-        return datetime.timedelta(days=delta)
-
     @staticmethod
     def to_nepali_date(date_ad: datetime.date, lang='eng'):
         if not isinstance(date_ad, datetime.date):
@@ -362,6 +353,15 @@ class NepaliDate(metaclass=NepaliDateMeta):
                 return TRANSLATION_MAP[to_translate][string]
             return ''.join([TRANSLATION_MAP['digits'][i] for i in string])
         return string
+
+    def delta_with_reference_bs(self):
+        delta = 0
+        for year in range(self.min.__year, self.__year):
+            delta += NepaliDate.total_days(year)
+        for month in range(1, self.__month):
+            delta += NepaliDate.calendar_data[self.__year][month - 1]
+        delta += self.__day - 1
+        return datetime.timedelta(days=delta)
 
     def isoformat(self):
         month = '0{}'.format(self.month) if self.month < 10 else str(self.month)
