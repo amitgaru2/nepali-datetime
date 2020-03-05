@@ -109,7 +109,8 @@ class NepaliDate(metaclass=NepaliDateMeta):
                 break
         from_month += delta_months
         from_day += delta_days
-        return NepaliDate(year=from_year, month=from_month, day=from_day)
+        self.year, self.month, self.day = from_year, from_month, from_day
+        return self
 
     def __eq__(self, other):
         if not isinstance(other, NepaliDate):
@@ -193,7 +194,8 @@ class NepaliDate(metaclass=NepaliDateMeta):
             else:
                 break
         from_day -= delta_days
-        return NepaliDate(year=from_year, month=from_month, day=from_day)
+        self.year, self.month, self.day = from_year, from_month, from_day
+        return self
 
     @classmethod
     def strpdate(cls, string: str, fmt="%Y/%m/%d", lang='eng'):
@@ -220,6 +222,13 @@ class NepaliDate(metaclass=NepaliDateMeta):
         _ = {**MIN_DATE, 'lang': lang}
         _.update(re.match(fmt, string).groupdict())
         return cls(**_)
+
+    @classmethod
+    def today(cls, lang='eng'):
+        date_today_ad = datetime.datetime.today().date()
+        delta = NepaliDate.delta_with_reference_ad(date_today_ad)
+        date_today_bs = NepaliDate.min + delta
+        return cls(year=date_today_bs.year, month=date_today_bs.month, day=date_today_bs.day, lang=lang)
 
     @property
     def day(self) -> int:
@@ -331,14 +340,6 @@ class NepaliDate(metaclass=NepaliDateMeta):
         date_bs = NepaliDate.min + delta
         date_bs.lang = lang
         return date_bs
-
-    @staticmethod
-    def today(lang='eng'):
-        date_today_ad = datetime.datetime.today().date()
-        delta = NepaliDate.delta_with_reference_ad(date_today_ad)
-        date_today_bs = NepaliDate.min + delta
-        date_today_bs.lang = lang
-        return date_today_bs
 
     @staticmethod
     def total_days(year):

@@ -13,3 +13,8 @@ class TestMethods:
     def test_strpdate(self):
         nep_date = NepaliDate.strpdate(' 2051/10/01', fmt=' %Y/%m/%d')
         assert nep_date == NepaliDate(2051, 10, 1)
+
+    def test_today(self):
+        nep_date = NepaliDate.today(lang='eng')
+        assert 1 <= nep_date.day <= 32
+        assert 1 <= nep_date.month <= 12
