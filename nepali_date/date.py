@@ -226,7 +226,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
     @classmethod
     def today(cls, lang='eng'):
         date_today_ad = datetime.datetime.today().date()
-        delta = NepaliDate.delta_with_reference_ad(date_today_ad)
+        delta = cls.delta_with_reference_ad(date_today_ad)
         date_today_bs = cls(year=cls.min.year, month=cls.min.month, day=cls.min.day) + delta
         return cls(year=date_today_bs.year, month=date_today_bs.month, day=date_today_bs.day, lang=lang)
 
