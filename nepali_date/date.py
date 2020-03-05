@@ -227,7 +227,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
     def today(cls, lang='eng'):
         date_today_ad = datetime.datetime.today().date()
         delta = NepaliDate.delta_with_reference_ad(date_today_ad)
-        date_today_bs = NepaliDate.min + delta
+        date_today_bs = cls(year=cls.min.year, month=cls.min.month, day=cls.min.day) + delta
         return cls(year=date_today_bs.year, month=date_today_bs.month, day=date_today_bs.day, lang=lang)
 
     @property
@@ -337,7 +337,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
         if not isinstance(date_ad, datetime.date):
             raise TypeError("Unsupported type {}.".format(type(date_ad)))
         delta = NepaliDate.delta_with_reference_ad(date_ad)
-        date_bs = NepaliDate.min + delta
+        date_bs = NepaliDate(year=NepaliDate.min.year, month=NepaliDate.min.month, day=NepaliDate.min.day) + delta
         date_bs.lang = lang
         return date_bs
 
