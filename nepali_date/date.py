@@ -198,7 +198,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
         return self
 
     @classmethod
-    def strpdate(cls, string: str, fmt="%Y/%m/%d", lang='eng'):
+    def strpdate(cls, string, fmt="%Y/%m/%d", lang='eng'):
         """API similar to datetime.datetime.strptime.
         string: NepaliDate in string format.
         fmt: format matching the string with accordance to format specifier.
@@ -231,11 +231,11 @@ class NepaliDate(metaclass=NepaliDateMeta):
         return cls(year=date_today_bs.year, month=date_today_bs.month, day=date_today_bs.day, lang=lang)
 
     @property
-    def day(self) -> int:
+    def day(self):
         return self.__day
 
     @property
-    def day_translated(self) -> str:
+    def day_translated(self):
         return NepaliDate.translate(self.lang, str(self.day)) if self.lang == 'nep' else str(self.day)
 
     @property
@@ -243,27 +243,27 @@ class NepaliDate(metaclass=NepaliDateMeta):
         return self.__lang
 
     @property
-    def month(self) -> int:
+    def month(self):
         return self.__month
 
     @property
-    def month_translated(self) -> str:
+    def month_translated(self):
         return NepaliDate.translate(self.lang, str(self.month)) if self.lang == 'nep' else str(self.month)
 
     @property
-    def weekday(self) -> str:
+    def weekday(self):
         return WEEKDAYS[self.to_english_date().weekday()][0]
 
     @property
-    def weekday_translated(self) -> str:
+    def weekday_translated(self):
         return NepaliDate.translate(self.lang, self.weekday, to_translate='day') if self.lang == 'nep' else self.weekday
 
     @property
-    def year(self) -> int:
+    def year(self):
         return self.__year
 
     @property
-    def year_translated(self) -> str:
+    def year_translated(self):
         return NepaliDate.translate(self.lang, str(self.year)) if self.lang == 'nep' else str(self.year)
 
     @day.setter
@@ -328,12 +328,12 @@ class NepaliDate(metaclass=NepaliDateMeta):
         print("{}\n{}\n{}".format(month_year, weekdays, days_disp))
 
     @staticmethod
-    def delta_with_reference_ad(date: datetime.date) -> datetime.timedelta:
+    def delta_with_reference_ad(date):
         delta = date - datetime.date(**REFERENCE_DATE_AD)
         return delta
 
     @staticmethod
-    def to_nepali_date(date_ad: datetime.date, lang='eng'):
+    def to_nepali_date(date_ad, lang='eng'):
         if not isinstance(date_ad, datetime.date):
             raise TypeError("Unsupported type {}.".format(type(date_ad)))
         delta = NepaliDate.delta_with_reference_ad(date_ad)
@@ -370,7 +370,7 @@ class NepaliDate(metaclass=NepaliDateMeta):
         return "{}-{}-{}".format(NepaliDate.translate(self.lang, str(self.year)),
                                  NepaliDate.translate(self.lang, month), NepaliDate.translate(self.lang, day))
 
-    def strfdate(self, fmt: str) -> str:
+    def strfdate(self, fmt):
         """API similar to datetime.datetime.strftime.
         fmt: the resulting string format with accordance to format specifier.
         Nepali Date object to formatted string."""
@@ -379,6 +379,6 @@ class NepaliDate(metaclass=NepaliDateMeta):
             fmt = fmt.replace('%{}'.format(f), FORMAT_MAP[f](self))
         return fmt
 
-    def to_english_date(self) -> datetime.date:
+    def to_english_date(self):
         delta = self.delta_with_reference_bs()
         return datetime.date(**REFERENCE_DATE_AD) + delta
