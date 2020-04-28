@@ -7,6 +7,8 @@ iv) Beautiful Nepali calendar in the terminal with justify option.
 """
 from .date import NepaliDate
 
+__version__ = "2.0.4"
+
 __all__ = [
     'NepaliDate'
 ]

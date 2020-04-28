@@ -55,7 +55,7 @@ class NepaliDateMeta(type):
         return calendar
 
     def __init__(cls, what, bases=None, dict=None):
-        cls.translator = json.load(open(TRANSLATIONS_PATH, 'r'))
+        cls.translator = json.load(open(TRANSLATIONS_PATH, 'r', encoding='utf-8'))
         cls.calendar_data = cls.load_calendar()
         cls.min = cls(**MIN_DATE)
         cls.max = cls(**MAX_DATE)

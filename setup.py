@@ -5,7 +5,7 @@ with open('README.md', encoding='utf-8') as readme_file:
 
 setup(
     name="nepali-date",
-    version="2.0.2",
+    version="2.0.4",
     description="Nepali Date API",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -13,8 +13,8 @@ setup(
     author="Amit Garu",
     author_email="amitgaru2@gmail.com",
     license="MIT",
-    packages=find_packages(),
+    packages=find_packages(exclude=("tests",)),
     keywords=['Nepali', 'BS', 'B.S', 'Date', 'Nepal', 'Bikram', 'Sambat',
-              'Year', 'Month', 'Day'],
+              'Year', 'Month', 'Day', 'calendar', 'nepali-calendar', 'nepali-date'],
     include_package_data=True
 )

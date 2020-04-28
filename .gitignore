@@ -3,3 +3,9 @@
 **/.pytest_cache/**
 
 **/.idea/**
+
+build/
+
+dist/
+
+nepali_date.egg-info/
