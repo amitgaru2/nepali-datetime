@@ -1,4 +1,4 @@
-from nepali_date.date import NepaliDate
+from date import NepaliDate
 
 
 class TestMethods:

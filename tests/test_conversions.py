@@ -1,11 +1,11 @@
 import datetime
 
-from nepali_date.date import MIN_DATE, REFERENCE_DATE_AD, NepaliDate
+from date import MIN_DATE, REFERENCE_DATE_AD, NepaliDate
 
-RANDOM_CONVERSION_MAPS = [{'nep': {'year': 2076, 'month': 6, 'day': 27},
-                           'eng': {'year': 2019, 'month': 10, 'day': 14}},
-                          {'nep': {'year': 2013, 'month': 2, 'day': 8},
-                           'eng': {'year': 1956, 'month': 5, 'day': 21}}]
+RANDOM_CONVERSION_MAPS = [
+    {'nep': {'year': 2076, 'month': 6, 'day': 27}, 'eng': {'year': 2019, 'month': 10, 'day': 14}},
+    {'nep': {'year': 2013, 'month': 2, 'day': 8}, 'eng': {'year': 1956, 'month': 5, 'day': 21}}
+]
 
 
 class TestConversion:

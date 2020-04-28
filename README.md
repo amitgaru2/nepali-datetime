@@ -4,13 +4,11 @@ The API similar to datetime.date() that works on the BS date instead of AD.
 **Now with NEPALI language support for date display.**
 
 ### Installation
----
  
 You can install the Nepali Date from PyPI: ```pip install nepali-date```
 
 
 ### Usage
----
 
 **B.S Date today**
 ```python
@@ -58,7 +56,7 @@ my_birthday = NepaliDate(2051, 10, 1)
 my_birthday_in_ad = my_birthday.to_english_date()
 ```
 ### Monthly Calendar
----
+
 **Current nepali month calendar highlighting today's date**
 ```python
 from nepali_date import NepaliDate
@@ -78,7 +76,7 @@ NepaliDate.calendar(lang='nep')
 
 
 ### Date in iso-format ie. 'YYYY-MM-DD'
----
+
 ```python
 dt = NepaliDate(2076, 4, 2)
 print(dt.isoformat())
@@ -88,7 +86,6 @@ print(dt_nep.isoformat())   # २०७६-०६-२४
 ```
 
 ### Date display formatting
----
 
 Format Specifier | Meaning | lang='eng' *(default)* | lang='nep'
 --- | --- | --- | ---
@@ -114,7 +111,7 @@ print("{0:B} {0:d}".format(dt))
 ```
 
 ### strfdate
----
+
 Similar API to ```datetime.datetime.strftime```. NepaliDate to formatted string. Follow the formatting table to know the formatting string.
 ```python
 dt = NepaliDate(2075, 10, 10)
@@ -125,7 +122,7 @@ print(dt_nep.strfdate('%Y/%m/%d'))   # २०७६/०६/२४
 ```
 
 ### strpdate
----
+
 Similar API to ```datetime.datetime.strptime```. Return NepaliDate instance if string and format matches. Follow the formatting table to know the formatting string.
 ```python
 nepali_date = NepaliDate.strpdate('06/20/2076', '%m/%d/%Y')

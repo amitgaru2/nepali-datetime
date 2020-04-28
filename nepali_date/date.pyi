@@ -9,12 +9,12 @@ AD_DATE = Dict[str, int]
 
 BASE_DIR: FILE_PATH
 CALENDAR_PATH: FILE_PATH
+TRANSLATIONS_PATH: FILE_PATH
 MIN_DATE: BS_DATE
 MAX_DATE: BS_DATE
 REFERENCE_DATE_AD: AD_DATE
-WEEKDAYS: List[Tuple[str, str]]
+WEEKDAYS: Tuple[Tuple[str, str], ...]
 NEPALI_MONTHS: Tuple[Tuple[str, str], ...]
-TRANSLATION_MAP: Dict[str, Dict[str, str]]
 FORMAT_MAP: Dict[str, Callable[[Any], Any]]
 
 
@@ -29,6 +29,8 @@ class NepaliDateMeta(type):
 class NepaliDate(metaclass=NepaliDateMeta):
     calendar_data: List[Any]
     min: 'NepaliDate'
+    max: 'NepaliDate'
+    translator: Dict[str, Dict[str, str]]
     __year: int
     __month: int
     __day: int

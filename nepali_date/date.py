@@ -1,6 +1,7 @@
 import re
 import os
 import csv
+import json
 import datetime
 import platform
 
@@ -8,49 +9,53 @@ from functools import reduce
 
 BASE_DIR = os.path.join(os.path.dirname(__file__))
 CALENDAR_PATH = os.path.join(BASE_DIR, 'data', 'calendar_bs.csv')
+TRANSLATIONS_PATH = os.path.join(BASE_DIR, 'data', 'translations.json')
 MIN_DATE = {'year': 1975, 'month': 1, 'day': 1}
 MAX_DATE = {'year': 2100, 'month': 12, 'day': 30}
 REFERENCE_DATE_AD = {'year': 1918, 'month': 4, 'day': 13}
-WEEKDAYS = [('Mon', 'Monday'), ('Tue', 'Tuesday'), ('Wed', 'Wednesday'), ('Thu', 'Thursday'), ('Fri', 'Friday'),
-            ('Sat', 'Saturday'), ('Sun', 'Sunday')]
-NEPALI_MONTHS = (("Baisakh", "Bai"), ("Jestha", "Jes"), ("Ashar", "Ash"), ("Shrawan", "Shr"), ("Bhadra", "Bha"),
-                 ("Asoj", "Aso"), ("Kartik", "Kar"), ("Mangsir", "Man"), ("Poush", "Pou"), ("Magh", "Mag"),
-                 ("Falgun", "Fal"), ("Chait", "Cha"))
-TRANSLATION_MAP = {
-    'month': {'Baisakh': 'बैशाख', 'Jestha': 'जेष्ठ', 'Ashar': 'आषाढ', 'Shrawan': 'श्रावन', 'Bhadra': 'भाद्र',
-              'Asoj': 'असोज', 'Kartik': 'कार्तिक', 'Mangsir': 'मंसिर', 'Poush': 'पौष', 'Magh': 'माघ', 'Falgun': 'फागुन',
-              'Chait': 'चैत्र', 'Bai': 'बैशाख', 'Jes': 'जेष्ठ', 'Ash': 'आषाढ', 'Shr': 'श्रावन', 'Bha': 'भाद्र',
-              'Aso': 'असोज', 'Kar': 'कार्तिक', 'Man': 'मंसिर', 'Pou': 'पौष', 'Mag': 'माघ', 'Fal': 'फागुन',
-              'Cha': 'चैत्र'},
-    'day': {'Sun': 'आइत', 'Mon': 'सोम', 'Tue': 'मंगल', 'Wed': 'बुध', 'Thu': 'बिहि', 'Fri': 'शक्र', 'Sat': 'शनि',
-            'Sunday': 'आइतबार', 'Monday': 'सोमबार', 'Tuesday': 'मंगलबार', 'Wednesday': 'बुधबार', 'Thursday': 'बिहिबार',
-            'Friday': 'शक्रबार', 'Saturday': 'शनिबार'},
-    'digits': {'0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९'}
-}
+WEEKDAYS = (
+    ('Mon', 'Monday'), ('Tue', 'Tuesday'), ('Wed', 'Wednesday'), ('Thu', 'Thursday'),
+    ('Fri', 'Friday'), ('Sat', 'Saturday'), ('Sun', 'Sunday')
+)
+NEPALI_MONTHS = (
+    ("Baisakh", "Bai"), ("Jestha", "Jes"), ("Ashar", "Ash"), ("Shrawan", "Shr"), ("Bhadra", "Bha"),
+    ("Asoj", "Aso"), ("Kartik", "Kar"), ("Mangsir", "Man"), ("Poush", "Pou"), ("Magh", "Mag"),
+    ("Falgun", "Fal"), ("Chait", "Cha")
+)
 
-FORMAT_MAP = {'Y': lambda x: x.year_translated,
-              'y': lambda x: x.year_translated[2:],
-              'm': lambda x: NepaliDate.translate(x.lang, '0{}'.format(x.month) if x.month < 10 else str(x.month)),
-              'b': lambda x: NepaliDate.translate(x.lang, NEPALI_MONTHS[x.month - 1][1], to_translate='month'),
-              'B': lambda x: NepaliDate.translate(x.lang, NEPALI_MONTHS[x.month - 1][0], to_translate='month'),
-              'd': lambda x: NepaliDate.translate(x.lang, '0{}'.format(x.day) if x.day < 10 else str(x.day)),
-              'a': lambda x: x.weekday_translated,
-              'A': lambda x: NepaliDate.translate(x.lang, dict(WEEKDAYS)[x.weekday], to_translate='day')}
+FORMAT_MAP = {
+    'Y': lambda x: x.year_translated,
+    'y': lambda x: x.year_translated[2:],
+    'm': lambda x: NepaliDate.translate(x.lang, '0{}'.format(x.month) if x.month < 10 else str(x.month)),
+    'b': lambda x: NepaliDate.translate(x.lang, NEPALI_MONTHS[x.month - 1][1], to_translate='month'),
+    'B': lambda x: NepaliDate.translate(x.lang, NEPALI_MONTHS[x.month - 1][0], to_translate='month'),
+    'd': lambda x: NepaliDate.translate(x.lang, '0{}'.format(x.day) if x.day < 10 else str(x.day)),
+    'a': lambda x: x.weekday_translated,
+    'A': lambda x: NepaliDate.translate(x.lang, dict(WEEKDAYS)[x.weekday], to_translate='day')
+}
 
 
 class NepaliDateMeta(type):
+    """
+    metaclass to inject:
+        translator: the translation maps
+        calendar_data: the calendar data for specified years with all days count for each months
+        min: minimum nepali date the class can support
+        max: maximum nepali date the class can support
+    """
 
     @staticmethod
     def load_calendar():
         calendar = dict()
         with open(CALENDAR_PATH, 'r') as calendar_file:
             file = csv.reader(calendar_file)
-            headers = next(file)
+            next(file)
             for row in file:
                 calendar[int(row[0])] = [int(days) for days in row[1:]]
         return calendar
 
     def __init__(cls, what, bases=None, dict=None):
+        cls.translator = json.load(open(TRANSLATIONS_PATH, 'r'))
         cls.calendar_data = cls.load_calendar()
         cls.min = cls(**MIN_DATE)
         cls.max = cls(**MAX_DATE)
@@ -66,15 +71,14 @@ class NepaliDate(metaclass=NepaliDateMeta):
         self.lang = lang
 
     def __add__(self, other):
-        """ The core logic of the algorithm. """
+        """ core logic of the algorithm """
         if not isinstance(other, datetime.timedelta):
             raise TypeError(
                 "Unsupported operand type(s) for +: {.__name__} and {.__name__}.".format(type(self), type(other)))
         delta_years, delta_months = 0, 0
         delta_days = other.days
-        total_remaining_days_this_year = NepaliDate.total_days(self.year) - (
-                sum(NepaliDate.calendar_data[self.year][:self.month - 1]) + self.day
-        )
+        total_remaining_days_this_year = NepaliDate.total_days(
+            self.year) - (sum(NepaliDate.calendar_data[self.year][:self.month - 1]) + self.day)
         from_year, from_month, from_day = self.year, self.month, self.day
         if delta_days > total_remaining_days_this_year:
             delta_days -= total_remaining_days_this_year
@@ -126,8 +130,12 @@ class NepaliDate(metaclass=NepaliDateMeta):
     def __lt__(self, other):
         if not isinstance(other, NepaliDate):
             raise TypeError(
-                "'<' not supported between instances of '{.__name__}' and '{.__name__}'".format(type(self),
-                                                                                                type(other)))
+                "'<' not supported between instances of '{.__name__}' and '{.__name__}'".format(
+                    type(self),
+                    type(other)
+                )
+
+            )
         if self.__year == other.__year:
             if self.__month == other.__month:
                 if self.__day < other.__day:
@@ -152,11 +160,11 @@ class NepaliDate(metaclass=NepaliDateMeta):
                                     NepaliDate.translate(self.lang, month), NepaliDate.translate(self.lang, day))
 
     def __sub__(self, other):
-        """ The core logic of the algorithm. """
+        """ core logic of the algorithm """
         if not isinstance(other, datetime.timedelta):
             raise TypeError(
                 "Unsupported operand type(s) for +: {.__name__} and {.__name__}.".format(type(self), type(other)))
-        delta_years, delta_months = 0, 0
+        delta_years = 0
         delta_days = other.days
         total_passed_days_this_year = sum(
             NepaliDate.calendar_data[self.year][:self.month - 1]
@@ -199,10 +207,12 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     @classmethod
     def strpdate(cls, string, fmt="%Y/%m/%d", lang='eng'):
-        """API similar to datetime.datetime.strptime.
-        string: NepaliDate in string format.
-        fmt: format matching the string with accordance to format specifier.
-        Returns NepaliDate instance if the string and format matches."""
+        """
+        API similar to datetime.datetime.strptime
+            string: NepaliDate in string format.
+            fmt: format matching the string with accordance to format specifier
+        returns NepaliDate instance if the string and format matches
+        """
         pattern = r'%({})'.format(reduce(lambda x, y: '{}|{}'.format(x, y), FORMAT_MAP.keys()))
         params = re.findall(pattern, fmt)
         if len(params) != len(set(params)):
@@ -348,11 +358,11 @@ class NepaliDate(metaclass=NepaliDateMeta):
 
     @staticmethod
     def translate(lang, string, to_translate='digits'):
-        assert to_translate in TRANSLATION_MAP.keys()
+        assert to_translate in NepaliDate.translator.keys()
         if lang == 'nep':
             if to_translate in ('month', 'day'):
-                return TRANSLATION_MAP[to_translate][string]
-            return ''.join([TRANSLATION_MAP['digits'][i] for i in string])
+                return NepaliDate.translator[to_translate][string]
+            return ''.join([NepaliDate.translator['digits'][i] for i in string])
         return string
 
     def delta_with_reference_bs(self):
@@ -371,9 +381,11 @@ class NepaliDate(metaclass=NepaliDateMeta):
                                  NepaliDate.translate(self.lang, month), NepaliDate.translate(self.lang, day))
 
     def strfdate(self, fmt):
-        """API similar to datetime.datetime.strftime.
-        fmt: the resulting string format with accordance to format specifier.
-        Nepali Date object to formatted string."""
+        """
+        API similar to datetime.datetime.strftime
+            fmt: the resulting string format with accordance to format specifier
+        NepaliDate object to formatted string
+        """
         pattern = r'%({})'.format(reduce(lambda x, y: '{}|{}'.format(x, y), FORMAT_MAP.keys()))
         for f in re.findall(pattern, fmt):
             fmt = fmt.replace('%{}'.format(f), FORMAT_MAP[f](self))

@@ -1,4 +1,4 @@
-from nepali_date.date import MIN_DATE, MAX_DATE, NepaliDate
+from date import MIN_DATE, MAX_DATE, NepaliDate
 
 
 class TestInit:
