@@ -16,5 +16,11 @@ setup(
     packages=find_packages(exclude=("tests",)),
     keywords=['Nepali', 'BS', 'B.S', 'Date', 'Nepal', 'Bikram', 'Sambat',
               'Year', 'Month', 'Day', 'calendar', 'nepali-calendar', 'nepali-date'],
-    include_package_data=True
+    include_package_data=True,
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    python_requires='>=3.5',
 )
