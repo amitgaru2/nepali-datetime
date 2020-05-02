@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Usage &#8212; Nepali Date  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Formatting" href="formatting.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>Importing the class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nepali_date</span> <span class="kn">import</span> <span class="n">NepaliDate</span>
+</pre></div>
+</div>
+<p>Creating instance of NepaliDate:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span> <span class="o">=</span> <span class="n">NepaliDate</span><span class="p">(</span><span class="mi">2055</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span>
+<span class="go">nepali_date.NepaliDate(2055, 9, 12)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span> <span class="o">=</span> <span class="n">NepaliDate</span><span class="p">(</span><span class="s1">&#39;2053&#39;</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span>
+<span class="go">nepali_date.NepaliDate(2053, 11, 11)</span>
+</pre></div>
+</div>
+<p>Creating instance of NepaliDate with output on Nepali language format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span> <span class="o">=</span> <span class="n">NepaliDate</span><span class="p">(</span><span class="s1">&#39;2055&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;17&#39;</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s1">&#39;nep&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span>
+<span class="go">nepali_date.NepaliDate(२०५५, ५, १७)</span>
+</pre></div>
+</div>
+<p>Adding/Subtracting datetime.timedelta to NepaliDate instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span> <span class="o">=</span> <span class="n">NepaliDate</span><span class="p">(</span><span class="mi">2077</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">forty_days_after</span> <span class="o">=</span> <span class="n">date_BS</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="go">nepali_date.NepaliDate(2077, 2, 10)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_days_b4</span> <span class="o">=</span> <span class="n">date_BS</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_days_b4</span>
+<span class="go">nepali_date.NepaliDate(2076, 11, 21)</span>
+</pre></div>
+</div>
+<p>Converting datetime.date to NepaliDate or vice-versa:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_AD</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">1995</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NepaliDate</span><span class="o">.</span><span class="n">to_nepali_date</span><span class="p">(</span><span class="n">date_AD</span><span class="p">)</span>
+<span class="go">nepali_date.NepaliDate(2051, 10, 1)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span> <span class="o">=</span> <span class="n">NepaliDate</span><span class="p">(</span><span class="mi">2069</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span><span class="o">.</span><span class="n">to_english_date</span><span class="p">()</span>
+<span class="go">datetime.date(2012, 11, 30)</span>
+</pre></div>
+</div>
+<div class="section" id="nepali-date-b-s-today">
+<h2>Nepali Date (B.S) today<a class="headerlink" href="#nepali-date-b-s-today" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NepaliDate</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+<span class="go">nepali_date.NepaliDate(2077, 1, 20)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="monthly-nepali-date-b-s-calendar">
+<h2>Monthly Nepali Date (B.S) calendar<a class="headerlink" href="#monthly-nepali-date-b-s-calendar" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NepaliDate</span><span class="o">.</span><span class="n">calendar</span><span class="p">()</span>
+<span class="go">              Baisakh 2077</span>
+<span class="go">Sun  Mon  Tue  Wed  Thu  Fri  Sat</span>
+<span class="go">       1    2    3    4    5    6</span>
+<span class="go">  7    8    9   10   11   12   13</span>
+<span class="go"> 14   15   16   17   18   19   20</span>
+<span class="go"> 21   22   23   24   25   26   27</span>
+<span class="go"> 28   29   30   31</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NepaliDate</span><span class="o">.</span><span class="n">calendar</span><span class="p">(</span><span class="n">justify</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">                      Baisakh 2077</span>
+<span class="go">Sun     Mon     Tue     Wed     Thu     Fri     Sat</span>
+<span class="go">          1       2       3       4       5       6</span>
+<span class="go">  7       8       9      10      11      12      13</span>
+<span class="go"> 14      15      16      17      18      19      20</span>
+<span class="go"> 21      22      23      24      25      26      27</span>
+<span class="go"> 28      29      30      31</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NepaliDate</span><span class="o">.</span><span class="n">calendar</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s2">&quot;nep&quot;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">                   बैशाख २०७७</span>
+<span class="go">आइत     सोम    मंगल     बुध    बिहि    शक्र     शनि</span>
+<span class="go">          १       २       ३       ४       ५       ६</span>
+<span class="go">  ७       ८       ९      १०      ११      १२      १३</span>
+<span class="go"> १४      १५      १६      १७      १८      १९      २०</span>
+<span class="go"> २१      २२      २३      २४      २५      २६      २७</span>
+<span class="go"> २८      २९      ३०      ३१</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Nepali Date</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nepali-date-b-s-today">Nepali Date (B.S) today</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monthly-nepali-date-b-s-calendar">Monthly Nepali Date (B.S) calendar</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="formatting.html">Formatting</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
+      <li>Next: <a href="formatting.html" title="next chapter">Formatting</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Amit Garu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/usage.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

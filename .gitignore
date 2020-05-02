@@ -10,4 +10,4 @@ dist/
 
 nepali_date.egg-info/
 
-docs/_*
+sphinx/_*
