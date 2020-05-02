@@ -6,8 +6,6 @@ python:
   - "3.8"
 os:
   - linux
-  - osx
-  - windows
 install:
   - pip install flake8
 before_script:
