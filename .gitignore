@@ -9,3 +9,5 @@ build/
 dist/
 
 nepali_date.egg-info/
+
+docs/_*

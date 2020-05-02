@@ -1,0 +1,9 @@
+Format Specifier,Meaning,lang=”eng” (default),lang=”nep”
+%a,Weekday abbreviated name.,"Sun, Mon, ..., Sat","आइत, सोम, ..., शनि"
+%A,Weekday full name.,"Sunday, Monday, ..., Saturday","आइतबार, सोमबार, ..., शनिबार"
+%d,Day of the month as a zero-padded decimal number.,"01, 02, ..., 32","०१, ०२, ..., ३२"
+%b,Month as abbreviated name.,"Bai, Jes, ..., Cha","बैशाख, जेष्ठ, ..., चैत्र"
+%B,Month as full name.,"Baishak, Jestha, ..., Chait","बैशाख, जेष्ठ, ..., चैत्र"
+%m,Month as a zero-padded decimal number.,"01, 02, ..., 12","०१, ०२, ..., १२"
+%y,Year without century as a zero-padded decimal number.,"00, 01, ..., 99","००, ०१, ..., ९९"
+%Y,Year with century as a decimal number.,"1975, 1976, ..., 2075, 2076, 2077, 2078, ..., 2100","१९७५, १९७६, ..., २०७५, २०७६, २०७७, २०७८, ..., २१००"
