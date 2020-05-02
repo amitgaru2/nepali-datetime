@@ -113,8 +113,8 @@ class NepaliDate(metaclass=NepaliDateMeta):
                 break
         from_month += delta_months
         from_day += delta_days
-        self.year, self.month, self.day = from_year, from_month, from_day
-        return self
+
+        return NepaliDate(year=from_year, month=from_month, day=from_day)
 
     def __eq__(self, other):
         if not isinstance(other, NepaliDate):
@@ -202,8 +202,8 @@ class NepaliDate(metaclass=NepaliDateMeta):
             else:
                 break
         from_day -= delta_days
-        self.year, self.month, self.day = from_year, from_month, from_day
-        return self
+
+        return NepaliDate(year=from_year, month=from_month, day=from_day)
 
     @classmethod
     def strpdate(cls, string, fmt="%Y/%m/%d", lang='eng'):
