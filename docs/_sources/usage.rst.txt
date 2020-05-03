@@ -1,12 +1,18 @@
 Usage
 =====
 
-Importing the class::
+Importing the class
+-------------------
+
+..  code-block:: python
 
     from nepali_date import NepaliDate
 
 
-Creating instance of NepaliDate::
+Creating the instance
+---------------------
+
+..  code-block:: python
 
     >>> date_BS = NepaliDate(2055, 9, 12)
     >>> date_BS
@@ -24,7 +30,12 @@ Creating instance of NepaliDate with output on Nepali language format::
     nepali_date.NepaliDate(२०५५, ५, १७)
 
 
-Adding/Subtracting datetime.timedelta to NepaliDate instance::
+Arithmetic operation on the instance
+------------------------------------
+
+NepaliDate instance supports addition and deletion of timedelta instances to itself.
+
+..  code-block:: python
 
     >>> from datetime import timedelta
 
@@ -32,12 +43,14 @@ Adding/Subtracting datetime.timedelta to NepaliDate instance::
     >>> forty_days_after = date_BS + timedelta(days=40)
     nepali_date.NepaliDate(2077, 2, 10)
 
-    >>> twenty_days_b4 = date_BS - timedelta(days=40)
+    >>> twenty_days_b4 = date_BS - timedelta(days=20)
     >>> twenty_days_b4
     nepali_date.NepaliDate(2076, 11, 21)
 
 
-Converting datetime.date to NepaliDate or vice-versa::
+B.S to A.D converter and vice-versa
+-----------------------------------
+..  code-block:: python
 
     >>> from datetime import date
 
@@ -52,13 +65,14 @@ Converting datetime.date to NepaliDate or vice-versa::
 
 Nepali Date (B.S) today
 -----------------------
-.. code-block:: python
+..  code-block:: python
 
     >>> NepaliDate.today()
     nepali_date.NepaliDate(2077, 1, 20)
 
 Monthly Nepali Date (B.S) calendar
 ----------------------------------
+
 ..  code-block:: python
 
     >>> NepaliDate.calendar()
@@ -87,4 +101,12 @@ Monthly Nepali Date (B.S) calendar
      १४      १५      १६      १७      १८      १९      २०
      २१      २२      २३      २४      २५      २६      २७
      २८      २९      ३०      ३१
+
+Total days in Year
+------------------
+
+..  code-block:: python
+
+    >>> NepaliDate.total_days(2078)
+    365
 

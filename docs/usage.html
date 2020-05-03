@@ -34,12 +34,15 @@
             
   <div class="section" id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<p>Importing the class:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nepali_date</span> <span class="kn">import</span> <span class="n">NepaliDate</span>
+<div class="section" id="importing-the-class">
+<h2>Importing the class<a class="headerlink" href="#importing-the-class" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nepali_date</span> <span class="kn">import</span> <span class="n">NepaliDate</span>
 </pre></div>
 </div>
-<p>Creating instance of NepaliDate:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span> <span class="o">=</span> <span class="n">NepaliDate</span><span class="p">(</span><span class="mi">2055</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+</div>
+<div class="section" id="creating-the-instance">
+<h2>Creating the instance<a class="headerlink" href="#creating-the-instance" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span> <span class="o">=</span> <span class="n">NepaliDate</span><span class="p">(</span><span class="mi">2055</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span>
 <span class="go">nepali_date.NepaliDate(2055, 9, 12)</span>
 
@@ -54,20 +57,25 @@
 <span class="go">nepali_date.NepaliDate(२०५५, ५, १७)</span>
 </pre></div>
 </div>
-<p>Adding/Subtracting datetime.timedelta to NepaliDate instance:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+</div>
+<div class="section" id="arithmetic-operation-on-the-instance">
+<h2>Arithmetic operation on the instance<a class="headerlink" href="#arithmetic-operation-on-the-instance" title="Permalink to this headline">¶</a></h2>
+<p>NepaliDate instance supports addition and deletion of timedelta instances to itself.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span> <span class="o">=</span> <span class="n">NepaliDate</span><span class="p">(</span><span class="mi">2077</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">forty_days_after</span> <span class="o">=</span> <span class="n">date_BS</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
 <span class="go">nepali_date.NepaliDate(2077, 2, 10)</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_days_b4</span> <span class="o">=</span> <span class="n">date_BS</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_days_b4</span> <span class="o">=</span> <span class="n">date_BS</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_days_b4</span>
 <span class="go">nepali_date.NepaliDate(2076, 11, 21)</span>
 </pre></div>
 </div>
-<p>Converting datetime.date to NepaliDate or vice-versa:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+</div>
+<div class="section" id="b-s-to-a-d-converter-and-vice-versa">
+<h2>B.S to A.D converter and vice-versa<a class="headerlink" href="#b-s-to-a-d-converter-and-vice-versa" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">date_AD</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">1995</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NepaliDate</span><span class="o">.</span><span class="n">to_nepali_date</span><span class="p">(</span><span class="n">date_AD</span><span class="p">)</span>
@@ -77,6 +85,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">date_BS</span><span class="o">.</span><span class="n">to_english_date</span><span class="p">()</span>
 <span class="go">datetime.date(2012, 11, 30)</span>
 </pre></div>
+</div>
 </div>
 <div class="section" id="nepali-date-b-s-today">
 <h2>Nepali Date (B.S) today<a class="headerlink" href="#nepali-date-b-s-today" title="Permalink to this headline">¶</a></h2>
@@ -116,6 +125,13 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="total-days-in-year">
+<h2>Total days in Year<a class="headerlink" href="#total-days-in-year" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NepaliDate</span><span class="o">.</span><span class="n">total_days</span><span class="p">(</span><span class="mi">2078</span><span class="p">)</span>
+<span class="go">365</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -138,8 +154,13 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#importing-the-class">Importing the class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-the-instance">Creating the instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arithmetic-operation-on-the-instance">Arithmetic operation on the instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#b-s-to-a-d-converter-and-vice-versa">B.S to A.D converter and vice-versa</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nepali-date-b-s-today">Nepali Date (B.S) today</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#monthly-nepali-date-b-s-calendar">Monthly Nepali Date (B.S) calendar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#total-days-in-year">Total days in Year</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="formatting.html">Formatting</a></li>
