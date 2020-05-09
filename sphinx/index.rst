@@ -11,6 +11,7 @@ The current version of NepaliDate is **2.0.5** .
     installation
     usage
     formatting
+    command_line
 
 
 Indices and tables
