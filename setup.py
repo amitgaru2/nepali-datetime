@@ -5,7 +5,7 @@ with open('README.md', encoding='utf-8') as readme_file:
 
 setup(
     name="nepali-date",
-    version="2.0.4",
+    version="2.0.5",
     description="Nepali Date API",
     long_description=README,
     long_description_content_type="text/markdown",
