@@ -9,6 +9,6 @@ os:
 install:
   - pip install flake8
 before_script:
-  - flake8 nepali_date --max-line-length=120
+  - flake8 nepali_datetime --max-line-length=120
 script:
   - pytest -v

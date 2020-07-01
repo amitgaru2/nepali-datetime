@@ -1,0 +1,676 @@
+.. nepali_datetime documentation master file, created by
+   sphinx-quickstart on Sat Jul 18 13:35:34 2020.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+:mod:`nepali_datetime` --- Basic date and time types that operates on B.S
+================================================================================
+.. module:: nepali_datetime
+   :synopsis: Basic date and time types that operates on B.S .
+
+.. moduleauthor:: Amit Garu <amitgaru2@gmail.com>
+.. sectionauthor:: Amit Garu <amitgaru2@gmail.com>
+
+The :mod:`nepali_datetime` module is highly motivated from the Python3's 
+:mod:`datetime` module. The module supplies classes for manipulating 
+dates and times in both simple and complex ways where the dates operate
+on top of Bikram Sambat (B.S).
+
+The :mod:`nepali_datetime` module exports the following constants:
+
+.. data:: MINYEAR
+The smallest year number allowed in a :class:`date` or :class:`.datetime` object. :const:`MINYEAR` is ``1975``.
+
+.. data:: MAXYEAR
+The largest year number allowed in a :class:`date` or :class:`.datetime` object. :const:`MAXYEAR` is ``2100``.
+
+
+Available Types
+---------------
+
+.. class:: date
+   :noindex:
+
+   An idealized naive date, assuming the current Gregorian calendar always was, and
+   always will be, in effect. Attributes: :attr:`year`, :attr:`month`, and
+   :attr:`day`.
+
+
+.. class:: datetime
+   :noindex:
+
+   A combination of a date and a time. Attributes: :attr:`year`, :attr:`month`,
+   :attr:`day`, :attr:`hour`, :attr:`minute`, :attr:`second`, :attr:`microsecond`,
+   and :attr:`.tzinfo`.
+
+
+:class:`date` Objects
+---------------------
+
+A :class:`date` object represents a date (year, month and day) in B.S calendar.  Baishak 1 of year 1975 is called day
+number 1, Baishak 2 of year 1975 is called day number 2, and so on.
+
+.. class:: date(year, month, day)
+
+   All arguments are required.  Arguments may be integers, in the following
+   ranges:
+
+   * ``MINYEAR <= year <= MAXYEAR``
+   * ``1 <= month <= 12``
+   * ``1 <= day <= number of days in the given month and year``
+
+   If an argument outside those ranges is given, :exc:`ValueError` is raised.
+
+
+Other constructors, all class methods:
+
+.. classmethod:: date.today()
+
+   Return the current B.S date.
+
+
+.. classmethod:: date.fromtimestamp(timestamp)
+
+
+.. classmethod:: date.fromordinal(ordinal)
+
+
+Class attributes:
+
+.. attribute:: date.min
+
+   The earliest representable date, ``date(MINYEAR, 1, 1)``.
+
+
+.. attribute:: date.max
+
+   The latest representable date, ``date(MAXYEAR, 12, MAXYEAR_LAST_MONTHS_LAST_DAY)``.
+
+
+.. attribute:: date.resolution
+
+   The smallest possible difference between non-equal date objects,
+   ``timedelta(days=1)``.
+
+
+Instance attributes (read-only):
+
+.. attribute:: date.year
+
+   Between :const:`MINYEAR` and :const:`MAXYEAR` inclusive.
+
+
+.. attribute:: date.month
+
+   Between 1 and 12 inclusive.
+
+
+.. attribute:: date.day
+
+   Between 1 and the number of days in the given month of the given year.
+
+
+Supported operations:
+
++-------------------------------+----------------------------------------------+
+| Operation                     | Result                                       |
++===============================+==============================================+
+| ``date2 = date1 + timedelta`` | *date2* is ``timedelta.days`` days removed   |
+|                               | from *date1*.  (1)                           |
++-------------------------------+----------------------------------------------+
+| ``date2 = date1 - timedelta`` | Computes *date2* such that ``date2 +         |
+|                               | timedelta == date1``. (2)                    |
++-------------------------------+----------------------------------------------+
+| ``timedelta = date1 - date2`` | \(3)                                         |
++-------------------------------+----------------------------------------------+
+| ``date1 < date2``             | *date1* is considered less than *date2* when |
+|                               | *date1* precedes *date2* in time. (4)        |
++-------------------------------+----------------------------------------------+
+
+Notes:
+
+(1)
+   *date2* is moved forward in time if ``timedelta.days > 0``, or backward if
+   ``timedelta.days < 0``.  Afterward ``date2 - date1 == timedelta.days``.
+   ``timedelta.seconds`` and ``timedelta.microseconds`` are ignored.
+   :exc:`OverflowError` is raised if ``date2.year`` would be smaller than
+   :const:`MINYEAR` or larger than :const:`MAXYEAR`.
+
+(2)
+   This isn't quite equivalent to date1 + (-timedelta), because -timedelta in
+   isolation can overflow in cases where date1 - timedelta does not.
+   ``timedelta.seconds`` and ``timedelta.microseconds`` are ignored.
+
+(3)
+   This is exact, and cannot overflow.  timedelta.seconds and
+   timedelta.microseconds are 0, and date2 + timedelta == date1 after.
+
+(4)
+   In other words, ``date1 < date2`` if and only if ``date1.toordinal() <
+   date2.toordinal()``. In order to stop comparison from falling back to the
+   default scheme of comparing object addresses, date comparison normally raises
+   :exc:`TypeError` if the other comparand isn't also a :class:`date` object.
+   However, ``NotImplemented`` is returned instead if the other comparand has a
+   :meth:`timetuple` attribute.  This hook gives other kinds of date objects a
+   chance at implementing mixed-type comparison. If not, when a :class:`date`
+   object is compared to an object of a different type, :exc:`TypeError` is raised
+   unless the comparison is ``==`` or ``!=``.  The latter cases return
+   :const:`False` or :const:`True`, respectively.
+
+
+Instance methods:
+
+.. method:: date.replace(year, month, day)
+
+   Return a date with the same value, except for those parameters given new
+   values by whichever keyword arguments are specified.  For example, if ``d ==
+   date(2002, 12, 30)``, then ``d.replace(day=26) == date(2002, 12, 26)``.
+
+
+.. method:: date.timetuple()
+
+   Return a :class:`time.struct_time` such as returned by :func:`time.localtime`.
+   The hours, minutes and seconds are 0, and the DST flag is -1. ``d.timetuple()``
+   is equivalent to ``time.struct_time((d.year, d.month, d.day, 0, 0, 0,
+   d.weekday(), yday, -1))``, where ``yday = d.toordinal() - date(d.year, 1,
+   1).toordinal() + 1`` is the day number within the current year starting with
+   ``1`` for Baishak 1st.
+
+
+.. method:: date.toordinal()
+
+
+.. method:: date.weekday()
+
+   Return the day of the week as an integer, where Sunday is 0 and Saturday is 6.
+   For example, ``date(2002, 12, 4).weekday() == 0``, a Sunday.
+
+
+.. method:: date.isoweekday()
+
+
+.. method:: date.isocalendar()
+
+
+.. method:: date.isoformat()
+
+   Return a string representing the date in ISO 8601 format, 'YYYY-MM-DD'.  For
+   example, ``date(2002, 12, 4).isoformat() == '2002-12-04'``.
+
+
+.. method:: date.__str__()
+
+   For a date *d*, ``str(d)`` is equivalent to ``d.isoformat()``.
+
+
+.. method:: date.ctime()
+
+   Return a string representing the date, for example ``date(2002, 12,
+   4).ctime() == 'Wed Cha 4 00:00:00 2002'``. ``d.ctime()`` is equivalent to
+   ``time.ctime(time.mktime(d.timetuple()))`` on platforms where the native C
+   :c:func:`ctime` function (which :func:`time.ctime` invokes, but which
+   :meth:`date.ctime` does not invoke) conforms to the C standard.
+
+
+.. method:: date.strftime(format)
+
+   Return a string representing the date, controlled by an explicit format string.
+   Format codes referring to hours, minutes or seconds will see 0 values. For a
+   complete list of formatting directives, see
+   :ref:`strftime-strptime-behavior`.
+
+
+.. method:: date.__format__(format)
+
+   Same as :meth:`.date.strftime`. This makes it possible to specify a format
+   string for a :class:`.date` object when using :meth:`str.format`. For a
+   complete list of formatting directives, see
+   :ref:`strftime-strptime-behavior`.
+
+
+Example of counting days to an event::
+
+    >>> import time
+    >>> from nepali_datetime import date
+    >>> today = date.today()
+    >>> today
+    nepali_datetime.date(2050, 12, 5)
+    >>> today == date.fromtimestamp(time.time())
+    True
+    >>> my_birthday = date(today.year, 10, 1)
+    >>> if my_birthday < today:
+    ...     my_birthday = my_birthday.replace(year=today.year + 1)
+    >>> my_birthday
+    nepali_datetime.date(2051, 10, 1)
+    >>> time_to_birthday = abs(my_birthday - today)
+    >>> time_to_birthday.days
+    303
+
+Example of working with :class:`date`:
+
+.. doctest::
+
+    >>> from nepali_datetime import date
+    >>> d = date.fromordinal(10000) # 10000th day after 1. 1. 1975
+    >>> d
+    nepali_datetime.date(2002, 5, 12)
+    >>> t = d.timetuple()
+    >>> for i in t:     # doctest: +SKIP
+    ...     print(i)
+    2002                # year
+    5                   # month
+    12                  # day
+    0
+    0
+    0
+    2                   # weekday (2 = Tuesday)
+    138                 # 138th day in the year
+    -1
+    >>> d.isoformat()
+    '2002-05-12'
+    >>> d.strftime("%d/%m/%y")
+    '12/05/02'
+    >>> d.strftime("%A %d. %B %Y")
+    'Tuesday 12. Bhadra 2002'
+    >>> 'The {1} is {0:%d}, the {2} is {0:%B}.'.format(d, "day", "month")
+    'The day is 12, the month is Bhadra.'
+
+
+:class:`.datetime` Objects
+--------------------------
+
+A :class:`.datetime` object is a single object containing all the information
+from a :class:`date` object and a :class:`.time` object.  Like a :class:`date`
+object, :class:`.datetime` assumes the current Gregorian calendar extended in
+both directions; like a time object, :class:`.datetime` assumes there are exactly
+3600\*24 seconds in every day.
+
+Constructor:
+
+.. class:: datetime(year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None)
+
+   The year, month and day arguments are required.  *tzinfo* may be ``None``, or an
+   instance of a :class:`tzinfo` subclass.  The remaining arguments may be integers,
+   in the following ranges:
+
+   * ``MINYEAR <= year <= MAXYEAR``
+   * ``1 <= month <= 12``
+   * ``1 <= day <= number of days in the given month and year``
+   * ``0 <= hour < 24``
+   * ``0 <= minute < 60``
+   * ``0 <= second < 60``
+   * ``0 <= microsecond < 1000000``
+
+   If an argument outside those ranges is given, :exc:`ValueError` is raised.
+
+Other constructors, all class methods:
+
+.. classmethod:: datetime.today()
+
+   Return the current B.S datetime, with :attr:`.tzinfo` ``None``.
+
+
+.. classmethod:: datetime.now(tz=None)
+
+   Return the current local date and time.  If optional argument *tz* is ``None``
+   or not specified, this is like :meth:`today`, but, if possible, supplies more
+   precision than can be gotten from going through a :func:`time.time` timestamp
+   (for example, this may be possible on platforms supplying the C
+   :c:func:`gettimeofday` function).
+
+   If *tz* is not ``None``, it must be an instance of a :class:`tzinfo` subclass, and the
+   current date and time are converted to *tz*’s time zone.  In this case the
+   result is equivalent to ``tz.fromutc(datetime.utcnow().replace(tzinfo=tz))``.
+   See also :meth:`today`, :meth:`utcnow`.
+
+
+.. classmethod:: datetime.utcnow()
+
+   Return the current UTC date and time, with :attr:`.tzinfo` ``None``. This is like
+   :meth:`now`, but returns the current UTC date and time, as a naive
+   :class:`.datetime` object.  An aware current UTC datetime can be obtained by
+   calling ``datetime.now(timezone.utc)``.  See also :meth:`now`.
+
+
+.. classmethod:: datetime.fromtimestamp(timestamp, tz=None)
+
+
+.. classmethod:: datetime.utcfromtimestamp(timestamp)
+
+
+.. classmethod:: datetime.fromordinal(ordinal)
+
+
+.. classmethod:: datetime.combine(date, time)
+
+
+.. classmethod:: datetime.strptime(date_string, format)
+
+   Return a :class:`.datetime` corresponding to *date_string*, parsed according to
+   *format*.  This is equivalent to ``datetime(*(time.strptime(date_string,
+   format)[0:6]))``. :exc:`ValueError` is raised if the date_string and format
+   can't be parsed by :func:`time.strptime` or if it returns a value which isn't a
+   time tuple. For a complete list of formatting directives, see
+   :ref:`strftime-strptime-behavior`.
+
+
+
+Class attributes:
+
+.. attribute:: datetime.min
+
+   The earliest representable :class:`.datetime`, ``datetime(MINYEAR, 1, 1,
+   tzinfo=None)``.
+
+
+.. attribute:: datetime.max
+
+   The latest representable :class:`.datetime`, ``datetime(MAXYEAR, 12, MAXYEAR_LAST_MONTHS_LAST_DAY, 23, 59,
+   59, 999999, tzinfo=None)``.
+
+
+.. attribute:: datetime.resolution
+
+   The smallest possible difference between non-equal :class:`.datetime` objects,
+   ``timedelta(microseconds=1)``.
+
+
+Instance attributes (read-only):
+
+.. attribute:: datetime.year
+
+   Between :const:`MINYEAR` and :const:`MAXYEAR` inclusive.
+
+
+.. attribute:: datetime.month
+
+   Between 1 and 12 inclusive.
+
+
+.. attribute:: datetime.day
+
+   Between 1 and the number of days in the given month of the given year.
+
+
+.. attribute:: datetime.hour
+
+   In ``range(24)``.
+
+
+.. attribute:: datetime.minute
+
+   In ``range(60)``.
+
+
+.. attribute:: datetime.second
+
+   In ``range(60)``.
+
+
+.. attribute:: datetime.microsecond
+
+   In ``range(1000000)``.
+
+
+.. attribute:: datetime.tzinfo
+
+   The object passed as the *tzinfo* argument to the :class:`.datetime` constructor,
+   or ``None`` if none was passed.
+
+
+Supported operations:
+
++---------------------------------------+--------------------------------+
+| Operation                             | Result                         |
++=======================================+================================+
+| ``datetime2 = datetime1 + timedelta`` | \(1)                           |
++---------------------------------------+--------------------------------+
+| ``datetime2 = datetime1 - timedelta`` | \(2)                           |
++---------------------------------------+--------------------------------+
+| ``timedelta = datetime1 - datetime2`` | \(3)                           |
++---------------------------------------+--------------------------------+
+| ``datetime1 < datetime2``             | Compares :class:`.datetime` to |
+|                                       | :class:`.datetime`. (4)        |
++---------------------------------------+--------------------------------+
+
+(1)
+   datetime2 is a duration of timedelta removed from datetime1, moving forward in
+   time if ``timedelta.days`` > 0, or backward if ``timedelta.days`` < 0.  The
+   result has the same :attr:`~.datetime.tzinfo` attribute as the input datetime, and
+   datetime2 - datetime1 == timedelta after. :exc:`OverflowError` is raised if
+   datetime2.year would be smaller than :const:`MINYEAR` or larger than
+   :const:`MAXYEAR`. Note that no time zone adjustments are done even if the
+   input is an aware object.
+
+(2)
+   Computes the datetime2 such that datetime2 + timedelta == datetime1. As for
+   addition, the result has the same :attr:`~.datetime.tzinfo` attribute as the input
+   datetime, and no time zone adjustments are done even if the input is aware.
+   This isn't quite equivalent to datetime1 + (-timedelta), because -timedelta
+   in isolation can overflow in cases where datetime1 - timedelta does not.
+
+(3)
+   Subtraction of a :class:`.datetime` from a :class:`.datetime` is defined only if
+   both operands are naive, or if both are aware.  If one is aware and the other is
+   naive, :exc:`TypeError` is raised.
+
+   If both are naive, or both are aware and have the same :attr:`~.datetime.tzinfo` attribute,
+   the :attr:`~.datetime.tzinfo` attributes are ignored, and the result is a :class:`timedelta`
+   object *t* such that ``datetime2 + t == datetime1``.  No time zone adjustments
+   are done in this case.
+
+   If both are aware and have different :attr:`~.datetime.tzinfo` attributes, ``a-b`` acts
+   as if *a* and *b* were first converted to naive UTC datetimes first.  The
+   result is ``(a.replace(tzinfo=None) - a.utcoffset()) - (b.replace(tzinfo=None)
+   - b.utcoffset())`` except that the implementation never overflows.
+
+(4)
+   *datetime1* is considered less than *datetime2* when *datetime1* precedes
+   *datetime2* in time.
+
+   If one comparand is naive and the other is aware, :exc:`TypeError`
+   is raised if an order comparison is attempted.  For equality
+   comparisons, naive instances are never equal to aware instances.
+
+   If both comparands are aware, and have the same :attr:`~.datetime.tzinfo` attribute, the
+   common :attr:`~.datetime.tzinfo` attribute is ignored and the base datetimes are
+   compared.  If both comparands are aware and have different :attr:`~.datetime.tzinfo`
+   attributes, the comparands are first adjusted by subtracting their UTC
+   offsets (obtained from ``self.utcoffset()``).
+
+
+Instance methods:
+
+.. method:: datetime.date()
+
+   Return :class:`date` object with same year, month and day.
+
+
+.. method:: datetime.time()
+
+   Return :class:`.time` object with same hour, minute, second and microsecond.
+   :attr:`.tzinfo` is ``None``.  See also method :meth:`timetz`.
+
+
+.. method:: datetime.timetz()
+
+   Return :class:`.time` object with same hour, minute, second, microsecond, and
+   tzinfo attributes.  See also method :meth:`time`.
+
+
+.. method:: datetime.replace([year[, month[, day[, hour[, minute[, second[, microsecond[, tzinfo]]]]]]]])
+
+   Return a datetime with the same attributes, except for those attributes given
+   new values by whichever keyword arguments are specified.  Note that
+   ``tzinfo=None`` can be specified to create a naive datetime from an aware
+   datetime with no conversion of date and time data.
+
+
+.. method:: datetime.astimezone(tz=None)
+
+
+.. method:: datetime.utcoffset()
+
+
+.. method:: datetime.dst()
+
+
+.. method:: datetime.tzname()
+
+   If :attr:`.tzinfo` is ``None``, returns ``None``, else returns
+   ``self.tzinfo.tzname(self)``, raises an exception if the latter doesn't return
+   ``None`` or a string object,
+
+
+.. method:: datetime.timetuple()
+
+   Return a :class:`time.struct_time` such as returned by :func:`time.localtime`.
+   ``d.timetuple()`` is equivalent to ``time.struct_time((d.year, d.month, d.day,
+   d.hour, d.minute, d.second, d.weekday(), yday, dst))``, where ``yday =
+   d.toordinal() - date(d.year, 1, 1).toordinal() + 1`` is the day number within
+   the current year starting with ``1`` for Baishak 1st. The :attr:`tm_isdst` flag
+   of the result is set according to the :meth:`dst` method: :attr:`.tzinfo` is
+   ``None`` or :meth:`dst` returns ``None``, :attr:`tm_isdst` is set to ``-1``;
+   else if :meth:`dst` returns a non-zero value, :attr:`tm_isdst` is set to ``1``;
+   else :attr:`tm_isdst` is set to ``0``.
+
+
+.. method:: datetime.utctimetuple()
+
+
+.. method:: datetime.toordinal()
+
+
+.. method:: datetime.timestamp()
+
+
+.. method:: datetime.weekday()
+
+   Return the day of the week as an integer, where Sunday is 0 and Saturday is 6.
+   The same as ``self.date().weekday()``. See also :meth:`isoweekday`.
+
+
+.. method:: datetime.isoweekday()
+
+
+.. method:: datetime.isocalendar()
+
+
+.. method:: datetime.isoformat(sep='T')
+
+
+.. method:: datetime.__str__()
+
+   For a :class:`.datetime` instance *d*, ``str(d)`` is equivalent to
+   ``d.isoformat(' ')``.
+
+
+.. method:: datetime.ctime()
+
+
+.. method:: datetime.strftime(format)
+
+   Return a string representing the date and time, controlled by an explicit format
+   string.  For a complete list of formatting directives, see
+   :ref:`strftime-strptime-behavior`.
+
+
+.. method:: datetime.__format__(format)
+
+   Same as :meth:`.datetime.strftime`.  This makes it possible to specify a format
+   string for a :class:`.datetime` object when using :meth:`str.format`.  For a
+   complete list of formatting directives, see
+   :ref:`strftime-strptime-behavior`.
+
+
+Examples of working with datetime objects:
+
+.. doctest::
+
+    >>> import nepali_datetime
+    >>> from datetime import time
+    >>> # Using datetime.combine()
+    >>> d = date(2005, 7, 14)
+    >>> t = time(12, 30)
+    >>> nepali_datetime.datetime.combine(d, t)
+    nepali_datetime.datetime(2005, 7, 14, 12, 30)
+    >>> # Using nepali_datetime.datetime.now() or nepali_datetime.datetime.utcnow()
+    >>> nepali_datetime.datetime.now()   # doctest: +SKIP
+    nepali_datetime.datetime(2007, 12, 6, 16, 29, 43, 79043)   # GMT +1
+    >>> nepali_datetime.datetime.utcnow()   # doctest: +SKIP
+    nepali_datetime.datetime(2007, 12, 6, 15, 29, 43, 79060)
+    >>> # Using nepali_datetime.datetime.strptime()
+    >>> dt = nepali_datetime.datetime.strptime("21/11/06 16:30", "%d/%m/%y %H:%M")
+    >>> dt
+    nepali_datetime.datetime(2006, 11, 21, 16, 30)
+    >>> # Using nepali_datetime.datetime.timetuple() to get tuple of all attributes
+    >>> tt = dt.timetuple()
+    >>> for it in tt:   # doctest: +SKIP
+    ...     print(it)
+    ...
+    2006    # year
+    11      # month
+    21      # day
+    16      # hour
+    30      # minute
+    0       # second
+    6       # weekday (0 = Sunday)
+    325     # number of days since 1st January
+    -1      # dst - method tzinfo.dst() returned None
+    >>> # Formatting datetime
+    >>> dt.strftime("%A, %d. %B %Y %I:%M%p")
+    'Saturday, 21. Falgun 2006 04:30PM'
+    >>> 'The {1} is {0:%d}, the {2} is {0:%B}, the {3} is {0:%I:%M%p}.'.format(dt, "day", "month", "time")
+    'The day is 21, the month is Falgun, the time is 04:30PM.'
+
+Using datetime with tzinfo:
+    
+    >>> import nepali_datetime
+    >>> from datetime import timedelta, tzinfo
+    >>> class GMT1(tzinfo):
+    ...     def utcoffset(self, dt):
+    ...         return timedelta(hours=1) + self.dst(dt)
+    ...     def dst(self, dt):
+    ...         # DST starts last Sunday in March
+    ...         d = datetime(dt.year, 4, 1)   # ends last Sunday in October
+    ...         self.dston = d - timedelta(days=d.weekday() + 1)
+    ...         d = datetime(dt.year, 11, 1)
+    ...         self.dstoff = d - timedelta(days=d.weekday() + 1)
+    ...         if self.dston <=  dt.replace(tzinfo=None) < self.dstoff:
+    ...             return timedelta(hours=1)
+    ...         else:
+    ...             return timedelta(0)
+    ...     def tzname(self,dt):
+    ...          return "GMT +1"
+    ...
+    >>> class GMT2(tzinfo):
+    ...     def utcoffset(self, dt):
+    ...         return timedelta(hours=2) + self.dst(dt)
+    ...     def dst(self, dt):
+    ...         d = datetime(dt.year, 4, 1)
+    ...         self.dston = d - timedelta(days=d.weekday() + 1)
+    ...         d = datetime(dt.year, 11, 1)
+    ...         self.dstoff = d - timedelta(days=d.weekday() + 1)
+    ...         if self.dston <=  dt.replace(tzinfo=None) < self.dstoff:
+    ...             return timedelta(hours=1)
+    ...         else:
+    ...             return timedelta(0)
+    ...     def tzname(self,dt):
+    ...         return "GMT +2"
+    ...
+    >>> gmt1 = GMT1()
+    >>> # Daylight Saving Time
+    >>> dt1 = nepali_datetime.datetime(2006, 11, 21, 16, 30, tzinfo=gmt1)
+    >>> dt1.dst()
+    datetime.timedelta(0)
+    >>> dt1.utcoffset()
+    datetime.timedelta(0, 3600)
+    >>> dt2 = nepali_datetime.datetime(2006, 6, 14, 13, 0, tzinfo=gmt1)
+    >>> dt2.dst()
+    datetime.timedelta(0, 3600)
+    >>> dt2.utcoffset()
+    datetime.timedelta(0, 7200)
+    >>> dt2     # doctest: +ELLIPSIS
+    nepali_datetime.datetime(2006, 6, 14, 13, 0, tzinfo=<GMT1 object at 0x...>)
+    >>> dt2.utctimetuple() == dt3.utctimetuple()
+    True

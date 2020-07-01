@@ -3,11 +3,11 @@
 **/.pytest_cache/**
 
 **/.idea/**
+**/.vscode/**
+*.swp
 
-build/
+docs/source/_*
 
-dist/
+/build
 
-nepali_date.egg-info/
-
-sphinx/_*
+/*.egg-info/
