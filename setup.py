@@ -5,8 +5,8 @@ with open('README.md', encoding='utf-8') as readme_file:
 
 setup(
     name="nepali-datetime",
-    version="1.0.0",
-    description="Datetime module that operates on B.S",
+    version="1.0.1",
+    description="datetime module that operates on B.S",
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/arneec/nepali-datetime",
