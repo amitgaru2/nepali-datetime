@@ -29,9 +29,7 @@ The equivalent `nepali_datetime` library usage.
 # 2077-04-03
 ```
 
-**The equivalence is not limited to just getting current datetime. Its supports almost methods from Python's core 
-datetime library supports & is almost equivalent. The ultimate goal is not make it equivalent & making these two 
-library's interchangeable at any line of code.**
+*The equivalence is not limited to just getting current datetime. Its supports almost methods from Python's core datetime library supports. The ultimate goal is to make it completely equivalent providing every method Python's datetime has provided, making nepali_datetime objects hashable and picklable so that one can migrate from Python's datetime to nepali_datetime in ease.*
 
 ## Documentation
 Complete documentations can be found [here](https://arneec.github.io/nepali-datetime/).
