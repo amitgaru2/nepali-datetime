@@ -1,19 +1,16 @@
-"""The completely inspired library from Python's datetime library which will operate on top of Bikram Sambat
-(B.S) date. Currently supported B.S date range is 1975 - 2100. Most of the code are derived from
-Python3.5 's datetime.py module & later modified to support nepali_datetime.
+"""The completely inspired library from Python's datetime library which will operate on top of
+Bikram Sambat (B.S) date. Currently supported B.S date range is 1975 - 2100. Most of the code
+and documentation are derived from Python3.5 's datetime.py module & later modified to support
+nepali_datetime.
 
 Supports >= Python3.5
-
-Creator
--------
-Amit Garu
-    email: amitgaru2@gmail.com
-    github: arneec
 """
 # TODO: make nepali_datetime 's "date", "datetime" objects hashable
 # TODO: add pickling support
 # TODO: tests for timezone is correctly working or not for datetime class
 # TODO: improve documentation
+
+__author__ = "Amit Garu <amitgaru2@gmail.com>"
 
 __version__ = "1.0.1"
 
@@ -27,12 +24,9 @@ from nepali_datetime.config import CALENDAR_PATH, MINDATE, MAXDATE, REFERENCE_DA
 MINYEAR = MINDATE['year']
 MAXYEAR = MAXDATE['year']
 
-_MONTHNAMES = [None, "Bai", "Jes", "Ash", "Shr", "Bha", "Aso", "Kar", "Man", "Pou", "Mag", "Fal", "Cha"]
-_FULLMONTHNAMES = [None, "Baishak", "Jestha", "Ashar", "Shrawan", "Bhadra", "Asoj", "Kartik", "Mangsir", "Poush",
-                   "Magh", "Falgun", "Chaith"]
-_ADMONTHNAMES = [None, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-_ADFULLMONTHNAMES = [None, "January", "February", "March", "April", "May", "June", "July", "August", "September",
-                     "October", "November", "December"]
+_MONTHNAMES = [None, "Bai", "Jes", "Asa", "Shr", "Bha", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha"]
+_FULLMONTHNAMES = [None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Aswin", "Kartik", "Mangsir", "Poush",
+                   "Magh", "Falgun", "Chaitra"]
 _DAYNAMES = [None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 _FULLDAYNAMES = [None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 

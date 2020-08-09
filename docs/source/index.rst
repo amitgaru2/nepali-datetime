@@ -273,9 +273,9 @@ Example of working with :class:`date`:
     >>> d.strftime("%d/%m/%y")
     '12/05/02'
     >>> d.strftime("%A %d. %B %Y")
-    'Tuesday 12. Bhadra 2002'
+    'Tuesday 12. Bhadau 2002'
     >>> 'The {1} is {0:%d}, the {2} is {0:%B}.'.format(d, "day", "month")
-    'The day is 12, the month is Bhadra.'
+    'The day is 12, the month is Bhadau.'
 
 
 :class:`.datetime` Objects
@@ -592,7 +592,7 @@ Examples of working with datetime objects:
     >>> import nepali_datetime
     >>> from datetime import time
     >>> # Using datetime.combine()
-    >>> d = date(2005, 7, 14)
+    >>> d = nepali_datetime.date(2005, 7, 14)
     >>> t = time(12, 30)
     >>> nepali_datetime.datetime.combine(d, t)
     nepali_datetime.datetime(2005, 7, 14, 12, 30)
@@ -738,8 +738,8 @@ format codes.
 |           |                                |                        |       |
 |           |                                |                        |       |
 +-----------+--------------------------------+------------------------+-------+
-| ``%B``    | Month as locale's full name.   || Baishak, Jestha,      | \(1)  |
-|           |                                |  ..., Chaith           |       |
+| ``%B``    | Month as locale's full name.   || Baishakh, Jestha,     | \(1)  |
+|           |                                |  ..., Chaitra          |       |
 |           |                                |                        |       |
 |           |                                |                        |       |
 +-----------+--------------------------------+------------------------+-------+
@@ -797,7 +797,7 @@ format codes.
 |           | are considered to be in        |                        |       |
 |           | week 0.                        |                        |       |
 +-----------+--------------------------------+------------------------+-------+
-| ``%c``    | Locale's appropriate date and  || Tue Ash 16 21:30:00   | \(1)  |
+| ``%c``    | Locale's appropriate date and  || Tue Asa 16 21:30:00   | \(1)  |
 |           | time representation.           |  1988                  |       |
 |           |                                |                        |       |
 |           |                                |                        |       |

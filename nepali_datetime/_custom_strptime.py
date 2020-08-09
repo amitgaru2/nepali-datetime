@@ -15,9 +15,9 @@ except ImportError:
 
 __all__ = []
 
-_MONTHNAMES = [None, "bai", "jes", "ash", "shr", "bha", "aso", "kar", "man", "pou", "mag", "fal", "cha"]
-_FULLMONTHNAMES = [None, "baishak", "jestha", "ashar", "shrawan", "bhadra", "asoj", "kartik", "mangsir", "poush",
-                   "magh", "falgun", "chaith"]
+_MONTHNAMES = [None, "bai", "jes", "asa", "shr", "bha", "asw", "kar", "man", "pou", "mag", "fal", "cha"]
+_FULLMONTHNAMES = [None, "baishakh", "jestha", "asar", "shrawan", "bhadau", "aswin", "kartik", "mangsir", "poush",
+                   "magh", "falgun", "chaitra"]
 
 
 def _getlang():
