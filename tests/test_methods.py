@@ -23,3 +23,4 @@ class TestDatetimeMethods:
         assert 0 <= dt.minute <= 59
         assert 0 <= dt.second <= 59
         assert 0 <= dt.microsecond <= 999999
+        assert isinstance(dt.tzinfo, nepali_datetime.UTC0545)

@@ -1,18 +1,19 @@
-"""The completely inspired library from Python's datetime library which will operate on top of
-Bikram Sambat (B.S) date. Currently supported B.S date range is 1975 - 2100. Most of the code
-and documentation are derived from Python3.5 's datetime.py module & later modified to support
+"""An inspired library from Python's `datetime` library which will operate on top of
+Bikram Sambat (B.S) date. Currently supported B.S date range is 1975 - 2100. Most of the code &
+documentation are derived from Python3.5 's datetime.py module & later modified to support
 nepali_datetime.
 
 Supports >= Python3.5
 """
 # TODO: make nepali_datetime 's "date", "datetime" objects hashable
 # TODO: add pickling support
-# TODO: tests for timezone is correctly working or not for datetime class
 # TODO: improve documentation
+# TODO: feature to allow inject custom month names
+# TODO: more tests
 
 __author__ = "Amit Garu <amitgaru2@gmail.com>"
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 import csv
 import time as _time
@@ -251,8 +252,8 @@ def _check_time_fields(hour, minute, second, microsecond):
 
 
 def _check_tzinfo_arg(tz):
-    if tz is not None and not isinstance(tz, _actual_datetime.tzinfo):
-        raise TypeError("tzinfo argument must be None or of a tzinfo subclass")
+    if tz is not None and not isinstance(tz, UTC0545):
+        raise TypeError("tzinfo argument must be None or of a UTC0545 subclass")
 
 
 def _cmperror(x, y):
@@ -261,6 +262,46 @@ def _cmperror(x, y):
 
 def _cmp(x, y):
     return 0 if x == y else 1 if x > y else -1
+
+
+class UTC0545(_actual_datetime.tzinfo):
+    _offset = _actual_datetime.timedelta(seconds=20700)
+    _dst = _actual_datetime.timedelta(0)
+    _name = "+0545"
+
+    def utcoffset(self, dt):
+        return self.__class__._offset
+
+    def dst(self, dt):
+        return self.__class__._dst
+
+    def tzname(self, dt):
+        return self.__class__._name
+
+    def fromutc(self, dt):
+        """datetime in UTC -> datetime in local time."""
+
+        if not isinstance(dt, datetime):
+            raise TypeError("fromutc() requires a nepali_datetime.datetime argument")
+        if dt.tzinfo is not self:
+            raise ValueError("dt.tzinfo is not self")
+
+        dtoff = dt.utcoffset()
+        if dtoff is None:
+            raise ValueError("fromutc() requires a non-None utcoffset() "
+                             "result")
+
+        dtdst = dt.dst()
+        if dtdst is None:
+            raise ValueError("fromutc() requires a non-None dst() result")
+        delta = dtoff - dtdst
+        if delta:
+            dt += delta
+            dtdst = dt.dst()
+            if dtdst is None:
+                raise ValueError("fromutc(): dt.dst gave inconsistent "
+                                 "results; cannot convert")
+        return dt + dtdst
 
 
 class date:
@@ -453,7 +494,7 @@ class date:
         return NotImplemented
 
     def weekday(self):
-        "Return day of the week, where Sunday == 0 ... Saturday == 6."
+        """Return day of the week, where Sunday == 0 ... Saturday == 6."""
         return (self.toordinal() + 5) % 7
 
     def isoweekday(self):
@@ -499,7 +540,7 @@ class datetime(date):
         self._minute = minute
         self._second = second
         self._microsecond = microsecond
-        self._tzinfo = tzinfo
+        self._tzinfo = UTC0545() if tzinfo is None else tzinfo
         self._hashcode = -1
         return self
 
@@ -569,10 +610,10 @@ class datetime(date):
         return cls._fromtimestamp(t, True, None)
 
     @classmethod
-    def now(cls, tz=None):
+    def now(cls):
         """Construct a datetime from time.time() and optional time zone info."""
         t = _time.time()
-        return cls.fromtimestamp(t, tz)
+        return cls.fromtimestamp(t, UTC0545())
 
     @classmethod
     def utcnow(cls):
