@@ -65,6 +65,12 @@ always will be, in effect. Attributes: <a class="reference internal" href="#nepa
 </dd></dl>
 
 <dl class="py class">
+<dt id="nepali_datetime.UTC0545">
+<em class="property">class </em><code class="sig-prename descclassname">nepali_datetime.</code><code class="sig-name descname">UTC0545</code><a class="headerlink" href="#nepali_datetime.UTC0545" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">tzinfo</span></code> subclass for Nepal timezone.</p>
+</dd></dl>
+
+<dl class="py class">
 <dt>
 <em class="property">class </em><code class="sig-prename descclassname">nepali_datetime.</code><code class="sig-name descname">datetime</code></dt>
 <dd><p>A combination of a date and a time. Attributes: <a class="reference internal" href="#nepali_datetime.datetime.year" title="nepali_datetime.datetime.year"><code class="xref py py-attr docutils literal notranslate"><span class="pre">year</span></code></a>, <a class="reference internal" href="#nepali_datetime.datetime.month" title="nepali_datetime.datetime.month"><code class="xref py py-attr docutils literal notranslate"><span class="pre">month</span></code></a>,
@@ -73,8 +79,8 @@ and <a class="reference internal" href="#nepali_datetime.datetime.tzinfo" title=
 </dd></dl>
 
 </div>
-<div class="section" id="date-objects">
-<h2><a class="reference internal" href="#nepali_datetime.date" title="nepali_datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> Objects<a class="headerlink" href="#date-objects" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nepali-date-date-objects">
+<h2><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_date.date</span></code> Objects<a class="headerlink" href="#nepali-date-date-objects" title="Permalink to this headline">¶</a></h2>
 <p>A <a class="reference internal" href="#nepali_datetime.date" title="nepali_datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> object represents a date (year, month and day) in B.S calendar.  Baishak 1 of year 1975 is called day
 number 1, Baishak 2 of year 1975 is called day number 2, and so on.</p>
 <dl class="py class">
@@ -321,14 +327,14 @@ complete list of formatting directives, see
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%y&quot;</span><span class="p">)</span>
 <span class="go">&#39;12/05/02&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%A </span><span class="si">%d</span><span class="s2">. %B %Y&quot;</span><span class="p">)</span>
-<span class="go">&#39;Tuesday 12. Bhadra 2002&#39;</span>
+<span class="go">&#39;Tuesday 12. Bhadau 2002&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;The </span><span class="si">{1}</span><span class="s1"> is {0:</span><span class="si">%d</span><span class="s1">}, the </span><span class="si">{2}</span><span class="s1"> is {0:%B}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">)</span>
-<span class="go">&#39;The day is 12, the month is Bhadra.&#39;</span>
+<span class="go">&#39;The day is 12, the month is Bhadau.&#39;</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="datetime-objects">
-<h2><a class="reference internal" href="#nepali_datetime.datetime" title="nepali_datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> Objects<a class="headerlink" href="#datetime-objects" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nepali-datetime-datetime-objects">
+<h2><a class="reference internal" href="#nepali_datetime.datetime" title="nepali_datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_datetime.datetime</span></code></a> Objects<a class="headerlink" href="#nepali-datetime-datetime-objects" title="Permalink to this headline">¶</a></h2>
 <p>A <a class="reference internal" href="#nepali_datetime.datetime" title="nepali_datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> object is a single object containing all the information
 from a <a class="reference internal" href="#nepali_datetime.date" title="nepali_datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> object and a <code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code> object.  Like a <a class="reference internal" href="#nepali_datetime.date" title="nepali_datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a>
 object, <a class="reference internal" href="#nepali_datetime.datetime" title="nepali_datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> assumes the current Gregorian calendar extended in
@@ -339,7 +345,7 @@ both directions; like a time object, <a class="reference internal" href="#nepali
 <dt id="nepali_datetime.datetime">
 <em class="property">class </em><code class="sig-prename descclassname">nepali_datetime.</code><code class="sig-name descname">datetime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">year</span></em>, <em class="sig-param"><span class="n">month</span></em>, <em class="sig-param"><span class="n">day</span></em>, <em class="sig-param"><span class="n">hour</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">minute</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">second</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">microsecond</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">tzinfo</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime" title="Permalink to this definition">¶</a></dt>
 <dd><p>The year, month and day arguments are required.  <em>tzinfo</em> may be <code class="docutils literal notranslate"><span class="pre">None</span></code>, or an
-instance of a <a class="reference internal" href="#nepali_datetime.datetime.tzinfo" title="nepali_datetime.datetime.tzinfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">tzinfo</span></code></a> subclass.  The remaining arguments may be integers,
+instance of a <a class="reference internal" href="#nepali_datetime.UTC0545" title="nepali_datetime.UTC0545"><code class="xref py py-class docutils literal notranslate"><span class="pre">UTC0545</span></code></a>.  The remaining arguments may be integers,
 in the following ranges:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">MINYEAR</span> <span class="pre">&lt;=</span> <span class="pre">year</span> <span class="pre">&lt;=</span> <span class="pre">MAXYEAR</span></code></p></li>
@@ -357,21 +363,19 @@ in the following ranges:</p>
 <dl class="py method">
 <dt id="nepali_datetime.datetime.today">
 <em class="property">classmethod </em><code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">today</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.today" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the current B.S datetime, with <a class="reference internal" href="#nepali_datetime.datetime.tzinfo" title="nepali_datetime.datetime.tzinfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tzinfo</span></code></a> <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<dd><p>Return the current B.S datetime, with <a class="reference internal" href="#nepali_datetime.datetime.tzinfo" title="nepali_datetime.datetime.tzinfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tzinfo</span></code></a> as <a class="reference internal" href="#nepali_datetime.UTC0545" title="nepali_datetime.UTC0545"><code class="xref py py-class docutils literal notranslate"><span class="pre">UTC0545</span></code></a> instance.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="nepali_datetime.datetime.now">
-<em class="property">classmethod </em><code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">now</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tz</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.now" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">now</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.now" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the current local date and time.  If optional argument <em>tz</em> is <code class="docutils literal notranslate"><span class="pre">None</span></code>
 or not specified, this is like <a class="reference internal" href="#nepali_datetime.datetime.today" title="nepali_datetime.datetime.today"><code class="xref py py-meth docutils literal notranslate"><span class="pre">today()</span></code></a>, but, if possible, supplies more
 precision than can be gotten from going through a <code class="xref py py-func docutils literal notranslate"><span class="pre">time.time()</span></code> timestamp
 (for example, this may be possible on platforms supplying the C
 <code class="xref c c-func docutils literal notranslate"><span class="pre">gettimeofday()</span></code> function).</p>
-<p>If <em>tz</em> is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, it must be an instance of a <a class="reference internal" href="#nepali_datetime.datetime.tzinfo" title="nepali_datetime.datetime.tzinfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">tzinfo</span></code></a> subclass, and the
-current date and time are converted to <em>tz</em>’s time zone.  In this case the
-result is equivalent to <code class="docutils literal notranslate"><span class="pre">tz.fromutc(datetime.utcnow().replace(tzinfo=tz))</span></code>.
-See also <a class="reference internal" href="#nepali_datetime.datetime.today" title="nepali_datetime.datetime.today"><code class="xref py py-meth docutils literal notranslate"><span class="pre">today()</span></code></a>, <a class="reference internal" href="#nepali_datetime.datetime.utcnow" title="nepali_datetime.datetime.utcnow"><code class="xref py py-meth docutils literal notranslate"><span class="pre">utcnow()</span></code></a>.</p>
+<p>The <em>tz</em> is explicitly set to restrict to Nepal timezone which is an instance
+of <a class="reference internal" href="#nepali_datetime.UTC0545" title="nepali_datetime.UTC0545"><code class="xref py py-class docutils literal notranslate"><span class="pre">UTC0545</span></code></a>. See also <a class="reference internal" href="#nepali_datetime.datetime.today" title="nepali_datetime.datetime.today"><code class="xref py py-meth docutils literal notranslate"><span class="pre">today()</span></code></a>, <a class="reference internal" href="#nepali_datetime.datetime.utcnow" title="nepali_datetime.datetime.utcnow"><code class="xref py py-meth docutils literal notranslate"><span class="pre">utcnow()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -379,8 +383,7 @@ See also <a class="reference internal" href="#nepali_datetime.datetime.today" ti
 <em class="property">classmethod </em><code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">utcnow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.utcnow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the current UTC date and time, with <a class="reference internal" href="#nepali_datetime.datetime.tzinfo" title="nepali_datetime.datetime.tzinfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tzinfo</span></code></a> <code class="docutils literal notranslate"><span class="pre">None</span></code>. This is like
 <a class="reference internal" href="#nepali_datetime.datetime.now" title="nepali_datetime.datetime.now"><code class="xref py py-meth docutils literal notranslate"><span class="pre">now()</span></code></a>, but returns the current UTC date and time, as a naive
-<a class="reference internal" href="#nepali_datetime.datetime" title="nepali_datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> object.  An aware current UTC datetime can be obtained by
-calling <code class="docutils literal notranslate"><span class="pre">datetime.now(timezone.utc)</span></code>.  See also <a class="reference internal" href="#nepali_datetime.datetime.now" title="nepali_datetime.datetime.now"><code class="xref py py-meth docutils literal notranslate"><span class="pre">now()</span></code></a>.</p>
+<a class="reference internal" href="#nepali_datetime.datetime" title="nepali_datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> object. See also <a class="reference internal" href="#nepali_datetime.datetime.now" title="nepali_datetime.datetime.now"><code class="xref py py-meth docutils literal notranslate"><span class="pre">now()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -560,14 +563,14 @@ offsets (obtained from <code class="docutils literal notranslate"><span class="p
 <dl class="py method">
 <dt id="nepali_datetime.datetime.time">
 <code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code> object with same hour, minute, second and microsecond.
+<dd><p>Return <a class="reference internal" href="#nepali_datetime.datetime.time" title="nepali_datetime.datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a> object with same hour, minute, second and microsecond.
 <a class="reference internal" href="#nepali_datetime.datetime.tzinfo" title="nepali_datetime.datetime.tzinfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tzinfo</span></code></a> is <code class="docutils literal notranslate"><span class="pre">None</span></code>.  See also method <a class="reference internal" href="#nepali_datetime.datetime.timetz" title="nepali_datetime.datetime.timetz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">timetz()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="nepali_datetime.datetime.timetz">
 <code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">timetz</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.timetz" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code> object with same hour, minute, second, microsecond, and
+<dd><p>Return <a class="reference internal" href="#nepali_datetime.datetime.time" title="nepali_datetime.datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a> object with same hour, minute, second, microsecond, and
 tzinfo attributes.  See also method <a class="reference internal" href="#nepali_datetime.datetime.time" title="nepali_datetime.datetime.time"><code class="xref py py-meth docutils literal notranslate"><span class="pre">time()</span></code></a>.</p>
 </dd></dl>
 
@@ -579,11 +582,6 @@ new values by whichever keyword arguments are specified.  Note that
 <code class="docutils literal notranslate"><span class="pre">tzinfo=None</span></code> can be specified to create a naive datetime from an aware
 datetime with no conversion of date and time data.</p>
 </dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.astimezone">
-<code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">astimezone</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tz</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.astimezone" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt id="nepali_datetime.datetime.utcoffset">
@@ -687,7 +685,7 @@ complete list of formatting directives, see
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nepali_datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">time</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Using datetime.combine()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2005</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">nepali_datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2005</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nepali_datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 <span class="go">nepali_datetime.datetime(2005, 7, 14, 12, 30)</span>
@@ -719,58 +717,6 @@ complete list of formatting directives, see
 <span class="go">&#39;Saturday, 21. Falgun 2006 04:30PM&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;The </span><span class="si">{1}</span><span class="s1"> is {0:</span><span class="si">%d</span><span class="s1">}, the </span><span class="si">{2}</span><span class="s1"> is {0:%B}, the </span><span class="si">{3}</span><span class="s1"> is {0:%I:%M%p}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">)</span>
 <span class="go">&#39;The day is 21, the month is Falgun, the time is 04:30PM.&#39;</span>
-</pre></div>
-</div>
-<p>Using datetime with tzinfo:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nepali_datetime</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">tzinfo</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">GMT1</span><span class="p">(</span><span class="n">tzinfo</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">utcoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dst</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">dst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="c1"># DST starts last Sunday in March</span>
-<span class="gp">... </span>        <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># ends last Sunday in October</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">dston</span> <span class="o">=</span> <span class="n">d</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">dstoff</span> <span class="o">=</span> <span class="n">d</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dston</span> <span class="o">&lt;=</span>  <span class="n">dt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">dstoff</span><span class="p">:</span>
-<span class="gp">... </span>            <span class="k">return</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="k">else</span><span class="p">:</span>
-<span class="gp">... </span>            <span class="k">return</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">tzname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dt</span><span class="p">):</span>
-<span class="gp">... </span>         <span class="k">return</span> <span class="s2">&quot;GMT +1&quot;</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">GMT2</span><span class="p">(</span><span class="n">tzinfo</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">utcoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dst</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">dst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">dston</span> <span class="o">=</span> <span class="n">d</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">dstoff</span> <span class="o">=</span> <span class="n">d</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dston</span> <span class="o">&lt;=</span>  <span class="n">dt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">dstoff</span><span class="p">:</span>
-<span class="gp">... </span>            <span class="k">return</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="k">else</span><span class="p">:</span>
-<span class="gp">... </span>            <span class="k">return</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">tzname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dt</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="s2">&quot;GMT +2&quot;</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gmt1</span> <span class="o">=</span> <span class="n">GMT1</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Daylight Saving Time</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt1</span> <span class="o">=</span> <span class="n">nepali_datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">gmt1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt1</span><span class="o">.</span><span class="n">dst</span><span class="p">()</span>
-<span class="go">datetime.timedelta(0)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt1</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">()</span>
-<span class="go">datetime.timedelta(0, 3600)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt2</span> <span class="o">=</span> <span class="n">nepali_datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">gmt1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt2</span><span class="o">.</span><span class="n">dst</span><span class="p">()</span>
-<span class="go">datetime.timedelta(0, 3600)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt2</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">()</span>
-<span class="go">datetime.timedelta(0, 7200)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt2</span>     
-<span class="go">nepali_datetime.datetime(2006, 6, 14, 13, 0, tzinfo=&lt;GMT1 object at 0x...&gt;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt2</span><span class="o">.</span><span class="n">utctimetuple</span><span class="p">()</span> <span class="o">==</span> <span class="n">dt3</span><span class="o">.</span><span class="n">utctimetuple</span><span class="p">()</span>
-<span class="go">True</span>
 </pre></div>
 </div>
 </div>
@@ -857,8 +803,8 @@ name.</p></td>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%B</span></code></p></td>
 <td><p>Month as locale’s full name.</p></td>
 <td><div class="line-block">
-<div class="line">Baishak, Jestha,
-…, Chaith</div>
+<div class="line">Baishakh, Jestha,
+…, Chaitra</div>
 </div>
 </td>
 <td><p>(1)</p></td>
@@ -969,7 +915,7 @@ week 0.</p></td>
 <td><p>Locale’s appropriate date and
 time representation.</p></td>
 <td><div class="line-block">
-<div class="line">Tue Ash 16 21:30:00
+<div class="line">Tue Asa 16 21:30:00
 1988</div>
 </div>
 </td>
@@ -1069,8 +1015,8 @@ in calculations when the day of the week and the year are specified.</p></li>
   <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Basic date and time types that operates on B.S</a><ul>
 <li><a class="reference internal" href="#available-types">Available Types</a></li>
-<li><a class="reference internal" href="#date-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code> Objects</a></li>
-<li><a class="reference internal" href="#datetime-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code> Objects</a></li>
+<li><a class="reference internal" href="#nepali-date-date-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_date.date</span></code> Objects</a></li>
+<li><a class="reference internal" href="#nepali-datetime-datetime-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_datetime.datetime</span></code> Objects</a></li>
 <li><a class="reference internal" href="#strftime-and-strptime-behavior"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strftime()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> Behavior</a></li>
 </ul>
 </li>

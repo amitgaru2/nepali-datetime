@@ -37,6 +37,10 @@ Available Types
    always will be, in effect. Attributes: :attr:`year`, :attr:`month`, and
    :attr:`day`.
 
+.. class:: UTC0545
+
+   A :class:`tzinfo` subclass for Nepal timezone.
+
 
 .. class:: datetime
    :noindex:
@@ -46,8 +50,8 @@ Available Types
    and :attr:`.tzinfo`.
 
 
-:class:`date` Objects
----------------------
+:class:`nepali_date.date` Objects
+---------------------------------
 
 A :class:`date` object represents a date (year, month and day) in B.S calendar.  Baishak 1 of year 1975 is called day
 number 1, Baishak 2 of year 1975 is called day number 2, and so on.
@@ -277,14 +281,13 @@ Example of working with :class:`date`:
     >>> 'The {1} is {0:%d}, the {2} is {0:%B}.'.format(d, "day", "month")
     'The day is 12, the month is Bhadau.'
 
+:class:`nepali_datetime.datetime` Objects
+-----------------------------------------
 
-:class:`.datetime` Objects
---------------------------
-
-A :class:`.datetime` object is a single object containing all the information
-from a :class:`date` object and a :class:`.time` object.  Like a :class:`date`
-object, :class:`.datetime` assumes the current Gregorian calendar extended in
-both directions; like a time object, :class:`.datetime` assumes there are exactly
+A :class:`datetime` object is a single object containing all the information
+from a :class:`date` object and a :class:`time` object.  Like a :class:`date`
+object, :class:`datetime` assumes the current Gregorian calendar extended in
+both directions; like a time object, :class:`datetime` assumes there are exactly
 3600\*24 seconds in every day.
 
 Constructor:
@@ -292,7 +295,7 @@ Constructor:
 .. class:: datetime(year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None)
 
    The year, month and day arguments are required.  *tzinfo* may be ``None``, or an
-   instance of a :class:`tzinfo` subclass.  The remaining arguments may be integers,
+   instance of a :class:`UTC0545`.  The remaining arguments may be integers,
    in the following ranges:
 
    * ``MINYEAR <= year <= MAXYEAR``
@@ -309,10 +312,10 @@ Other constructors, all class methods:
 
 .. classmethod:: datetime.today()
 
-   Return the current B.S datetime, with :attr:`.tzinfo` ``None``.
+   Return the current B.S datetime, with :attr:`.tzinfo` as :class:`.UTC0545` instance.
 
 
-.. classmethod:: datetime.now(tz=None)
+.. classmethod:: datetime.now()
 
    Return the current local date and time.  If optional argument *tz* is ``None``
    or not specified, this is like :meth:`today`, but, if possible, supplies more
@@ -320,18 +323,15 @@ Other constructors, all class methods:
    (for example, this may be possible on platforms supplying the C
    :c:func:`gettimeofday` function).
 
-   If *tz* is not ``None``, it must be an instance of a :class:`tzinfo` subclass, and the
-   current date and time are converted to *tz*’s time zone.  In this case the
-   result is equivalent to ``tz.fromutc(datetime.utcnow().replace(tzinfo=tz))``.
-   See also :meth:`today`, :meth:`utcnow`.
+   The *tz* is explicitly set to restrict to Nepal timezone which is an instance
+   of :class:`.UTC0545`. See also :meth:`today`, :meth:`utcnow`.
 
 
 .. classmethod:: datetime.utcnow()
 
    Return the current UTC date and time, with :attr:`.tzinfo` ``None``. This is like
    :meth:`now`, but returns the current UTC date and time, as a naive
-   :class:`.datetime` object.  An aware current UTC datetime can be obtained by
-   calling ``datetime.now(timezone.utc)``.  See also :meth:`now`.
+   :class:`.datetime` object. See also :meth:`now`.
 
 
 .. classmethod:: datetime.fromtimestamp(timestamp, tz=None)
@@ -490,13 +490,13 @@ Instance methods:
 
 .. method:: datetime.time()
 
-   Return :class:`.time` object with same hour, minute, second and microsecond.
+   Return :class:`time` object with same hour, minute, second and microsecond.
    :attr:`.tzinfo` is ``None``.  See also method :meth:`timetz`.
 
 
 .. method:: datetime.timetz()
 
-   Return :class:`.time` object with same hour, minute, second, microsecond, and
+   Return :class:`time` object with same hour, minute, second, microsecond, and
    tzinfo attributes.  See also method :meth:`time`.
 
 
@@ -506,9 +506,6 @@ Instance methods:
    new values by whichever keyword arguments are specified.  Note that
    ``tzinfo=None`` can be specified to create a naive datetime from an aware
    datetime with no conversion of date and time data.
-
-
-.. method:: datetime.astimezone(tz=None)
 
 
 .. method:: datetime.utcoffset()
@@ -625,66 +622,13 @@ Examples of working with datetime objects:
     >>> 'The {1} is {0:%d}, the {2} is {0:%B}, the {3} is {0:%I:%M%p}.'.format(dt, "day", "month", "time")
     'The day is 21, the month is Falgun, the time is 04:30PM.'
 
-Using datetime with tzinfo:
-    
-    >>> import nepali_datetime
-    >>> from datetime import timedelta, tzinfo
-    >>> class GMT1(tzinfo):
-    ...     def utcoffset(self, dt):
-    ...         return timedelta(hours=1) + self.dst(dt)
-    ...     def dst(self, dt):
-    ...         # DST starts last Sunday in March
-    ...         d = datetime(dt.year, 4, 1)   # ends last Sunday in October
-    ...         self.dston = d - timedelta(days=d.weekday() + 1)
-    ...         d = datetime(dt.year, 11, 1)
-    ...         self.dstoff = d - timedelta(days=d.weekday() + 1)
-    ...         if self.dston <=  dt.replace(tzinfo=None) < self.dstoff:
-    ...             return timedelta(hours=1)
-    ...         else:
-    ...             return timedelta(0)
-    ...     def tzname(self,dt):
-    ...          return "GMT +1"
-    ...
-    >>> class GMT2(tzinfo):
-    ...     def utcoffset(self, dt):
-    ...         return timedelta(hours=2) + self.dst(dt)
-    ...     def dst(self, dt):
-    ...         d = datetime(dt.year, 4, 1)
-    ...         self.dston = d - timedelta(days=d.weekday() + 1)
-    ...         d = datetime(dt.year, 11, 1)
-    ...         self.dstoff = d - timedelta(days=d.weekday() + 1)
-    ...         if self.dston <=  dt.replace(tzinfo=None) < self.dstoff:
-    ...             return timedelta(hours=1)
-    ...         else:
-    ...             return timedelta(0)
-    ...     def tzname(self,dt):
-    ...         return "GMT +2"
-    ...
-    >>> gmt1 = GMT1()
-    >>> # Daylight Saving Time
-    >>> dt1 = nepali_datetime.datetime(2006, 11, 21, 16, 30, tzinfo=gmt1)
-    >>> dt1.dst()
-    datetime.timedelta(0)
-    >>> dt1.utcoffset()
-    datetime.timedelta(0, 3600)
-    >>> dt2 = nepali_datetime.datetime(2006, 6, 14, 13, 0, tzinfo=gmt1)
-    >>> dt2.dst()
-    datetime.timedelta(0, 3600)
-    >>> dt2.utcoffset()
-    datetime.timedelta(0, 7200)
-    >>> dt2     # doctest: +ELLIPSIS
-    nepali_datetime.datetime(2006, 6, 14, 13, 0, tzinfo=<GMT1 object at 0x...>)
-    >>> dt2.utctimetuple() == dt3.utctimetuple()
-    True
-
-
 
 .. _strftime-strptime-behavior:
 
 :meth:`strftime` and :meth:`strptime` Behavior
 ----------------------------------------------
 
-:class:`date`, :class:`.datetime`, and :class:`.time` objects all support a
+:class:`date`, :class:`.datetime`, and :class:`time` objects all support a
 ``strftime(format)`` method, to create a string representing the time under the
 control of an explicit format string.  Broadly speaking, ``d.strftime(fmt)``
 acts like the :mod:`time` module's ``time.strftime(fmt, d.timetuple())``
@@ -695,7 +639,7 @@ Conversely, the :meth:`datetime.strptime` class method creates a
 corresponding format string. ``datetime.strptime(date_string, format)`` is
 equivalent to ``datetime(*(time.strptime(date_string, format)[0:6]))``.
 
-For :class:`.time` objects, the format codes for year, month, and day should not
+For :class:`time` objects, the format codes for year, month, and day should not
 be used, as time objects have no such values.  If they're used anyway, ``1975``
 is substituted for the year, and ``1`` for the month and day.
 
