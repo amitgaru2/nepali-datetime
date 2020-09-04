@@ -1,7 +1,7 @@
-# Nepali Datetime (Bikram Sambat B.S) 
+# Nepali Datetime (Bikram Sambat B.S & Nepal Time NPT) 
 
-The package similar to Python core ``datetime`` package that
-operates on Bikram Sambat (B.S) date instead of A.D.
+The package similar to Python's core ``datetime`` package that
+operates on Bikram Sambat (B.S) date & Nepal Time ``+05:45``.
 
 ## Installation
 ```shell
@@ -9,27 +9,31 @@ $ pip install nepali-datetime
 ```
 
 ## Usage
-The Python3 core `datetime` library usage.
+The Python3 core `datetime` library usage VS `nepali_datetime` usage.
 ```python
-# Get current datetime in AD format
+# importing the module
 >>> import datetime
->>> datetime.datetime.now()
-# 2020-07-18 12:18:53.586455
->>> datetime.date.today()
-# 2020-07-18
-```
-
-The equivalent `nepali_datetime` library usage. 
-```python
-# Get current datetime in BS format
 >>> import nepali_datetime
->>> nepali_datetime.datetime.now()
-# 2077-04-03 12:18:53.586455
+
+# getting today's date
+>>> datetime.date.today()
 >>> nepali_datetime.date.today()
-# 2077-04-03
+
+# getting now datetime
+>>> datetime.datetime.now()
+>>> nepali_datetime.datetime.now()
+
+# creating date object
+>>> datetime.date(2020, 9, 4)
+>>> nepali_datetime.date(2077, 5, 19)
+
+# creating datetime object
+>>> datetime.datetime(2020, 9, 4, 8, 26, 10, 123456)
+>>> nepali_datetime.datetime(2077, 5, 19, 8, 26, 10, 123456)
 ```
 
-*The equivalence is not limited to just getting current datetime. Its supports almost methods from Python's core datetime library supports. The ultimate goal is to make it completely equivalent providing every method Python's datetime has provided, making nepali_datetime objects hashable and picklable so that one can migrate from Python's datetime to nepali_datetime in ease.*
+*The equivalence is not limited to just getting current datetime. Its 
+supports most of the methods from Python's core datetime library.*
 
 ## Documentation
 Complete documentations can be found [here](https://arneec.github.io/nepali-datetime/).
