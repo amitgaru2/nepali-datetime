@@ -6,7 +6,7 @@ with open('README.md', encoding='utf-8') as readme_file:
 setup(
     name="nepali-datetime",
     version="1.0.2",
-    description="datetime module that operates on B.S",
+    description="datetime module that operates on bikram sambat & nepal time",
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/arneec/nepali-datetime",
@@ -14,8 +14,8 @@ setup(
     author_email="amitgaru2@gmail.com",
     license="MIT",
     packages=find_packages(exclude=("tests", "docs")),
-    keywords=['nepali', 'bs', 'b.s', 'date', 'datetime', 'nepal', 'bikram', 'sambat', 'samvat', 'calendar',
-              'nepali-calendar', 'nepali-date', 'nepali-datetime', 'nepali_date', 'nepali_datetime'],
+    keywords=['nepali', 'bs', 'b.s', 'date', 'datetime', 'time', 'timezone', 'nepal', 'bikram', 'sambat', 'samvat',
+              'nepali-date', 'nepali-datetime', 'nepal-time', 'npt', 'nepal-timezone'],
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
