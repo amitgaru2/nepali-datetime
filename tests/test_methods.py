@@ -6,6 +6,12 @@ import nepali_datetime
 class TestDateMethods:
     """Test helper methods of nepali_datetime.date ."""
 
+    def test_init(self):
+        dt = nepali_datetime.date(2075, 5, 20)
+        assert dt.year == 2075
+        assert dt.month == 5
+        assert dt.day == 20
+
     def test_today(self):
         dt = nepali_datetime.date.today()
         assert nepali_datetime.MINYEAR <= dt.year <= nepali_datetime.MAXYEAR
@@ -15,6 +21,16 @@ class TestDateMethods:
 
 class TestDatetimeMethods:
     """Test helper methods of nepali_datetime.datetime ."""
+
+    def test_init(self):
+        dt = nepali_datetime.datetime(2033, 2, 10, 10, 5, 30, 123456)
+        assert dt.year == 2033
+        assert dt.month == 2
+        assert dt.day == 10
+        assert dt.hour == 10
+        assert dt.minute == 5
+        assert dt.second == 30
+        assert dt.microsecond == 123456
 
     def test_now(self):
         dt = nepali_datetime.datetime.now()
