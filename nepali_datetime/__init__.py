@@ -5,15 +5,14 @@ nepali_datetime.
 
 Supports >= Python3.5
 """
-# TODO: make nepali_datetime 's "date", "datetime" objects hashable
-# TODO: add pickling support
+# TODO: make nepali_datetime 's "date", "datetime" objects hashable & add pickling support
 # TODO: improve documentation
 # TODO: feature to allow inject custom month names
 # TODO: more tests
 
 __author__ = "Amit Garu <amitgaru2@gmail.com>"
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 import csv
 import time as _time
@@ -24,6 +23,8 @@ from nepali_datetime.config import CALENDAR_PATH, MINDATE, MAXDATE, REFERENCE_DA
 
 MINYEAR = MINDATE['year']
 MAXYEAR = MAXDATE['year']
+
+NEPAL_TIME_UTC_OFFSET = 20700
 
 _MONTHNAMES = [None, "Bai", "Jes", "Asa", "Shr", "Bha", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha"]
 _FULLMONTHNAMES = [None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Aswin", "Kartik", "Mangsir", "Poush",
@@ -204,7 +205,7 @@ def _days_before_month(year, month):
 
 
 def _ymd2ord(year, month, day):
-    "year, month, day -> ordinal, considering 1975-Bai-01 as day 1."
+    """year, month, day -> ordinal, considering 1975-Bai-01 as day 1."""
     assert 1 <= month <= 12, 'month must be in 1..12'
     dim = _days_in_month(year, month)
     assert 1 <= day <= dim, ('day must be in 1..%d' % dim)
@@ -265,7 +266,7 @@ def _cmp(x, y):
 
 
 class UTC0545(_actual_datetime.tzinfo):
-    _offset = _actual_datetime.timedelta(seconds=20700)
+    _offset = _actual_datetime.timedelta(seconds=NEPAL_TIME_UTC_OFFSET)
     _dst = _actual_datetime.timedelta(0)
     _name = "+0545"
 
@@ -318,7 +319,8 @@ class date:
     @classmethod
     def fromtimestamp(cls, t):
         """Construct a date from a POSIX timestamp (like time.time())."""
-        return cls.from_datetime_date(_actual_datetime.date.fromtimestamp(t))
+        y, m, d, hh, mm, ss, weekday, jday, dst = _time.gmtime(t + NEPAL_TIME_UTC_OFFSET)
+        return cls.from_datetime_date(_actual_datetime.date(y, m, d))
 
     @classmethod
     def today(cls):

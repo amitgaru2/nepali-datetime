@@ -12,6 +12,8 @@ _Text = str
 MINYEAR: int
 MAXYEAR: int
 
+NEPAL_TIME_UTC_OFFSET: int
+
 
 class tzinfo:
     def tzname(self, dt: Optional[datetime]) -> Optional[str]: ...
