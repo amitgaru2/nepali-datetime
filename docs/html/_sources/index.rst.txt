@@ -26,6 +26,9 @@ The :mod:`nepali_datetime` module exports the following constants:
    
    The largest year number allowed in a :class:`date` or :class:`.datetime` object. :const:`MAXYEAR` is ``2100``.
 
+.. data:: NEPAL_TIME_UTC_OFFSET
+
+   The UTC offset of Nepal time ``+05:45``.
 
 Available Types
 ---------------
@@ -237,13 +240,13 @@ Instance methods:
 Example of counting days to an event::
 
     >>> import time
-    >>> from nepali_datetime import date
-    >>> today = date.today()
+    >>> import nepali_datetime
+    >>> today = nepali_datetime.date.today()
     >>> today
     nepali_datetime.date(2050, 12, 5)
-    >>> today == date.fromtimestamp(time.time())
+    >>> today == nepali_datetime.date.fromtimestamp(time.time())
     True
-    >>> my_birthday = date(today.year, 10, 1)
+    >>> my_birthday = nepali_datetime.date(today.year, 10, 1)
     >>> if my_birthday < today:
     ...     my_birthday = my_birthday.replace(year=today.year + 1)
     >>> my_birthday
@@ -256,8 +259,8 @@ Example of working with :class:`date`:
 
 .. doctest::
 
-    >>> from nepali_datetime import date
-    >>> d = date.fromordinal(10000) # 10000th day after 1. 1. 1975
+    >>> import nepali_datetime
+    >>> d = nepali_datetime.date.fromordinal(10000) # 10000th day after 1. 1. 1975
     >>> d
     nepali_datetime.date(2002, 5, 12)
     >>> t = d.timetuple()

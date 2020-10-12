@@ -19,10 +19,10 @@
 
 project = 'nepali_datetime'
 copyright = '2020, Amit Garu'
-author = 'Amit Garu'
+author = 'Amit Garu <amitgaru2@gmail.com>'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.1'
+release = '1.0.3'
 
 
 # -- General configuration ---------------------------------------------------
@@ -48,7 +48,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'nature'
+html_theme = 'python_docs_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
