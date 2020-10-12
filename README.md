@@ -36,9 +36,9 @@ The Python3 core `datetime` library usage VS `nepali_datetime` usage.
 supports most of the methods from Python's core datetime library.*
 
 ## Documentation
-Complete documentations can be found [here](https://arneec.github.io/nepali-datetime/).
+Complete documentations can be found [here](https://dxillar.github.io/nepali-datetime/).
 
 
 ## Contribution
 
-For contribution check the guidelines in [CONTRIBUTING.md](https://github.com/arneec/nepali-datetime/blob/master/CONTRIBUTING.md).
+For contribution check the guidelines in [CONTRIBUTING.md](https://github.com/dxillar/nepali-datetime/blob/master/CONTRIBUTING.md).
