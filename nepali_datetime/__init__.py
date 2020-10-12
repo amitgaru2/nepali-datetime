@@ -25,6 +25,8 @@ from nepali_datetime.config import CALENDAR_PATH, MINDATE, MAXDATE, REFERENCE_DA
 MINYEAR = MINDATE['year']
 MAXYEAR = MAXDATE['year']
 
+NEPAL_TIME_UTC_OFFSET = 20700
+
 _MONTHNAMES = [None, "Bai", "Jes", "Asa", "Shr", "Bha", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha"]
 _FULLMONTHNAMES = [None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Aswin", "Kartik", "Mangsir", "Poush",
                    "Magh", "Falgun", "Chaitra"]
@@ -265,7 +267,7 @@ def _cmp(x, y):
 
 
 class UTC0545(_actual_datetime.tzinfo):
-    _offset = _actual_datetime.timedelta(seconds=20700)
+    _offset = _actual_datetime.timedelta(seconds=NEPAL_TIME_UTC_OFFSET)
     _dst = _actual_datetime.timedelta(0)
     _name = "+0545"
 
@@ -318,7 +320,8 @@ class date:
     @classmethod
     def fromtimestamp(cls, t):
         """Construct a date from a POSIX timestamp (like time.time())."""
-        return cls.from_datetime_date(_actual_datetime.date.fromtimestamp(t))
+        y, m, d, hh, mm, ss, weekday, jday, dst = _time.gmtime(t + NEPAL_TIME_UTC_OFFSET)
+        return cls.from_datetime_date(_actual_datetime.date(y, m, d))
 
     @classmethod
     def today(cls):
