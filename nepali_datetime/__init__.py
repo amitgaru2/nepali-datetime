@@ -5,8 +5,7 @@ nepali_datetime.
 
 Supports >= Python3.5
 """
-# TODO: make nepali_datetime 's "date", "datetime" objects hashable
-# TODO: add pickling support
+# TODO: make nepali_datetime 's "date", "datetime" objects hashable & add pickling support
 # TODO: improve documentation
 # TODO: feature to allow inject custom month names
 # TODO: more tests

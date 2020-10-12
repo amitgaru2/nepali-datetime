@@ -13,10 +13,15 @@ class TestDateMethods:
         assert dt.day == 20
 
     def test_today(self):
-        dt = nepali_datetime.date.today()
-        assert nepali_datetime.MINYEAR <= dt.year <= nepali_datetime.MAXYEAR
-        assert 1 <= dt.day <= 32
-        assert 1 <= dt.month <= 12
+        ndt = nepali_datetime.date.today()
+        assert nepali_datetime.MINYEAR <= ndt.year <= nepali_datetime.MAXYEAR
+        assert 1 <= ndt.day <= 32
+        assert 1 <= ndt.month <= 12
+
+        dt = nepali_datetime.date.from_datetime_date(
+            datetime.datetime.utcnow().date() + datetime.timedelta(seconds=nepali_datetime.NEPAL_TIME_UTC_OFFSET)
+        )
+        assert ndt == dt
 
 
 class TestDatetimeMethods:
