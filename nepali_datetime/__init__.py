@@ -13,7 +13,7 @@ Supports >= Python3.5
 
 __author__ = "Amit Garu <amitgaru2@gmail.com>"
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 import csv
 import time as _time
@@ -204,7 +204,7 @@ def _days_before_month(year, month):
 
 
 def _ymd2ord(year, month, day):
-    "year, month, day -> ordinal, considering 1975-Bai-01 as day 1."
+    """year, month, day -> ordinal, considering 1975-Bai-01 as day 1."""
     assert 1 <= month <= 12, 'month must be in 1..12'
     dim = _days_in_month(year, month)
     assert 1 <= day <= dim, ('day must be in 1..%d' % dim)
