@@ -83,6 +83,10 @@ Other constructors, all class methods:
 
 .. classmethod:: date.fromordinal(ordinal)
 
+.. classmethod:: date.from_datetime_date(datetime.date)
+
+   Return the converted :class:`nepalidatetime.date` (B.S) object for the given ``datetime.date`` object.
+
 
 Class attributes:
 
@@ -195,10 +199,9 @@ Instance methods:
    For example, ``date(2002, 12, 4).weekday() == 0``, a Sunday.
 
 
-.. method:: date.isoweekday()
+.. method:: date.to_datetime_date()
 
-
-.. method:: date.isocalendar()
+   Return the converted ``datetime.date`` (A.D) object of the :class:`nepali_datetime.date` object.
 
 
 .. method:: date.isoformat()

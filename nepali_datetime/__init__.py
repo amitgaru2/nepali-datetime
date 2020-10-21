@@ -12,7 +12,7 @@ Supports >= Python3.5
 
 __author__ = "Amit Garu <amitgaru2@gmail.com>"
 
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 
 import csv
 import time as _time
@@ -330,7 +330,7 @@ class date:
 
     @classmethod
     def fromordinal(cls, n):
-        """Construct a date from a proleptic Gregorian ordinal.
+        """Construct a date from a (MINYEAR, 1, 1).
 
         Baishak 1 of year 1975 is day 1.  Only the year, month and day are
         non-zero in the result.
@@ -355,6 +355,16 @@ class date:
         if not isinstance(from_date, _actual_datetime.date):
             raise TypeError("Unsupported type {}.".format(type(from_date)))
         return cls(MINYEAR, 1, 1) + (from_date - _actual_datetime.date(**REFERENCE_DATE_AD))
+
+    def to_datetime_date(self):
+        """Convert nepali_datetime.date to datetime.date (B.S date to A.D).
+
+        Returns
+        -------
+        datetime.date
+            The converted datetime.date object.
+        """
+        return _actual_datetime.date(**REFERENCE_DATE_AD) + _actual_datetime.timedelta(days=self.toordinal() - 1)
 
     def __repr__(self):
         return "%s.%s(%d, %d, %d)" % (
