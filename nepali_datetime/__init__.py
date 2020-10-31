@@ -29,12 +29,14 @@ NEPAL_TIME_UTC_OFFSET = 20700
 _MONTHNAMES = [None, "Bai", "Jes", "Asa", "Shr", "Bha", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha"]
 _FULLMONTHNAMES = [None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Aswin", "Kartik", "Mangsir", "Poush",
                    "Magh", "Falgun", "Chaitra"]
+_MONTHNAMES_NP = [None, "वैशाख", "जेष्ठ", "असार", "श्रावण", "भदौ", "आश्विन", "कार्तिक", "मंसिर", "पौष", "माघ", "फाल्गुण", "चैत्र"]
 _DAYNAMES = [None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 _FULLDAYNAMES = [None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 _STRFTIME_CUSTOM_MAP = {
     'b': lambda x: '%s' % _MONTHNAMES[x.tm_mon],
     'B': lambda x: '%s' % _FULLMONTHNAMES[x.tm_mon],
+    'N': lambda x: '%s' % _MONTHNAMES_NP[x.tm_mon],
     'a': lambda x: '%s' % _DAYNAMES[(x.tm_wday % 7) or 7],
     'A': lambda x: '%s' % _FULLDAYNAMES[(x.tm_wday % 7) or 7]
 }
@@ -113,7 +115,7 @@ def _wrap_strftime(object, format, timetuple):
                                 # strftime is going to have at this: escape %
                                 Zreplace = s.replace('%', '%%')
                     newformat.append(Zreplace)
-                elif ch in ('a', 'A', 'b', 'B'):
+                elif ch in ('a', 'A', 'b', 'B', 'N'):
                     newformat.append(_STRFTIME_CUSTOM_MAP[ch](timetuple))
                 else:
                     push('%')

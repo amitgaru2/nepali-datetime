@@ -3,11 +3,6 @@
 The package similar to Python's core ``datetime`` package that
 operates on Bikram Sambat (B.S) date & Nepal Time ``+05:45``.
 
-## Installation
-```shell
-$ pip install nepali-datetime
-```
-
 ## Usage
 The `Python3` core [``datetime``](https://docs.python.org/3.5/library/datetime.html) library usage _VS_ `nepali_datetime` usage.
 ```python
@@ -33,12 +28,24 @@ The `Python3` core [``datetime``](https://docs.python.org/3.5/library/datetime.h
 
 # date/datetime formatting
 >>> datetime.datetime(2020, 9, 4, 8, 26, 10, 123456).strftime("%d %B %Y") # 04 September 2020
->>> nepali_datetime.datetime(2077, 5, 19, 8, 26, 10, 123456).strftime("%d %B %Y") # 19 Bhadau 2077 
+>>> nepali_datetime.datetime(2077, 5, 19, 8, 26, 10, 123456).strftime("%d %B %Y") # 19 Bhadau 2077
+
+# date/datetime formatting with Nepali month unicode support
+>>> nepali_datetime.date(2078, 1, 10).strftime('%N') # वैशाख
+
+# ... and many more
 ```
 
 ***Note**: The equivalence is not limited to just getting current datetime. Its 
 supports most of the methods from Python's core datetime library. Check 
 documentation for more details.
+
+
+## Installation
+```shell
+$ pip install nepali-datetime
+```
+
 
 ## Documentation
 Complete documentations can be found [here](https://dxillar.github.io/nepali-datetime/).

@@ -4,8 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nepali_datetime — Basic date and time types that operates on B.S &#8212; nepali_datetime 1.0.3 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nepali_datetime — Basic date and time types that operates on B.S &#8212; nepali_datetime 1.0.4 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -37,7 +37,7 @@
              style="vertical-align: middle; margin-top: -1px"/></li>
     <li><a href="https://www.python.org/">Python</a> &#187;</li>
     
-    <a href="#">nepali_datetime 1.0.3 documentation</a> &#187;
+    <a href="#">nepali_datetime 1.0.4 documentation</a> &#187;
     
 
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Basic date and time types that operates on B.S</a></li>
@@ -114,8 +114,8 @@ and <a class="reference internal" href="#nepali_datetime.datetime.tzinfo" title=
 </dd></dl>
 
 </div>
-<div class="section" id="nepali-date-date-objects">
-<h2><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_date.date</span></code> Objects<a class="headerlink" href="#nepali-date-date-objects" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nepali-datetime-date-objects">
+<h2><a class="reference internal" href="#nepali_datetime.date" title="nepali_datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_datetime.date</span></code></a> Objects<a class="headerlink" href="#nepali-datetime-date-objects" title="Permalink to this headline">¶</a></h2>
 <p>A <a class="reference internal" href="#nepali_datetime.date" title="nepali_datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> object represents a date (year, month and day) in B.S calendar.  Baishak 1 of year 1975 is called day
 number 1, Baishak 2 of year 1975 is called day number 2, and so on.</p>
 <dl class="py class">
@@ -147,6 +147,12 @@ ranges:</p>
 <dt id="nepali_datetime.date.fromordinal">
 <em class="property">classmethod </em><code class="sig-prename descclassname">date.</code><code class="sig-name descname">fromordinal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ordinal</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.fromordinal" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt id="nepali_datetime.date.from_datetime_date">
+<em class="property">classmethod </em><code class="sig-prename descclassname">date.</code><code class="sig-name descname">from_datetime_date</code><span class="sig-paren">(</span><em class="sig-param">datetime.date</em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.from_datetime_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the converted <code class="xref py py-class docutils literal notranslate"><span class="pre">nepalidatetime.date</span></code> (B.S) object for the given <code class="docutils literal notranslate"><span class="pre">datetime.date</span></code> object.</p>
+</dd></dl>
 
 <p>Class attributes:</p>
 <dl class="py attribute">
@@ -272,14 +278,10 @@ For example, <code class="docutils literal notranslate"><span class="pre">date(2
 </dd></dl>
 
 <dl class="py method">
-<dt id="nepali_datetime.date.isoweekday">
-<code class="sig-prename descclassname">date.</code><code class="sig-name descname">isoweekday</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.isoweekday" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.date.isocalendar">
-<code class="sig-prename descclassname">date.</code><code class="sig-name descname">isocalendar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.isocalendar" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="nepali_datetime.date.to_datetime_date">
+<code class="sig-prename descclassname">date.</code><code class="sig-name descname">to_datetime_date</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.to_datetime_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the converted <code class="docutils literal notranslate"><span class="pre">datetime.date</span></code> (A.D) object of the <a class="reference internal" href="#nepali_datetime.date" title="nepali_datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_datetime.date</span></code></a> object.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="nepali_datetime.date.isoformat">
@@ -772,10 +774,6 @@ is substituted for the year, and <code class="docutils literal notranslate"><spa
 <p>For <a class="reference internal" href="#nepali_datetime.date" title="nepali_datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> objects, the format codes for hours, minutes, seconds, and
 microseconds should not be used, as <a class="reference internal" href="#nepali_datetime.date" title="nepali_datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> objects have no such
 values.  If they’re used anyway, <code class="docutils literal notranslate"><span class="pre">0</span></code> is substituted for them.</p>
-<p>The full set of format codes supported varies across platforms, because Python
-calls the platform C library’s <code class="xref py py-func docutils literal notranslate"><span class="pre">strftime()</span></code> function, and platform
-variations are common.  To see the full set of format codes supported on your
-platform, consult the <em class="manpage">strftime(3)</em> documentation.</p>
 <p>The following is a list of all the format codes that the C standard (1989
 version) requires, and these work on all platforms with a standard C
 implementation.  Note that the 1999 version of the C standard added additional
@@ -788,7 +786,7 @@ format codes.</p>
 <col style="width: 9%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Directive</p></th>
+<tr class="row-odd"><th class="head"><p>Directives</p></th>
 <th class="head"><p>Meaning</p></th>
 <th class="head"><p>Example</p></th>
 <th class="head"><p>Notes</p></th>
@@ -798,19 +796,13 @@ format codes.</p>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%a</span></code></p></td>
 <td><p>Weekday as locale’s
 abbreviated name.</p></td>
-<td><div class="line-block">
-<div class="line">Sun, Mon, …, Sat</div>
-</div>
-</td>
+<td><p>Sun, Mon, …, Sat</p></td>
 <td><p>(1)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%A</span></code></p></td>
 <td><p>Weekday as locale’s full name.</p></td>
-<td><div class="line-block">
-<div class="line">Sunday, Monday, …,
-Saturday</div>
-</div>
-</td>
+<td><p>Sunday, Monday, …,
+Saturday</p></td>
 <td><p>(1)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%w</span></code></p></td>
@@ -829,74 +821,74 @@ zero-padded decimal number.</p></td>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%b</span></code></p></td>
 <td><p>Month as locale’s abbreviated
 name.</p></td>
-<td><div class="line-block">
-<div class="line">Bai, Jes, …, Cha</div>
-</div>
-</td>
+<td><p>Bai, Jes, …, Cha</p></td>
 <td><p>(1)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%B</span></code></p></td>
 <td><p>Month as locale’s full name.</p></td>
-<td><div class="line-block">
-<div class="line">Baishakh, Jestha,
-…, Chaitra</div>
-</div>
-</td>
+<td><p>Baishakh, Jestha,
+…, Chaitra</p></td>
 <td><p>(1)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%m</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%N</span></code></p></td>
+<td><p>Month as locale’s full name
+in Nepali unicode.</p></td>
+<td><p>वैशाख, जेष्ठ, असार,
+श्रावण, भदौ, आश्विन,
+कार्तिक, मंसिर, पौष, माघ,
+फाल्गुण, चैत्र</p></td>
+<td><p>(1)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%m</span></code></p></td>
 <td><p>Month as a zero-padded
 decimal number.</p></td>
 <td><p>01, 02, …, 12</p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%y</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%y</span></code></p></td>
 <td><p>Year without century as a
 zero-padded decimal number.</p></td>
 <td><p>00, 01, …, 99</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%Y</span></code></p></td>
-<td><p>Year with century as a decimal
-number.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%Y</span></code></p></td>
+<td><p>Year with century as a
+decimal number.</p></td>
 <td><p>1975, 1976, …, 2020,
 2021, …, 2099, 2100</p></td>
 <td><p>(2)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%H</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%H</span></code></p></td>
 <td><p>Hour (24-hour clock) as a
 zero-padded decimal number.</p></td>
 <td><p>00, 01, …, 23</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%I</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%I</span></code></p></td>
 <td><p>Hour (12-hour clock) as a
 zero-padded decimal number.</p></td>
 <td><p>01, 02, …, 12</p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%p</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%p</span></code></p></td>
 <td><p>Locale’s equivalent of either
 AM or PM.</p></td>
-<td><div class="line-block">
-<div class="line">AM, PM</div>
-</div>
-</td>
-<td><p>(1),</p></td>
+<td><p>AM, PM</p></td>
+<td><p>(1)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%M</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%M</span></code></p></td>
 <td><p>Minute as a zero-padded
 decimal number.</p></td>
 <td><p>00, 01, …, 59</p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%S</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%S</span></code></p></td>
 <td><p>Second as a zero-padded
 decimal number.</p></td>
 <td><p>00, 01, …, 59</p></td>
 <td><p>(4)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%f</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%f</span></code></p></td>
 <td><p>Microsecond as a decimal
 number, zero-padded on the
 left.</p></td>
@@ -904,7 +896,7 @@ left.</p></td>
 999999</p></td>
 <td><p>(5)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%z</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%z</span></code></p></td>
 <td><p>UTC offset in the form +HHMM
 or -HHMM (empty string if the
 object is naive).</p></td>
@@ -912,19 +904,19 @@ object is naive).</p></td>
 +1030</p></td>
 <td><p>(6)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%Z</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%Z</span></code></p></td>
 <td><p>Time zone name (empty string
 if the object is naive).</p></td>
 <td><p>(empty), UTC, EST, CST</p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%j</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%j</span></code></p></td>
 <td><p>Day of the year as a
 zero-padded decimal number.</p></td>
 <td><p>001, 002, …, 366</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%U</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%U</span></code></p></td>
 <td><p>Week number of the year
 (Sunday as the first day of
 the week) as a zero padded
@@ -935,7 +927,7 @@ week 0.</p></td>
 <td><p>00, 01, …, 53</p></td>
 <td><p>(7)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%W</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%W</span></code></p></td>
 <td><p>Week number of the year
 (Monday as the first day of
 the week) as a decimal number.
@@ -946,36 +938,27 @@ week 0.</p></td>
 <td><p>00, 01, …, 53</p></td>
 <td><p>(7)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%c</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%c</span></code></p></td>
 <td><p>Locale’s appropriate date and
 time representation.</p></td>
-<td><div class="line-block">
-<div class="line">Tue Asa 16 21:30:00
-1988</div>
-</div>
-</td>
+<td><p>Tue Asa 16 21:30:00
+1988</p></td>
 <td><p>(1)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%x</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%x</span></code></p></td>
 <td><p>Locale’s appropriate date
 representation.</p></td>
-<td><div class="line-block">
-<div class="line">08/16/88 (None);</div>
-<div class="line">08/16/1988</div>
-</div>
-</td>
+<td><p>08/16/88 (None);
+08/16/1988</p></td>
 <td><p>(1)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%X</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%X</span></code></p></td>
 <td><p>Locale’s appropriate time
 representation.</p></td>
-<td><div class="line-block">
-<div class="line">21:30:00</div>
-</div>
-</td>
+<td><p>21:30:00</p></td>
 <td><p>(1)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%%</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%%</span></code></p></td>
 <td><p>A literal <code class="docutils literal notranslate"><span class="pre">'%'</span></code> character.</p></td>
 <td><p>%</p></td>
 <td></td>
@@ -984,24 +967,12 @@ representation.</p></td>
 </table>
 <p>Notes:</p>
 <ol class="arabic">
-<li><p>Because the format depends on the current locale, care should be taken when
-making assumptions about the output value. Field orderings will vary (for
-example, “month/day/year” versus “day/month/year”), and the output may
-contain Unicode characters encoded using the locale’s default encoding (for
-example, if the current locale is <code class="docutils literal notranslate"><span class="pre">ja_JP</span></code>, the default encoding could be
-any one of <code class="docutils literal notranslate"><span class="pre">eucJP</span></code>, <code class="docutils literal notranslate"><span class="pre">SJIS</span></code>, or <code class="docutils literal notranslate"><span class="pre">utf-8</span></code>; use <code class="xref py py-meth docutils literal notranslate"><span class="pre">locale.getlocale()</span></code>
-to determine the current locale’s encoding).</p></li>
+<li><p>Because the format depends on the directive <code class="docutils literal notranslate"><span class="pre">%b</span></code> or <code class="docutils literal notranslate"><span class="pre">%B</span></code> or <code class="docutils literal notranslate"><span class="pre">%N</span></code>, care
+should be taken when making assumptions about the output value. Field orderings
+will vary (for example, “month/day/year” versus “day/month/year”), and the output
+may contain Unicode characters.</p></li>
 <li><p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> method can parse years in the full [1, 9999] range, but
-years &lt; 1000 must be zero-filled to 4-digit width.</p>
-<div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.2: </span>In previous versions, <code class="xref py py-meth docutils literal notranslate"><span class="pre">strftime()</span></code> method was restricted to
-years &gt;= 1900.</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span>In version 3.2, <code class="xref py py-meth docutils literal notranslate"><span class="pre">strftime()</span></code> method was restricted to
-years &gt;= 1000.</p>
-</div>
-</li>
+years &lt; 1000 must be zero-filled to 4-digit width.</p></li>
 <li><p>When used with the <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> method, the <code class="docutils literal notranslate"><span class="pre">%p</span></code> directive only affects
 the output hour field if the <code class="docutils literal notranslate"><span class="pre">%I</span></code> directive is used to parse the hour.</p></li>
 <li><p>Unlike the <code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code> module, the <code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code> module does not support
@@ -1050,7 +1021,7 @@ in calculations when the day of the week and the year are specified.</p></li>
   <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Basic date and time types that operates on B.S</a><ul>
 <li><a class="reference internal" href="#available-types">Available Types</a></li>
-<li><a class="reference internal" href="#nepali-date-date-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_date.date</span></code> Objects</a></li>
+<li><a class="reference internal" href="#nepali-datetime-date-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_datetime.date</span></code> Objects</a></li>
 <li><a class="reference internal" href="#nepali-datetime-datetime-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_datetime.datetime</span></code> Objects</a></li>
 <li><a class="reference internal" href="#strftime-and-strptime-behavior"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strftime()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> Behavior</a></li>
 </ul>
@@ -1091,7 +1062,7 @@ in calculations when the day of the week and the year are specified.</p></li>
              style="vertical-align: middle; margin-top: -1px"/></li>
     <li><a href="https://www.python.org/">Python</a> &#187;</li>
     
-    <a href="#">nepali_datetime 1.0.3 documentation</a> &#187;
+    <a href="#">nepali_datetime 1.0.4 documentation</a> &#187;
     
 
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Basic date and time types that operates on B.S</a></li>
@@ -1125,7 +1096,7 @@ in calculations when the day of the week and the year are specified.</p></li>
     
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
     </div>
 
   </body>
