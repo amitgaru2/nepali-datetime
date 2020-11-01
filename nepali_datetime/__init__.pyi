@@ -6,6 +6,7 @@ from time import struct_time
 from typing import Optional, Tuple, overload, ClassVar, Type, TypeVar
 
 _S = TypeVar("_S")
+_A = TypeVar("_A")
 
 _Text = str
 
@@ -48,7 +49,8 @@ class date:
     @classmethod
     def fromordinal(cls: Type[_S], n: int) -> _S: ...
     @classmethod
-    def from_datetime_date(cls, from_date) -> _S: ...
+    def from_datetime_date(cls, from_date: _A) -> _S: ...
+    def to_datetime_date(self) -> _A: ...
     if sys.version_info >= (3, 7):
         @classmethod
         def fromisoformat(cls: Type[_S], date_string: str) -> _S: ...

@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-:mod:`nepali_datetime` --- Basic date and time types that operates on B.S
+:mod:`nepali_datetime` --- Bikram Sambat Date and Nepal Time types
 ================================================================================
 .. module:: nepali_datetime
    :synopsis: Basic date and time types that operates on B.S .
@@ -13,8 +13,8 @@
 
 The :mod:`nepali_datetime` module is highly motivated from the Python3's 
 :mod:`datetime` module. The module supplies classes for manipulating 
-dates and times in both simple and complex ways where the dates operate
-on top of Bikram Sambat (B.S).
+Bikram Sambat dates and Nepal times in both simple and complex ways.
+
 
 The :mod:`nepali_datetime` module exports the following constants:
 
@@ -53,8 +53,8 @@ Available Types
    and :attr:`.tzinfo`.
 
 
-:class:`nepali_date.date` Objects
----------------------------------
+:class:`nepali_datetime.date` Objects
+-------------------------------------
 
 A :class:`date` object represents a date (year, month and day) in B.S calendar.  Baishak 1 of year 1975 is called day
 number 1, Baishak 2 of year 1975 is called day number 2, and so on.
@@ -78,11 +78,17 @@ Other constructors, all class methods:
    Return the current B.S date.
 
 
-.. classmethod:: date.fromtimestamp(timestamp)
+.. classmethod:: date.from_datetime_date(datetime.date)
 
+   Return the converted :class:`nepalidatetime.date` (B.S) object for the given ``datetime.date`` object.
 
-.. classmethod:: date.fromordinal(ordinal)
+   Example::
 
+      >>> import datetime
+      >>> import nepali_datetime
+      >>> dt = datetime.date(2018, 11, 7)
+      >>> nepali_datetime.date.from_datetime_date(dt)
+      nepali_datetime.date(2075, 7, 21)
 
 Class attributes:
 
@@ -186,20 +192,22 @@ Instance methods:
    ``1`` for Baishak 1st.
 
 
-.. method:: date.toordinal()
-
-
 .. method:: date.weekday()
 
    Return the day of the week as an integer, where Sunday is 0 and Saturday is 6.
    For example, ``date(2002, 12, 4).weekday() == 0``, a Sunday.
 
 
-.. method:: date.isoweekday()
+.. method:: date.to_datetime_date()
 
+   Return the converted ``datetime.date`` (A.D) object of the :class:`nepali_datetime.date` object.
 
-.. method:: date.isocalendar()
+   Example::
 
+      >>> import nepali_datetime
+      >>> ndt = nepali_datetime.date(2075, 7, 21)
+      >>> ndt.to_datetime_date()
+      datetime.date(2018, 11, 7)
 
 .. method:: date.isoformat()
 
@@ -210,6 +218,25 @@ Instance methods:
 .. method:: date.__str__()
 
    For a date *d*, ``str(d)`` is equivalent to ``d.isoformat()``.
+
+.. method:: date.calendar(justify=4)
+
+   Dispaly a B.S calendar for the date object's month with the object's day highlighted. Override 
+   default ``justify=4`` for wider view of calendar.
+
+   Example::
+   
+      >>> import nepali_datetime
+      >>> ndt = nepali_datetime.date(2051, 10, 1)
+      >>> ndt.calendar()
+
+                      Magh 2051                 
+         Sun   Mon   Tue   Wed   Thu   Fri   Sat
+           1     2     3     4     5     6     7
+           8     9    10    11    12    13    14
+          15    16    17    18    19    20    21
+          22    23    24    25    26    27    28
+          29
 
 
 .. method:: date.ctime()
@@ -335,18 +362,6 @@ Other constructors, all class methods:
    Return the current UTC date and time, with :attr:`.tzinfo` ``None``. This is like
    :meth:`now`, but returns the current UTC date and time, as a naive
    :class:`.datetime` object. See also :meth:`now`.
-
-
-.. classmethod:: datetime.fromtimestamp(timestamp, tz=None)
-
-
-.. classmethod:: datetime.utcfromtimestamp(timestamp)
-
-
-.. classmethod:: datetime.fromordinal(ordinal)
-
-
-.. classmethod:: datetime.combine(date, time)
 
 
 .. classmethod:: datetime.strptime(date_string, format)
@@ -511,12 +526,6 @@ Instance methods:
    datetime with no conversion of date and time data.
 
 
-.. method:: datetime.utcoffset()
-
-
-.. method:: datetime.dst()
-
-
 .. method:: datetime.tzname()
 
    If :attr:`.tzinfo` is ``None``, returns ``None``, else returns
@@ -537,25 +546,10 @@ Instance methods:
    else :attr:`tm_isdst` is set to ``0``.
 
 
-.. method:: datetime.utctimetuple()
-
-
-.. method:: datetime.toordinal()
-
-
-.. method:: datetime.timestamp()
-
-
 .. method:: datetime.weekday()
 
    Return the day of the week as an integer, where Sunday is 0 and Saturday is 6.
    The same as ``self.date().weekday()``. See also :meth:`isoweekday`.
-
-
-.. method:: datetime.isoweekday()
-
-
-.. method:: datetime.isocalendar()
 
 
 .. method:: datetime.isoformat(sep='T')
@@ -565,9 +559,6 @@ Instance methods:
 
    For a :class:`.datetime` instance *d*, ``str(d)`` is equivalent to
    ``d.isoformat(' ')``.
-
-
-.. method:: datetime.ctime()
 
 
 .. method:: datetime.strftime(format)
@@ -650,137 +641,127 @@ For :class:`date` objects, the format codes for hours, minutes, seconds, and
 microseconds should not be used, as :class:`date` objects have no such
 values.  If they're used anyway, ``0`` is substituted for them.
 
-The full set of format codes supported varies across platforms, because Python
-calls the platform C library's :func:`strftime` function, and platform
-variations are common.  To see the full set of format codes supported on your
-platform, consult the :manpage:`strftime(3)` documentation.
-
 The following is a list of all the format codes that the C standard (1989
 version) requires, and these work on all platforms with a standard C
 implementation.  Note that the 1999 version of the C standard added additional
 format codes.
 
-+-----------+--------------------------------+------------------------+-------+
-| Directive | Meaning                        | Example                | Notes |
-+===========+================================+========================+=======+
-| ``%a``    | Weekday as locale's            || Sun, Mon, ..., Sat    | \(1)  |
-|           | abbreviated name.              |                        |       |
-|           |                                |                        |       |
-|           |                                |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%A``    | Weekday as locale's full name. || Sunday, Monday, ...,  | \(1)  |
-|           |                                |  Saturday              |       |
-|           |                                |                        |       |
-|           |                                |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%w``    | Weekday as a decimal number,   | 0, 1, ..., 6           |       |
-|           | where 0 is Sunday and 6 is     |                        |       |
-|           | Saturday.                      |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%d``    | Day of the month as a          | 01, 02, ..., 32        |       |
-|           | zero-padded decimal number.    |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%b``    | Month as locale's abbreviated  || Bai, Jes, ..., Cha    | \(1)  |
-|           | name.                          |                        |       |
-|           |                                |                        |       |
-|           |                                |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%B``    | Month as locale's full name.   || Baishakh, Jestha,     | \(1)  |
-|           |                                |  ..., Chaitra          |       |
-|           |                                |                        |       |
-|           |                                |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%m``    | Month as a zero-padded         | 01, 02, ..., 12        |       |
-|           | decimal number.                |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%y``    | Year without century as a      | 00, 01, ..., 99        |       |
-|           | zero-padded decimal number.    |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%Y``    | Year with century as a decimal | 1975, 1976, ..., 2020, | \(2)  |
-|           | number.                        | 2021, ..., 2099, 2100  |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%H``    | Hour (24-hour clock) as a      | 00, 01, ..., 23        |       |
-|           | zero-padded decimal number.    |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%I``    | Hour (12-hour clock) as a      | 01, 02, ..., 12        |       |
-|           | zero-padded decimal number.    |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%p``    | Locale's equivalent of either  || AM, PM                | \(1), |
-|           | AM or PM.                      |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%M``    | Minute as a zero-padded        | 00, 01, ..., 59        |       |
-|           | decimal number.                |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%S``    | Second as a zero-padded        | 00, 01, ..., 59        | \(4)  |
-|           | decimal number.                |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%f``    | Microsecond as a decimal       | 000000, 000001, ...,   | \(5)  |
-|           | number, zero-padded on the     | 999999                 |       |
-|           | left.                          |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%z``    | UTC offset in the form +HHMM   | (empty), +0000, -0400, | \(6)  |
-|           | or -HHMM (empty string if the  | +1030                  |       |
-|           | object is naive).              |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%Z``    | Time zone name (empty string   | (empty), UTC, EST, CST |       |
-|           | if the object is naive).       |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%j``    | Day of the year as a           | 001, 002, ..., 366     |       |
-|           | zero-padded decimal number.    |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%U``    | Week number of the year        | 00, 01, ..., 53        | \(7)  |
-|           | (Sunday as the first day of    |                        |       |
-|           | the week) as a zero padded     |                        |       |
-|           | decimal number. All days in a  |                        |       |
-|           | new year preceding the first   |                        |       |
-|           | Sunday are considered to be in |                        |       |
-|           | week 0.                        |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%W``    | Week number of the year        | 00, 01, ..., 53        | \(7)  |
-|           | (Monday as the first day of    |                        |       |
-|           | the week) as a decimal number. |                        |       |
-|           | All days in a new year         |                        |       |
-|           | preceding the first Monday     |                        |       |
-|           | are considered to be in        |                        |       |
-|           | week 0.                        |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%c``    | Locale's appropriate date and  || Tue Asa 16 21:30:00   | \(1)  |
-|           | time representation.           |  1988                  |       |
-|           |                                |                        |       |
-|           |                                |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%x``    | Locale's appropriate date      || 08/16/88 (None);      | \(1)  |
-|           | representation.                || 08/16/1988            |       |
-|           |                                |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%X``    | Locale's appropriate time      || 21:30:00              | \(1)  |
-|           | representation.                |                        |       |
-+-----------+--------------------------------+------------------------+-------+
-| ``%%``    | A literal ``'%'`` character.   | %                      |       |
-+-----------+--------------------------------+------------------------+-------+
+
+===========  ================================ ======================== =======
+Directives   Meaning                          Example                  Notes
+===========  ================================ ======================== =======
+``%a``       Weekday as locale's              Sun, Mon, ..., Sat       \(1)
+             abbreviated name.                                
+
+``%A``       Weekday as locale's full name.   Sunday, Monday, ...,     \(1)  
+                                              Saturday                     
+                                                                          
+                                                                     
+``%w``       Weekday as a decimal number,     0, 1, ..., 6                  
+             where 0 is Sunday and 6 is                                    
+             Saturday.                         
+
+
+``%d``       Day of the month as a            01, 02, ..., 32               
+             zero-padded decimal number.                                   
+
+``%b``       Month as locale's abbreviated    Bai, Jes, ..., Cha       \(1)  
+             name.                                                         
+                                                                          
+                                                                          
+
+``%B``       Month as locale's full name.     Baishakh, Jestha,        \(1)  
+                                              ..., Chaitra                 
+                                                                          
+                                                                          
+
+``%N``       Month as locale's full name      वैशाख, जेष्ठ, असार,          \(1)
+             in Nepali unicode.               श्रावण, भदौ, आश्विन,
+                                              कार्तिक, मंसिर, पौष, माघ,
+                                              फाल्गुण, चैत्र
+
+``%m``       Month as a zero-padded           01, 02, ..., 12               
+             decimal number.                                               
+
+``%y``       Year without century as a        00, 01, ..., 99               
+             zero-padded decimal number.
+                                   
+``%Y``       Year with century as a           1975, 1976, ..., 2020,   \(2) 
+             decimal number.                  2021, ..., 2099, 2100         
+
+``%H``       Hour (24-hour clock) as a        00, 01, ..., 23               
+             zero-padded decimal number.
+                     
+``%I``       Hour (12-hour clock) as a        01, 02, ..., 12               
+             zero-padded decimal number.                          
+
+``%p``       Locale's equivalent of either    AM, PM                   \(1)
+             AM or PM.                                                     
+
+``%M``       Minute as a zero-padded          00, 01, ..., 59               
+             decimal number.                                               
+
+``%S``       Second as a zero-padded          00, 01, ..., 59          \(4)  
+             decimal number.                                               
+
+``%f``       Microsecond as a decimal         000000, 000001, ...,     \(5)  
+             number, zero-padded on the       999999                        
+             left.                                                         
+
+``%z``       UTC offset in the form +HHMM     (empty), +0000, -0400,   \(6)  
+             or -HHMM (empty string if the    +1030                         
+             object is naive).                                             
+
+``%Z``       Time zone name (empty string     (empty), UTC, EST, CST        
+             if the object is naive).                                      
+
+``%j``       Day of the year as a             001, 002, ..., 366            
+             zero-padded decimal number.                                   
+
+``%U``       Week number of the year          00, 01, ..., 53          \(7)  
+             (Sunday as the first day of                                   
+             the week) as a zero padded                                    
+             decimal number. All days in a                                 
+             new year preceding the first                                  
+             Sunday are considered to be in                                
+             week 0.                                                       
+
+``%W``       Week number of the year          00, 01, ..., 53          \(7)  
+             (Monday as the first day of                                   
+             the week) as a decimal number.                                
+             All days in a new year                                        
+             preceding the first Monday                                    
+             are considered to be in                                       
+             week 0.                                                       
+
+``%c``       Locale's appropriate date and    Tue Asa 16 21:30:00      \(1)  
+             time representation.             1988                         
+                                                                          
+                                                                          
+
+``%x``       Locale's appropriate date        08/16/88 (None);         \(1)  
+             representation.                  08/16/1988                   
+                                                                          
+
+``%X``       Locale's appropriate time        21:30:00                 \(1)  
+             representation.                                               
+
+``%%``       A literal ``'%'`` character.     %             
+===========  ================================ ======================== =======
+
+                        
 
 Notes:
 
 (1)
-   Because the format depends on the current locale, care should be taken when
-   making assumptions about the output value. Field orderings will vary (for
-   example, "month/day/year" versus "day/month/year"), and the output may
-   contain Unicode characters encoded using the locale's default encoding (for
-   example, if the current locale is ``ja_JP``, the default encoding could be
-   any one of ``eucJP``, ``SJIS``, or ``utf-8``; use :meth:`locale.getlocale`
-   to determine the current locale's encoding).
+   Because the format depends on the directive ``%b`` or ``%B`` or ``%N``, care
+   should be taken when making assumptions about the output value. Field orderings
+   will vary (for example, "month/day/year" versus "day/month/year"), and the output
+   may contain Unicode characters.
 
 (2)
    The :meth:`strptime` method can parse years in the full [1, 9999] range, but
    years < 1000 must be zero-filled to 4-digit width.
-
-   .. versionchanged:: 3.2
-      In previous versions, :meth:`strftime` method was restricted to
-      years >= 1900.
-
-   .. versionchanged:: 3.3
-      In version 3.2, :meth:`strftime` method was restricted to
-      years >= 1000.
 
 (3)
    When used with the :meth:`strptime` method, the ``%p`` directive only affects

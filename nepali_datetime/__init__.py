@@ -12,8 +12,9 @@ Supports >= Python3.5
 
 __author__ = "Amit Garu <amitgaru2@gmail.com>"
 
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 
+import sys
 import csv
 import time as _time
 import math as _math
@@ -29,12 +30,15 @@ NEPAL_TIME_UTC_OFFSET = 20700
 _MONTHNAMES = [None, "Bai", "Jes", "Asa", "Shr", "Bha", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha"]
 _FULLMONTHNAMES = [None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Aswin", "Kartik", "Mangsir", "Poush",
                    "Magh", "Falgun", "Chaitra"]
+_MONTHNAMES_NP = [None, "वैशाख", "जेष्ठ", "असार", "श्रावण", "भदौ", "आश्विन", "कार्तिक", "मंसिर", "पौष",
+                  "माघ", "फाल्गुण", "चैत्र"]
 _DAYNAMES = [None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 _FULLDAYNAMES = [None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 _STRFTIME_CUSTOM_MAP = {
     'b': lambda x: '%s' % _MONTHNAMES[x.tm_mon],
     'B': lambda x: '%s' % _FULLMONTHNAMES[x.tm_mon],
+    'N': lambda x: '%s' % _MONTHNAMES_NP[x.tm_mon],
     'a': lambda x: '%s' % _DAYNAMES[(x.tm_wday % 7) or 7],
     'A': lambda x: '%s' % _FULLDAYNAMES[(x.tm_wday % 7) or 7]
 }
@@ -113,7 +117,7 @@ def _wrap_strftime(object, format, timetuple):
                                 # strftime is going to have at this: escape %
                                 Zreplace = s.replace('%', '%%')
                     newformat.append(Zreplace)
-                elif ch in ('a', 'A', 'b', 'B'):
+                elif ch in ('a', 'A', 'b', 'B', 'N'):
                     newformat.append(_STRFTIME_CUSTOM_MAP[ch](timetuple))
                 else:
                     push('%')
@@ -330,7 +334,7 @@ class date:
 
     @classmethod
     def fromordinal(cls, n):
-        """Construct a date from a proleptic Gregorian ordinal.
+        """Construct a date from a (MINYEAR, 1, 1).
 
         Baishak 1 of year 1975 is day 1.  Only the year, month and day are
         non-zero in the result.
@@ -355,6 +359,49 @@ class date:
         if not isinstance(from_date, _actual_datetime.date):
             raise TypeError("Unsupported type {}.".format(type(from_date)))
         return cls(MINYEAR, 1, 1) + (from_date - _actual_datetime.date(**REFERENCE_DATE_AD))
+
+    def to_datetime_date(self):
+        """Convert nepali_datetime.date to datetime.date (B.S date to A.D).
+
+        Returns
+        -------
+        datetime.date
+            The converted datetime.date object.
+        """
+        return _actual_datetime.date(**REFERENCE_DATE_AD) + _actual_datetime.timedelta(days=self.toordinal() - 1)
+
+    def calendar(self, justify=4):
+        format_str = '{:>%s}' % justify
+        _found_today = False
+
+        def _check_today_day(day, week_start_day, cal):
+            nonlocal _found_today
+            if not _found_today and day < week_start_day:
+                indx = cal[-1].index(format_str.format(day))
+                cal[-1][indx] = '\033[31m{}\033[39m'.format(cal[-1][indx])
+                _found_today = True
+
+        total_days_month = _days_in_month(self.year, self.month)
+        start_weekday = self.__class__(self.year, self.month, 1).weekday()
+        cal = [[('{:^%s}' % ((justify + 1) * 7)).format(self.strftime('%B %Y'))],
+               [format_str.format('Sun'), *(format_str.format(j) for j in _DAYNAMES[1:-1])],
+               [format_str.format(' ') for _ in range(start_weekday)]]
+        cal[-1].extend([format_str.format(j) for j in range(1, 8 - start_weekday)])
+        week_start_day = int(cal[-1][-1]) + 1
+        _check_today_day(self.day, week_start_day, cal)
+
+        for i in range((total_days_month - week_start_day) // 7):
+            cal.append([format_str.format(j) for j in range(week_start_day, week_start_day + 7)])
+            week_start_day = int(cal[-1][-1]) + 1
+            _check_today_day(self.day, week_start_day, cal)
+
+        if int(cal[-1][-1]) < total_days_month:
+            week_start_day = int(cal[-1][-1]) + 1
+            cal.append([format_str.format(j) for j in range(week_start_day, total_days_month + 1)])
+            _check_today_day(self.day, week_start_day, cal)
+
+        cal = '\n' + '\n'.join(' '.join(j) for j in cal) + '\n\n'
+        sys.stdout.write(cal)
 
     def __repr__(self):
         return "%s.%s(%d, %d, %d)" % (
