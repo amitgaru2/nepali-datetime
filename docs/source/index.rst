@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-:mod:`nepali_datetime` --- Basic date and time types that operates on B.S
+:mod:`nepali_datetime` --- Bikram Sambat Date and Nepal Time types
 ================================================================================
 .. module:: nepali_datetime
    :synopsis: Basic date and time types that operates on B.S .
@@ -13,8 +13,8 @@
 
 The :mod:`nepali_datetime` module is highly motivated from the Python3's 
 :mod:`datetime` module. The module supplies classes for manipulating 
-dates and times in both simple and complex ways where the dates operate
-on top of Bikram Sambat (B.S).
+Bikram Sambat dates and Nepal times in both simple and complex ways.
+
 
 The :mod:`nepali_datetime` module exports the following constants:
 
@@ -78,15 +78,17 @@ Other constructors, all class methods:
    Return the current B.S date.
 
 
-.. classmethod:: date.fromtimestamp(timestamp)
-
-
-.. classmethod:: date.fromordinal(ordinal)
-
 .. classmethod:: date.from_datetime_date(datetime.date)
 
    Return the converted :class:`nepalidatetime.date` (B.S) object for the given ``datetime.date`` object.
 
+   Example::
+
+      >>> import datetime
+      >>> import nepali_datetime
+      >>> dt = datetime.date(2018, 11, 7)
+      >>> nepali_datetime.date.from_datetime_date(dt)
+      nepali_datetime.date(2075, 7, 21)
 
 Class attributes:
 
@@ -190,9 +192,6 @@ Instance methods:
    ``1`` for Baishak 1st.
 
 
-.. method:: date.toordinal()
-
-
 .. method:: date.weekday()
 
    Return the day of the week as an integer, where Sunday is 0 and Saturday is 6.
@@ -203,6 +202,12 @@ Instance methods:
 
    Return the converted ``datetime.date`` (A.D) object of the :class:`nepali_datetime.date` object.
 
+   Example::
+
+      >>> import nepali_datetime
+      >>> ndt = nepali_datetime.date(2075, 7, 21)
+      >>> ndt.to_datetime_date()
+      datetime.date(2018, 11, 7)
 
 .. method:: date.isoformat()
 
@@ -357,18 +362,6 @@ Other constructors, all class methods:
    Return the current UTC date and time, with :attr:`.tzinfo` ``None``. This is like
    :meth:`now`, but returns the current UTC date and time, as a naive
    :class:`.datetime` object. See also :meth:`now`.
-
-
-.. classmethod:: datetime.fromtimestamp(timestamp, tz=None)
-
-
-.. classmethod:: datetime.utcfromtimestamp(timestamp)
-
-
-.. classmethod:: datetime.fromordinal(ordinal)
-
-
-.. classmethod:: datetime.combine(date, time)
 
 
 .. classmethod:: datetime.strptime(date_string, format)
@@ -533,12 +526,6 @@ Instance methods:
    datetime with no conversion of date and time data.
 
 
-.. method:: datetime.utcoffset()
-
-
-.. method:: datetime.dst()
-
-
 .. method:: datetime.tzname()
 
    If :attr:`.tzinfo` is ``None``, returns ``None``, else returns
@@ -559,25 +546,10 @@ Instance methods:
    else :attr:`tm_isdst` is set to ``0``.
 
 
-.. method:: datetime.utctimetuple()
-
-
-.. method:: datetime.toordinal()
-
-
-.. method:: datetime.timestamp()
-
-
 .. method:: datetime.weekday()
 
    Return the day of the week as an integer, where Sunday is 0 and Saturday is 6.
    The same as ``self.date().weekday()``. See also :meth:`isoweekday`.
-
-
-.. method:: datetime.isoweekday()
-
-
-.. method:: datetime.isocalendar()
 
 
 .. method:: datetime.isoformat(sep='T')
@@ -587,9 +559,6 @@ Instance methods:
 
    For a :class:`.datetime` instance *d*, ``str(d)`` is equivalent to
    ``d.isoformat(' ')``.
-
-
-.. method:: datetime.ctime()
 
 
 .. method:: datetime.strftime(format)

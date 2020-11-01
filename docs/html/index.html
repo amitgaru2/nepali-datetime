@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>nepali_datetime — Basic date and time types that operates on B.S &#8212; nepali_datetime 1.0.4 documentation</title>
+    <title>nepali_datetime — Bikram Sambat Date and Nepal Time types &#8212; nepali_datetime 1.0.4 documentation</title>
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -40,7 +40,7 @@
     <a href="#">nepali_datetime 1.0.4 documentation</a> &#187;
     
 
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Basic date and time types that operates on B.S</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Bikram Sambat Date and Nepal Time types</a></li>
     <li class="right">
         
 
@@ -65,11 +65,10 @@
           <div class="body" role="main">
             
   <div class="section" id="module-nepali_datetime">
-<span id="nepali-datetime-basic-date-and-time-types-that-operates-on-b-s"></span><h1><a class="reference internal" href="#module-nepali_datetime" title="nepali_datetime: Basic date and time types that operates on B.S ."><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code></a> — Basic date and time types that operates on B.S<a class="headerlink" href="#module-nepali_datetime" title="Permalink to this headline">¶</a></h1>
+<span id="nepali-datetime-bikram-sambat-date-and-nepal-time-types"></span><h1><a class="reference internal" href="#module-nepali_datetime" title="nepali_datetime: Basic date and time types that operates on B.S ."><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code></a> — Bikram Sambat Date and Nepal Time types<a class="headerlink" href="#module-nepali_datetime" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference internal" href="#module-nepali_datetime" title="nepali_datetime: Basic date and time types that operates on B.S ."><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code></a> module is highly motivated from the Python3’s
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code> module. The module supplies classes for manipulating
-dates and times in both simple and complex ways where the dates operate
-on top of Bikram Sambat (B.S).</p>
+Bikram Sambat dates and Nepal times in both simple and complex ways.</p>
 <p>The <a class="reference internal" href="#module-nepali_datetime" title="nepali_datetime: Basic date and time types that operates on B.S ."><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code></a> module exports the following constants:</p>
 <dl class="py data">
 <dt id="nepali_datetime.MINYEAR">
@@ -139,19 +138,17 @@ ranges:</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="nepali_datetime.date.fromtimestamp">
-<em class="property">classmethod </em><code class="sig-prename descclassname">date.</code><code class="sig-name descname">fromtimestamp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timestamp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.fromtimestamp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.date.fromordinal">
-<em class="property">classmethod </em><code class="sig-prename descclassname">date.</code><code class="sig-name descname">fromordinal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ordinal</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.fromordinal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt id="nepali_datetime.date.from_datetime_date">
 <em class="property">classmethod </em><code class="sig-prename descclassname">date.</code><code class="sig-name descname">from_datetime_date</code><span class="sig-paren">(</span><em class="sig-param">datetime.date</em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.from_datetime_date" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the converted <code class="xref py py-class docutils literal notranslate"><span class="pre">nepalidatetime.date</span></code> (B.S) object for the given <code class="docutils literal notranslate"><span class="pre">datetime.date</span></code> object.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nepali_datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nepali_datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">from_datetime_date</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="go">nepali_datetime.date(2075, 7, 21)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <p>Class attributes:</p>
@@ -266,11 +263,6 @@ is equivalent to <code class="docutils literal notranslate"><span class="pre">ti
 </dd></dl>
 
 <dl class="py method">
-<dt id="nepali_datetime.date.toordinal">
-<code class="sig-prename descclassname">date.</code><code class="sig-name descname">toordinal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.toordinal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt id="nepali_datetime.date.weekday">
 <code class="sig-prename descclassname">date.</code><code class="sig-name descname">weekday</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.weekday" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the day of the week as an integer, where Sunday is 0 and Saturday is 6.
@@ -281,6 +273,13 @@ For example, <code class="docutils literal notranslate"><span class="pre">date(2
 <dt id="nepali_datetime.date.to_datetime_date">
 <code class="sig-prename descclassname">date.</code><code class="sig-name descname">to_datetime_date</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.to_datetime_date" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the converted <code class="docutils literal notranslate"><span class="pre">datetime.date</span></code> (A.D) object of the <a class="reference internal" href="#nepali_datetime.date" title="nepali_datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_datetime.date</span></code></a> object.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nepali_datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ndt</span> <span class="o">=</span> <span class="n">nepali_datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2075</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ndt</span><span class="o">.</span><span class="n">to_datetime_date</span><span class="p">()</span>
+<span class="go">datetime.date(2018, 11, 7)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -443,26 +442,6 @@ of <a class="reference internal" href="#nepali_datetime.UTC0545" title="nepali_d
 <a class="reference internal" href="#nepali_datetime.datetime.now" title="nepali_datetime.datetime.now"><code class="xref py py-meth docutils literal notranslate"><span class="pre">now()</span></code></a>, but returns the current UTC date and time, as a naive
 <a class="reference internal" href="#nepali_datetime.datetime" title="nepali_datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> object. See also <a class="reference internal" href="#nepali_datetime.datetime.now" title="nepali_datetime.datetime.now"><code class="xref py py-meth docutils literal notranslate"><span class="pre">now()</span></code></a>.</p>
 </dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.fromtimestamp">
-<em class="property">classmethod </em><code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">fromtimestamp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timestamp</span></em>, <em class="sig-param"><span class="n">tz</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.fromtimestamp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.utcfromtimestamp">
-<em class="property">classmethod </em><code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">utcfromtimestamp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timestamp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.utcfromtimestamp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.fromordinal">
-<em class="property">classmethod </em><code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">fromordinal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ordinal</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.fromordinal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.combine">
-<em class="property">classmethod </em><code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">date</span></em>, <em class="sig-param"><span class="n">time</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.combine" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt id="nepali_datetime.datetime.strptime">
@@ -642,16 +621,6 @@ datetime with no conversion of date and time data.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="nepali_datetime.datetime.utcoffset">
-<code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">utcoffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.utcoffset" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.dst">
-<code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.dst" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt id="nepali_datetime.datetime.tzname">
 <code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">tzname</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.tzname" title="Permalink to this definition">¶</a></dt>
 <dd><p>If <a class="reference internal" href="#nepali_datetime.datetime.tzinfo" title="nepali_datetime.datetime.tzinfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tzinfo</span></code></a> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, else returns
@@ -667,43 +636,18 @@ datetime with no conversion of date and time data.</p>
 <span class="pre">d.hour,</span> <span class="pre">d.minute,</span> <span class="pre">d.second,</span> <span class="pre">d.weekday(),</span> <span class="pre">yday,</span> <span class="pre">dst))</span></code>, where <code class="docutils literal notranslate"><span class="pre">yday</span> <span class="pre">=</span>
 <span class="pre">d.toordinal()</span> <span class="pre">-</span> <span class="pre">date(d.year,</span> <span class="pre">1,</span> <span class="pre">1).toordinal()</span> <span class="pre">+</span> <span class="pre">1</span></code> is the day number within
 the current year starting with <code class="docutils literal notranslate"><span class="pre">1</span></code> for Baishak 1st. The <code class="xref py py-attr docutils literal notranslate"><span class="pre">tm_isdst</span></code> flag
-of the result is set according to the <a class="reference internal" href="#nepali_datetime.datetime.dst" title="nepali_datetime.datetime.dst"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dst()</span></code></a> method: <a class="reference internal" href="#nepali_datetime.datetime.tzinfo" title="nepali_datetime.datetime.tzinfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tzinfo</span></code></a> is
-<code class="docutils literal notranslate"><span class="pre">None</span></code> or <a class="reference internal" href="#nepali_datetime.datetime.dst" title="nepali_datetime.datetime.dst"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dst()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">tm_isdst</span></code> is set to <code class="docutils literal notranslate"><span class="pre">-1</span></code>;
-else if <a class="reference internal" href="#nepali_datetime.datetime.dst" title="nepali_datetime.datetime.dst"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dst()</span></code></a> returns a non-zero value, <code class="xref py py-attr docutils literal notranslate"><span class="pre">tm_isdst</span></code> is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>;
+of the result is set according to the <code class="xref py py-meth docutils literal notranslate"><span class="pre">dst()</span></code> method: <a class="reference internal" href="#nepali_datetime.datetime.tzinfo" title="nepali_datetime.datetime.tzinfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tzinfo</span></code></a> is
+<code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="xref py py-meth docutils literal notranslate"><span class="pre">dst()</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">tm_isdst</span></code> is set to <code class="docutils literal notranslate"><span class="pre">-1</span></code>;
+else if <code class="xref py py-meth docutils literal notranslate"><span class="pre">dst()</span></code> returns a non-zero value, <code class="xref py py-attr docutils literal notranslate"><span class="pre">tm_isdst</span></code> is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>;
 else <code class="xref py py-attr docutils literal notranslate"><span class="pre">tm_isdst</span></code> is set to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 </dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.utctimetuple">
-<code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">utctimetuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.utctimetuple" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.toordinal">
-<code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">toordinal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.toordinal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.timestamp">
-<code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">timestamp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.timestamp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt id="nepali_datetime.datetime.weekday">
 <code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">weekday</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.weekday" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the day of the week as an integer, where Sunday is 0 and Saturday is 6.
-The same as <code class="docutils literal notranslate"><span class="pre">self.date().weekday()</span></code>. See also <a class="reference internal" href="#nepali_datetime.datetime.isoweekday" title="nepali_datetime.datetime.isoweekday"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isoweekday()</span></code></a>.</p>
+The same as <code class="docutils literal notranslate"><span class="pre">self.date().weekday()</span></code>. See also <code class="xref py py-meth docutils literal notranslate"><span class="pre">isoweekday()</span></code>.</p>
 </dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.isoweekday">
-<code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">isoweekday</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.isoweekday" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.isocalendar">
-<code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">isocalendar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.isocalendar" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt id="nepali_datetime.datetime.isoformat">
@@ -716,11 +660,6 @@ The same as <code class="docutils literal notranslate"><span class="pre">self.da
 <dd><p>For a <a class="reference internal" href="#nepali_datetime.datetime" title="nepali_datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> instance <em>d</em>, <code class="docutils literal notranslate"><span class="pre">str(d)</span></code> is equivalent to
 <code class="docutils literal notranslate"><span class="pre">d.isoformat('</span> <span class="pre">')</span></code>.</p>
 </dd></dl>
-
-<dl class="py method">
-<dt id="nepali_datetime.datetime.ctime">
-<code class="sig-prename descclassname">datetime.</code><code class="sig-name descname">ctime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.datetime.ctime" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt id="nepali_datetime.datetime.strftime">
@@ -1040,7 +979,7 @@ in calculations when the day of the week and the year are specified.</p></li>
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Basic date and time types that operates on B.S</a><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Bikram Sambat Date and Nepal Time types</a><ul>
 <li><a class="reference internal" href="#available-types">Available Types</a></li>
 <li><a class="reference internal" href="#nepali-datetime-date-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_datetime.date</span></code> Objects</a></li>
 <li><a class="reference internal" href="#nepali-datetime-datetime-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">nepali_datetime.datetime</span></code> Objects</a></li>
@@ -1086,7 +1025,7 @@ in calculations when the day of the week and the year are specified.</p></li>
     <a href="#">nepali_datetime 1.0.4 documentation</a> &#187;
     
 
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Basic date and time types that operates on B.S</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Bikram Sambat Date and Nepal Time types</a></li>
     <li class="right">
         
 
