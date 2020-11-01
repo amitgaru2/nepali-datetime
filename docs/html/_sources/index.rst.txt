@@ -214,6 +214,25 @@ Instance methods:
 
    For a date *d*, ``str(d)`` is equivalent to ``d.isoformat()``.
 
+.. method:: date.calendar(justify=4)
+
+   Dispaly a B.S calendar for the date object's month with the object's day highlighted. Override 
+   default ``justify=4`` for wider view of calendar.
+
+   Example::
+   
+      >>> import nepali_datetime
+      >>> ndt = nepali_datetime.date(2051, 10, 1)
+      >>> ndt.calendar()
+
+                      Magh 2051                 
+         Sun   Mon   Tue   Wed   Thu   Fri   Sat
+           1     2     3     4     5     6     7
+           8     9    10    11    12    13    14
+          15    16    17    18    19    20    21
+          22    23    24    25    26    27    28
+          29
+
 
 .. method:: date.ctime()
 

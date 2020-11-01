@@ -297,6 +297,27 @@ example, <code class="docutils literal notranslate"><span class="pre">date(2002,
 </dd></dl>
 
 <dl class="py method">
+<dt id="nepali_datetime.date.calendar">
+<code class="sig-prename descclassname">date.</code><code class="sig-name descname">calendar</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">justify</span><span class="o">=</span><span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.calendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispaly a B.S calendar for the date object’s month with the object’s day highlighted. Override
+default <code class="docutils literal notranslate"><span class="pre">justify=4</span></code> for wider view of calendar.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nepali_datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ndt</span> <span class="o">=</span> <span class="n">nepali_datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2051</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ndt</span><span class="o">.</span><span class="n">calendar</span><span class="p">()</span>
+
+<span class="go">                Magh 2051</span>
+<span class="go">   Sun   Mon   Tue   Wed   Thu   Fri   Sat</span>
+<span class="go">     1     2     3     4     5     6     7</span>
+<span class="go">     8     9    10    11    12    13    14</span>
+<span class="go">    15    16    17    18    19    20    21</span>
+<span class="go">    22    23    24    25    26    27    28</span>
+<span class="go">    29</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt id="nepali_datetime.date.ctime">
 <code class="sig-prename descclassname">date.</code><code class="sig-name descname">ctime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nepali_datetime.date.ctime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a string representing the date, for example <code class="docutils literal notranslate"><span class="pre">date(2002,</span> <span class="pre">12,</span>
