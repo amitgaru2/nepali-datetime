@@ -372,14 +372,10 @@ class date:
 
     def calendar(self, justify=4):
         format_str = '{:>%s}' % justify
-        _found_today = False
 
-        def _check_today_day(day, week_start_day, cal):
-            nonlocal _found_today
-            if not _found_today and day < week_start_day:
-                indx = cal[-1].index(format_str.format(day))
-                cal[-1][indx] = '\033[31m{}\033[39m'.format(cal[-1][indx])
-                _found_today = True
+        def _mark_today(indx):
+            indx_day = cal[indx].index(format_str.format(self.day))
+            cal[indx][indx_day] = '\033[31m{}\033[39m'.format(cal[indx][indx_day])
 
         total_days_month = _days_in_month(self.year, self.month)
         start_weekday = self.__class__(self.year, self.month, 1).weekday()
@@ -387,18 +383,23 @@ class date:
                [format_str.format('Sun'), *(format_str.format(j) for j in _DAYNAMES[1:-1])],
                [format_str.format(' ') for _ in range(start_weekday)]]
         cal[-1].extend([format_str.format(j) for j in range(1, 8 - start_weekday)])
-        week_start_day = int(cal[-1][-1]) + 1
-        _check_today_day(self.day, week_start_day, cal)
+        cal_cursor = 8 - start_weekday
+        cal_range = [(1, 7 - start_weekday)]
 
-        for i in range((total_days_month - week_start_day) // 7):
-            cal.append([format_str.format(j) for j in range(week_start_day, week_start_day + 7)])
-            week_start_day = int(cal[-1][-1]) + 1
-            _check_today_day(self.day, week_start_day, cal)
+        total_mid_weeks = (total_days_month - cal_cursor) // 7
+        for i in range(total_mid_weeks):
+            cal_range.append((cal_cursor, cal_cursor + 6))
+            cal.append([format_str.format(j) for j in range(cal_cursor, cal_cursor + 7)])
+            cal_cursor += 7
 
-        if int(cal[-1][-1]) < total_days_month:
-            week_start_day = int(cal[-1][-1]) + 1
-            cal.append([format_str.format(j) for j in range(week_start_day, total_days_month + 1)])
-            _check_today_day(self.day, week_start_day, cal)
+        if cal_cursor < total_days_month:
+            cal.append([format_str.format(j) for j in range(cal_cursor, total_days_month + 1)])
+            cal_range.append((cal_cursor, total_days_month))
+
+        for i, cr in enumerate(cal_range):
+            if cr[0] <= self.day <= cr[1]:
+                _mark_today(-len(cal_range) + i)
+                break
 
         cal = '\n' + '\n'.join(' '.join(j) for j in cal) + '\n\n'
         sys.stdout.write(cal)
