@@ -11,7 +11,7 @@ class TestStrftime:
 
     def test_strftime_datetime(self):
         dt = nepali_datetime.datetime(2052, 10, 29, 15, 22, 50, 2222)
-        assert dt.strftime("%m/%d/%Y %I:%M:%S.%f") == "10/29/2052 03:22:50.002222"
+        assert dt.strftime("%m/%d/%Y %I:%M:%S.%f %p %a %A") == "10/29/2052 03:22:50.002222 PM Mon Monday"
 
 
 class TestStrptime:

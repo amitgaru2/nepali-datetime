@@ -5,14 +5,9 @@ nepali_datetime.
 
 Supports >= Python3.5
 """
-# TODO: make nepali_datetime 's "date", "datetime" objects hashable & add pickling support
-# TODO: improve documentation
-# TODO: feature to allow inject custom month names
-# TODO: more tests
+__version__ = "1.0.5"
 
 __author__ = "Amit Garu <amitgaru2@gmail.com>"
-
-__version__ = "1.0.4"
 
 import sys
 import csv
@@ -36,11 +31,21 @@ _DAYNAMES = [None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 _FULLDAYNAMES = [None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 _STRFTIME_CUSTOM_MAP = {
-    'b': lambda x: '%s' % _MONTHNAMES[x.tm_mon],
-    'B': lambda x: '%s' % _FULLMONTHNAMES[x.tm_mon],
-    'N': lambda x: '%s' % _MONTHNAMES_NP[x.tm_mon],
-    'a': lambda x: '%s' % _DAYNAMES[(x.tm_wday % 7) or 7],
-    'A': lambda x: '%s' % _FULLDAYNAMES[(x.tm_wday % 7) or 7]
+    'a': lambda o: '%s' % _DAYNAMES[(o.weekday() % 7) or 7],
+    'A': lambda o: '%s' % _FULLDAYNAMES[(o.weekday() % 7) or 7],
+    'w': lambda o: '%d' % o.weekday(),
+    'd': lambda o: '%02d' % o.day,
+    'b': lambda o: '%s' % _MONTHNAMES[o.month],
+    'B': lambda o: '%s' % _FULLMONTHNAMES[o.month],
+    'N': lambda o: '%s' % _MONTHNAMES_NP[o.month],
+    'm': lambda o: '%02d' % o.month,
+    'y': lambda o: '%02d' % (o.year % 100),
+    'Y': lambda o: '%d' % o.year,
+    'H': lambda o: '%02d' % getattr(o, 'hour', 0),
+    'I': lambda o: '%02d' % (getattr(o, 'hour', 0) % 12,),
+    'p': lambda o: 'AM' if getattr(o, 'hour', 0) < 12 else 'PM',
+    'M': lambda o: '%02d' % getattr(o, 'minute', 0),
+    'S': lambda o: '%02d' % getattr(o, 'second', 0),
 }
 
 _CALENDAR = {}
@@ -89,8 +94,7 @@ def _wrap_strftime(object, format, timetuple):
                 i += 1
                 if ch == 'f':
                     if freplace is None:
-                        freplace = '%06d' % getattr(object,
-                                                    'microsecond', 0)
+                        freplace = '%06d' % getattr(object, 'microsecond', 0)
                     newformat.append(freplace)
                 elif ch == 'z':
                     if zreplace is None:
@@ -117,8 +121,8 @@ def _wrap_strftime(object, format, timetuple):
                                 # strftime is going to have at this: escape %
                                 Zreplace = s.replace('%', '%%')
                     newformat.append(Zreplace)
-                elif ch in ('a', 'A', 'b', 'B', 'N'):
-                    newformat.append(_STRFTIME_CUSTOM_MAP[ch](timetuple))
+                elif ch in ('a', 'A', 'w', 'd', 'b', 'B', 'N', 'm', 'y', 'Y', 'H', 'I', 'p', 'M', 'S'):
+                    newformat.append(_STRFTIME_CUSTOM_MAP[ch](object))
                 else:
                     push('%')
                     push(ch)
@@ -127,7 +131,7 @@ def _wrap_strftime(object, format, timetuple):
         else:
             push(ch)
     newformat = "".join(newformat)
-    return _time.strftime(newformat, timetuple)
+    return newformat
 
 
 def _bin_search(key, *arr):
