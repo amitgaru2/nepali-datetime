@@ -32,7 +32,7 @@ The `Python3` core [``datetime``](https://docs.python.org/3.5/library/datetime.h
 
 # datetime parsed from string (strptime)
 >>> datetime.datetime.strptime('2020-12-27', '%Y-%m-%d') # datetime.datetime(2020, 12, 27, 0, 0)
->>> nepali_datetime.strptime('2077-09-12', '%Y-%m-%d') # nepali_datetime.datetime(2077, 9, 12, 0, 0)
+>>> nepali_datetime.datetime.strptime('2077-09-12', '%Y-%m-%d') # nepali_datetime.datetime(2077, 9, 12, 0, 0)
 
 # date/datetime formatting with Nepali month unicode support
 >>> nepali_datetime.date(2078, 1, 10).strftime('%N') # वैशाख
