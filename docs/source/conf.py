@@ -18,11 +18,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'nepali_datetime'
-copyright = '2020, Amit Garu'
+copyright = '2021, Amit Garu'
 author = 'Amit Garu <amitgaru2@gmail.com>'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.4'
+release = '1.0.5'
 
 
 # -- General configuration ---------------------------------------------------

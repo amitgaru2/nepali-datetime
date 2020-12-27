@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>nepali_datetime — Bikram Sambat Date and Nepal Time types &#8212; nepali_datetime 1.0.4 documentation</title>
+    <title>nepali_datetime — Bikram Sambat Date and Nepal Time types &#8212; nepali_datetime 1.0.5 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     
@@ -36,7 +36,7 @@
              style="vertical-align: middle; margin-top: -1px"/></li>
     <li><a href="https://www.python.org/">Python</a> &#187;</li>
     
-    <a href="#">nepali_datetime 1.0.4 documentation</a> &#187;
+    <a href="#">nepali_datetime 1.0.5 documentation</a> &#187;
     
 
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Bikram Sambat Date and Nepal Time types</a></li>
@@ -864,7 +864,7 @@ available).</p></li>
 <li><p>For a naive object, the <code class="docutils literal notranslate"><span class="pre">%z</span></code> and <code class="docutils literal notranslate"><span class="pre">%Z</span></code> format codes are replaced by empty
 strings.</p>
 <p>For an aware object:</p>
-<dl class="simple">
+<dl>
 <dt><code class="docutils literal notranslate"><span class="pre">%z</span></code></dt><dd><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">utcoffset()</span></code> is transformed into a 5-character string of the form
 +HHMM or -HHMM, where HH is a 2-digit string giving the number of UTC
 offset hours, and MM is a 2-digit string giving the number of UTC offset
@@ -875,13 +875,11 @@ minutes.  For example, if <code class="xref py py-meth docutils literal notransl
 <dt><code class="docutils literal notranslate"><span class="pre">%Z</span></code></dt><dd><p>If <code class="xref py py-meth docutils literal notranslate"><span class="pre">tzname()</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">%Z</span></code> is replaced by an empty
 string.  Otherwise <code class="docutils literal notranslate"><span class="pre">%Z</span></code> is replaced by the returned value, which must
 be a string.</p>
-</dd>
-</dl>
-<div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.2: </span>When the <code class="docutils literal notranslate"><span class="pre">%z</span></code> directive is provided to the <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> method, an
+<p>When the <code class="docutils literal notranslate"><span class="pre">%z</span></code> directive is provided to the <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> method, an
 aware <a class="reference internal" href="#nepali_datetime.datetime" title="nepali_datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> object will be produced.  The <code class="docutils literal notranslate"><span class="pre">tzinfo</span></code> of the
 result will be set to a <code class="xref py py-class docutils literal notranslate"><span class="pre">timezone</span></code> instance.</p>
-</div>
+</dd>
+</dl>
 </li>
 </ol>
 </div>
@@ -939,7 +937,7 @@ result will be set to a <code class="xref py py-class docutils literal notransla
              style="vertical-align: middle; margin-top: -1px"/></li>
     <li><a href="https://www.python.org/">Python</a> &#187;</li>
     
-    <a href="#">nepali_datetime 1.0.4 documentation</a> &#187;
+    <a href="#">nepali_datetime 1.0.5 documentation</a> &#187;
     
 
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Bikram Sambat Date and Nepal Time types</a></li>
@@ -961,7 +959,7 @@ result will be set to a <code class="xref py py-class docutils literal notransla
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="copyright.html">Copyright</a> 2020, Amit Garu.
+    &copy; <a href="copyright.html">Copyright</a> 2021, Amit Garu.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />

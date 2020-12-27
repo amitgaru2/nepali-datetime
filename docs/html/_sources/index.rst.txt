@@ -738,7 +738,6 @@ Notes:
       string.  Otherwise ``%Z`` is replaced by the returned value, which must
       be a string.
 
-   .. versionchanged:: 3.2
       When the ``%z`` directive is provided to the :meth:`strptime` method, an
       aware :class:`.datetime` object will be produced.  The ``tzinfo`` of the
       result will be set to a :class:`timezone` instance.
