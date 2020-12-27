@@ -400,10 +400,12 @@ class date:
             cal.append([format_str.format(j) for j in range(cal_cursor, total_days_month + 1)])
             cal_range.append((cal_cursor, total_days_month))
 
-        for i, cr in enumerate(cal_range):
-            if cr[0] <= self.day <= cr[1]:
-                _mark_today(-len(cal_range) + i)
-                break
+        if sys.platform.startswith('linux'):
+            # currently only linux supported
+            for i, cr in enumerate(cal_range):
+                if cr[0] <= self.day <= cr[1]:
+                    _mark_today(-len(cal_range) + i)
+                    break
 
         cal = '\n' + '\n'.join(' '.join(j) for j in cal) + '\n\n'
         sys.stdout.write(cal)
