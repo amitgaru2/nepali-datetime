@@ -290,18 +290,6 @@ Example of working with :class:`date`:
     >>> d = nepali_datetime.date.fromordinal(10000) # 10000th day after 1. 1. 1975
     >>> d
     nepali_datetime.date(2002, 5, 12)
-    >>> t = d.timetuple()
-    >>> for i in t:     # doctest: +SKIP
-    ...     print(i)
-    2002                # year
-    5                   # month
-    12                  # day
-    0
-    0
-    0
-    2                   # weekday (2 = Tuesday)
-    138                 # 138th day in the year
-    -1
     >>> d.isoformat()
     '2002-05-12'
     >>> d.strftime("%d/%m/%y")
@@ -581,7 +569,6 @@ Examples of working with datetime objects:
 .. doctest::
 
     >>> import nepali_datetime
-    >>> from datetime import time
     >>> # Using datetime.combine()
     >>> d = nepali_datetime.date(2005, 7, 14)
     >>> t = time(12, 30)
@@ -589,27 +576,13 @@ Examples of working with datetime objects:
     nepali_datetime.datetime(2005, 7, 14, 12, 30)
     >>> # Using nepali_datetime.datetime.now() or nepali_datetime.datetime.utcnow()
     >>> nepali_datetime.datetime.now()   # doctest: +SKIP
-    nepali_datetime.datetime(2007, 12, 6, 16, 29, 43, 79043)   # GMT +1
+    nepali_datetime.datetime(2007, 12, 6, 16, 30, 43, 79043)   # GMT +5:45
     >>> nepali_datetime.datetime.utcnow()   # doctest: +SKIP
-    nepali_datetime.datetime(2007, 12, 6, 15, 29, 43, 79060)
+    nepali_datetime.datetime(2007, 12, 6, 10, 45, 43, 79060)
     >>> # Using nepali_datetime.datetime.strptime()
     >>> dt = nepali_datetime.datetime.strptime("21/11/06 16:30", "%d/%m/%y %H:%M")
     >>> dt
     nepali_datetime.datetime(2006, 11, 21, 16, 30)
-    >>> # Using nepali_datetime.datetime.timetuple() to get tuple of all attributes
-    >>> tt = dt.timetuple()
-    >>> for it in tt:   # doctest: +SKIP
-    ...     print(it)
-    ...
-    2006    # year
-    11      # month
-    21      # day
-    16      # hour
-    30      # minute
-    0       # second
-    6       # weekday (0 = Sunday)
-    325     # number of days since 1st January
-    -1      # dst - method tzinfo.dst() returned None
     >>> # Formatting datetime
     >>> dt.strftime("%A, %d. %B %Y %I:%M%p")
     'Saturday, 21. Falgun 2006 04:30PM'
@@ -715,38 +688,6 @@ Directives   Meaning                          Example                  Notes
 ``%Z``       Time zone name (empty string     (empty), UTC, EST, CST        
              if the object is naive).                                      
 
-``%j``       Day of the year as a             001, 002, ..., 366            
-             zero-padded decimal number.                                   
-
-``%U``       Week number of the year          00, 01, ..., 53          \(7)  
-             (Sunday as the first day of                                   
-             the week) as a zero padded                                    
-             decimal number. All days in a                                 
-             new year preceding the first                                  
-             Sunday are considered to be in                                
-             week 0.                                                       
-
-``%W``       Week number of the year          00, 01, ..., 53          \(7)  
-             (Monday as the first day of                                   
-             the week) as a decimal number.                                
-             All days in a new year                                        
-             preceding the first Monday                                    
-             are considered to be in                                       
-             week 0.                                                       
-
-``%c``       Locale's appropriate date and    Tue Asa 16 21:30:00      \(1)  
-             time representation.             1988                         
-                                                                          
-                                                                          
-
-``%x``       Locale's appropriate date        08/16/88 (None);         \(1)  
-             representation.                  08/16/1988                   
-                                                                          
-
-``%X``       Locale's appropriate time        21:30:00                 \(1)  
-             representation.                                               
-
-``%%``       A literal ``'%'`` character.     %             
 ===========  ================================ ======================== =======
 
                         
@@ -801,7 +742,3 @@ Notes:
       When the ``%z`` directive is provided to the :meth:`strptime` method, an
       aware :class:`.datetime` object will be produced.  The ``tzinfo`` of the
       result will be set to a :class:`timezone` instance.
-
-(7)
-   When used with the :meth:`strptime` method, ``%U`` and ``%W`` are only used
-   in calculations when the day of the week and the year are specified.

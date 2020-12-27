@@ -6,14 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>nepali_datetime — Bikram Sambat Date and Nepal Time types &#8212; nepali_datetime 1.0.4 documentation</title>
-    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -367,18 +366,6 @@ complete list of formatting directives, see
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">nepali_datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="c1"># 10000th day after 1. 1. 1975</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
 <span class="go">nepali_datetime.date(2002, 5, 12)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>     
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="go">2002                # year</span>
-<span class="go">5                   # month</span>
-<span class="go">12                  # day</span>
-<span class="go">0</span>
-<span class="go">0</span>
-<span class="go">0</span>
-<span class="go">2                   # weekday (2 = Tuesday)</span>
-<span class="go">138                 # 138th day in the year</span>
-<span class="go">-1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
 <span class="go">&#39;2002-05-12&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%y&quot;</span><span class="p">)</span>
@@ -680,7 +667,6 @@ complete list of formatting directives, see
 
 <p>Examples of working with datetime objects:</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nepali_datetime</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">time</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Using datetime.combine()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">nepali_datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2005</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
@@ -688,27 +674,13 @@ complete list of formatting directives, see
 <span class="go">nepali_datetime.datetime(2005, 7, 14, 12, 30)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Using nepali_datetime.datetime.now() or nepali_datetime.datetime.utcnow()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nepali_datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>   
-<span class="go">nepali_datetime.datetime(2007, 12, 6, 16, 29, 43, 79043)   # GMT +1</span>
+<span class="go">nepali_datetime.datetime(2007, 12, 6, 16, 30, 43, 79043)   # GMT +5:45</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nepali_datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>   
-<span class="go">nepali_datetime.datetime(2007, 12, 6, 15, 29, 43, 79060)</span>
+<span class="go">nepali_datetime.datetime(2007, 12, 6, 10, 45, 43, 79060)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Using nepali_datetime.datetime.strptime()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">nepali_datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">&quot;21/11/06 16:30&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%y %H:%M&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span>
 <span class="go">nepali_datetime.datetime(2006, 11, 21, 16, 30)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Using nepali_datetime.datetime.timetuple() to get tuple of all attributes</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">tt</span><span class="p">:</span>   
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
-<span class="gp">...</span>
-<span class="go">2006    # year</span>
-<span class="go">11      # month</span>
-<span class="go">21      # day</span>
-<span class="go">16      # hour</span>
-<span class="go">30      # minute</span>
-<span class="go">0       # second</span>
-<span class="go">6       # weekday (0 = Sunday)</span>
-<span class="go">325     # number of days since 1st January</span>
-<span class="go">-1      # dst - method tzinfo.dst() returned None</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Formatting datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%A, </span><span class="si">%d</span><span class="s2">. %B %Y %I:%M%p&quot;</span><span class="p">)</span>
 <span class="go">&#39;Saturday, 21. Falgun 2006 04:30PM&#39;</span>
@@ -870,59 +842,6 @@ if the object is naive).</p></td>
 <td><p>(empty), UTC, EST, CST</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%j</span></code></p></td>
-<td><p>Day of the year as a
-zero-padded decimal number.</p></td>
-<td><p>001, 002, …, 366</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%U</span></code></p></td>
-<td><p>Week number of the year
-(Sunday as the first day of
-the week) as a zero padded
-decimal number. All days in a
-new year preceding the first
-Sunday are considered to be in
-week 0.</p></td>
-<td><p>00, 01, …, 53</p></td>
-<td><p>(7)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%W</span></code></p></td>
-<td><p>Week number of the year
-(Monday as the first day of
-the week) as a decimal number.
-All days in a new year
-preceding the first Monday
-are considered to be in
-week 0.</p></td>
-<td><p>00, 01, …, 53</p></td>
-<td><p>(7)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%c</span></code></p></td>
-<td><p>Locale’s appropriate date and
-time representation.</p></td>
-<td><p>Tue Asa 16 21:30:00
-1988</p></td>
-<td><p>(1)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%x</span></code></p></td>
-<td><p>Locale’s appropriate date
-representation.</p></td>
-<td><p>08/16/88 (None);
-08/16/1988</p></td>
-<td><p>(1)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%X</span></code></p></td>
-<td><p>Locale’s appropriate time
-representation.</p></td>
-<td><p>21:30:00</p></td>
-<td><p>(1)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%%</span></code></p></td>
-<td><p>A literal <code class="docutils literal notranslate"><span class="pre">'%'</span></code> character.</p></td>
-<td><p>%</p></td>
-<td></td>
-</tr>
 </tbody>
 </table>
 <p>Notes:</p>
@@ -964,8 +883,6 @@ aware <a class="reference internal" href="#nepali_datetime.datetime" title="nepa
 result will be set to a <code class="xref py py-class docutils literal notranslate"><span class="pre">timezone</span></code> instance.</p>
 </div>
 </li>
-<li><p>When used with the <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> method, <code class="docutils literal notranslate"><span class="pre">%U</span></code> and <code class="docutils literal notranslate"><span class="pre">%W</span></code> are only used
-in calculations when the day of the week and the year are specified.</p></li>
 </ol>
 </div>
 </div>
@@ -1046,6 +963,12 @@ in calculations when the day of the week and the year are specified.</p></li>
     <div class="footer">
     &copy; <a href="copyright.html">Copyright</a> 2020, Amit Garu.
     <br />
+    This page is licensed under the Python Software Foundation License Version 2.
+    <br />
+    Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
+    <br />
+    See <a href="">History and License</a> for more information.
+    <br /><br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
@@ -1056,7 +979,7 @@ in calculations when the day of the week and the year are specified.</p></li>
     
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
     </div>
 
   </body>
