@@ -5,7 +5,7 @@ with open('README.md', encoding='utf-8') as readme_file:
 
 setup(
     name="nepali-datetime",
-    version="1.0.5",
+    version="1.0.5.1",
     description="Datetime module that operates on Bikram Sambat & Nepal time.",
     long_description=README,
     long_description_content_type="text/markdown",
