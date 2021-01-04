@@ -154,7 +154,7 @@ def _bin_search(key, *arr):
 
 def _check_tzname(name):
     if name is not None and not isinstance(name, str):
-        raise TypeError("tzinfo.tzname() must return None or string, not '%s'" % type(name))
+        raise TypeError(f"tzinfo.tzname() must return None or string, not '{type(name)}'")
 
 
 def _check_utc_offset(name, offset):
@@ -162,18 +162,15 @@ def _check_utc_offset(name, offset):
     if offset is None:
         return
     if not isinstance(offset, _actual_datetime.timedelta):
-        raise TypeError("tzinfo.%s() must return None "
-                        "or _actual_datetime.timedelta, not '%s'" % (name, type(offset)))
+        raise TypeError(f"tzinfo.{name}() must return None or _actual_datetime.timedelta, not '{type(offset)}'")
     if offset % _actual_datetime.timedelta(minutes=1) or offset.microseconds:
-        raise ValueError("tzinfo.%s() must return a whole number "
-                         "of minutes, got %s" % (name, offset))
+        raise ValueError(f"tzinfo.{name}() must return a whole number of minutes, got {offset}")
     if not -_actual_datetime.timedelta(1) < offset < _actual_datetime.timedelta(1):
-        raise ValueError("%s()=%s, must be must be strictly between "
-                         "-timedelta(hours=24) and timedelta(hours=24)" %
-                         (name, offset))
+        raise ValueError(f"{name}()={offset}, must be must be strictly between -timedelta(hours=24) and timedelta(hours=24)")
 
 
 def _check_int_field(value):
+    value_type = type(value).__name__
     if isinstance(value, int):
         return value
     if not isinstance(value, float):
@@ -184,8 +181,8 @@ def _check_int_field(value):
         else:
             if isinstance(value, int):
                 return value
-            raise TypeError('__int__ returned non-int (type %s)' % type(value).__name__)
-        raise TypeError('an integer is required (got type %s)' % type(value).__name__)
+            raise TypeError(f'__int__ returned non-int (type {value_type})')
+        raise TypeError(f'an integer is required (got type {value_type})')
     raise TypeError('integer argument expected, got float')
 
 
@@ -198,7 +195,7 @@ def _days_in_month(year, month):
 
 def _days_before_year(year):
     """year -> number of days before Baishak 1st of year."""
-    assert MINYEAR <= year <= MAXYEAR, "year must be in %s..%s" % (MINYEAR, MAXYEAR)
+    assert MINYEAR <= year <= MAXYEAR, f"year must be in {MINYEAR}..{MAXYEAR}"
     if year == MINYEAR:
         return 0
     return _DAYS_BEFORE_YEAR[year - MINYEAR - 1]
@@ -266,7 +263,7 @@ def _check_tzinfo_arg(tz):
 
 
 def _cmperror(x, y):
-    raise TypeError("can't compare '%s' to '%s'" % (type(x).__name__, type(y).__name__))
+    raise TypeError(f"can't compare '{type(x).__name__}' to '{type(y).__name__}'")
 
 
 def _cmp(x, y):
@@ -430,7 +427,7 @@ class date:
 
     def __format__(self, fmt):
         if not isinstance(fmt, str):
-            raise TypeError("must be str, not %s" % type(fmt).__name__)
+            raise TypeError(f"must be str, not {type(fmt).__name__}")
         if len(fmt) != 0:
             return self.strftime(fmt)
         return str(self)
@@ -802,9 +799,8 @@ class datetime(date):
             del L[-1]
         if L[-1] == 0:
             del L[-1]
-        s = "%s.%s(%s)" % (self.__class__.__module__,
-                           self.__class__.__qualname__,
-                           ", ".join(map(str, L)))
+        this = self.__class__
+        s = f"{this.__module__}.{this.__qualname__}({', '.join(map(str, L))})"
         if self._tzinfo is not None:
             assert s[-1:] == ")"
             s = s[:-1] + ", tzinfo=%r" % self._tzinfo + ")"
