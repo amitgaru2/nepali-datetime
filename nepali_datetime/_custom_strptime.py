@@ -1,7 +1,7 @@
 """Code derived form of  Python3.5 's _strptime.py core library to support nepali_datetime."""
 import time
 import locale
-import calendar
+from calendar import isleap
 import _strptime as _actual_strptime
 
 from datetime import (date as datetime_date,
@@ -15,9 +15,9 @@ except ImportError:
 
 __all__ = []
 
-_MONTHNAMES = [None, "bai", "jes", "asa", "shr", "bha", "asw", "kar", "man", "pou", "mag", "fal", "cha"]
-_FULLMONTHNAMES = [None, "baishakh", "jestha", "asar", "shrawan", "bhadau", "aswin", "kartik", "mangsir", "poush",
-                   "magh", "falgun", "chaitra"]
+_MONTHNAMES = (None, "bai", "jes", "asa", "shr", "bha", "asw", "kar", "man", "pou", "mag", "fal", "cha")
+_FULLMONTHNAMES = (None, "baishakh", "jestha", "asar", "shrawan", "bhadau", "aswin", "kartik", "mangsir", "poush",
+                   "magh", "falgun", "chaitra")
 
 
 def _getlang():
@@ -132,19 +132,16 @@ def _strptime(data_string, format="%a %b %d %H:%M:%S %Y"):
                 if bad_directive == "\\":
                     bad_directive = "%"
                 del err
-                raise ValueError("'%s' is a bad directive in format '%s'" %
-                                 (bad_directive, format)) from None
+                raise ValueError(f"'{bad_directive}' is a bad directive in format {format}") from None
             # IndexError only occurs when the format string is "%"
             except IndexError:
-                raise ValueError("stray %% in format '%s'" % format) from None
+                raise ValueError(f"stray % in format '{format}'") from None
             _regex_cache[format] = format_regex
     found = format_regex.match(data_string)
     if not found:
-        raise ValueError("time data %r does not match format %r" %
-                         (data_string, format))
+        raise ValueError(f"time data '{data_string}' does not match format '{format}'")
     if len(data_string) != found.end():
-        raise ValueError("unconverted data remains: %s" %
-                         data_string[found.end():])
+        raise ValueError(f"unconverted data remains: {data_string[found.end():]}")
 
     year = None
     month = day = 1
@@ -260,7 +257,7 @@ def _strptime(data_string, format="%a %b %d %H:%M:%S %Y"):
                                           week_starts_Mon)
         if julian <= 0:
             year -= 1
-            yday = 366 if calendar.isleap(year) else 365
+            yday = 366 if isleap(year) else 365
             julian += yday
     # Cannot pre-calculate datetime_date() since can change in Julian
     # calculation and thus could have different value for the day of the week
