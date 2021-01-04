@@ -12,8 +12,9 @@ __author__ = "Amit Garu <amitgaru2@gmail.com>"
 import sys
 import csv
 import time as _time
-import math as _math
 import datetime as _actual_datetime
+
+from math import modf as _math_modf
 
 from nepali_datetime.config import CALENDAR_PATH, MINDATE, MAXDATE, REFERENCE_DATE_AD
 
@@ -22,13 +23,13 @@ MAXYEAR = MAXDATE['year']
 
 NEPAL_TIME_UTC_OFFSET = 20700
 
-_MONTHNAMES = [None, "Bai", "Jes", "Asa", "Shr", "Bha", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha"]
-_FULLMONTHNAMES = [None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Aswin", "Kartik", "Mangsir", "Poush",
-                   "Magh", "Falgun", "Chaitra"]
-_MONTHNAMES_NP = [None, "वैशाख", "जेष्ठ", "असार", "श्रावण", "भदौ", "आश्विन", "कार्तिक", "मंसिर", "पौष",
-                  "माघ", "फाल्गुण", "चैत्र"]
-_DAYNAMES = [None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-_FULLDAYNAMES = [None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+_MONTHNAMES = (None, "Bai", "Jes", "Asa", "Shr", "Bha", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha")
+_FULLMONTHNAMES = (None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Aswin", "Kartik", "Mangsir", "Poush",
+                   "Magh", "Falgun", "Chaitra")
+_MONTHNAMES_NP = (None, "वैशाख", "जेष्ठ", "असार", "श्रावण", "भदौ", "आश्विन", "कार्तिक", "मंसिर", "पौष",
+                  "माघ", "फाल्गुण", "चैत्र")
+_DAYNAMES = (None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+_FULLDAYNAMES = (None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 
 _STRFTIME_CUSTOM_MAP = {
     'a': lambda o: '%s' % _DAYNAMES[(o.weekday() % 7) or 7],
@@ -396,7 +397,7 @@ class date:
             cal.append([format_str.format(j) for j in range(cal_cursor, cal_cursor + 7)])
             cal_cursor += 7
 
-        if cal_cursor < total_days_month:
+        if cal_cursor <= total_days_month:
             cal.append([format_str.format(j) for j in range(cal_cursor, total_days_month + 1)])
             cal_range.append((cal_cursor, total_days_month))
 
@@ -431,7 +432,7 @@ class date:
     def __format__(self, fmt):
         if not isinstance(fmt, str):
             raise TypeError("must be str, not %s" % type(fmt).__name__)
-        if len(fmt) != 0:
+        if fmt:
             return self.strftime(fmt)
         return str(self)
 
@@ -631,7 +632,7 @@ class datetime(date):
 
         A timezone info object may be passed in as well.
         """
-        frac, t = _math.modf(t)
+        frac, t = _math_modf(t)
         us = round(frac * 1e6)
         if us >= 1000000:
             t += 1
