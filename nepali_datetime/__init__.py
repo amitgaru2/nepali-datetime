@@ -12,7 +12,7 @@ __author__ = "Amit Garu <amitgaru2@gmail.com>"
 import sys
 import csv
 import time as _time
-import math as _math
+from math import modf as _math_modf 
 import datetime as _actual_datetime
 
 from nepali_datetime.config import CALENDAR_PATH, MINDATE, MAXDATE, REFERENCE_DATE_AD
@@ -628,7 +628,7 @@ class datetime(date):
 
         A timezone info object may be passed in as well.
         """
-        frac, t = _math.modf(t)
+        frac, t = _math_modf(t)
         us = round(frac * 1e6)
         if us >= 1000000:
             t += 1

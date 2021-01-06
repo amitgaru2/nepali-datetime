@@ -1,7 +1,7 @@
 """Code derived form of  Python3.5 's _strptime.py core library to support nepali_datetime."""
 import time
 import locale
-import calendar
+from calendar import isleap
 import _strptime as _actual_strptime
 
 from datetime import (date as datetime_date,
@@ -257,7 +257,7 @@ def _strptime(data_string, format="%a %b %d %H:%M:%S %Y"):
                                           week_starts_Mon)
         if julian <= 0:
             year -= 1
-            yday = 366 if calendar.isleap(year) else 365
+            yday = 366 if isleap(year) else 365
             julian += yday
     # Cannot pre-calculate datetime_date() since can change in Julian
     # calculation and thus could have different value for the day of the week
