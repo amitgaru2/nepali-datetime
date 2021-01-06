@@ -428,7 +428,7 @@ class date:
     def __format__(self, fmt):
         if not isinstance(fmt, str):
             raise TypeError(f"must be str, not {type(fmt).__name__}")
-        if len(fmt) != 0:
+        if fmt:
             return self.strftime(fmt)
         return str(self)
 
