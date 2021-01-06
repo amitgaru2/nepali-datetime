@@ -12,7 +12,7 @@ __author__ = "Amit Garu <amitgaru2@gmail.com>"
 import sys
 import csv
 import time as _time
-from math import modf as _math_modf 
+from math import modf as _math_modf
 import datetime as _actual_datetime
 
 from nepali_datetime.config import CALENDAR_PATH, MINDATE, MAXDATE, REFERENCE_DATE_AD
