@@ -139,9 +139,9 @@ def _strptime(data_string, format="%a %b %d %H:%M:%S %Y"):
             _regex_cache[format] = format_regex
     found = format_regex.match(data_string)
     if not found:
-        raise ValueError("time data '{data_string}' does not match format '{format}'")
+        raise ValueError(f"time data '{data_string}' does not match format '{format}'")
     if len(data_string) != found.end():
-        raise ValueError("unconverted data remains: {data_string[found.end():]}")
+        raise ValueError(f"unconverted data remains: {data_string[found.end():]}")
 
     year = None
     month = day = 1
