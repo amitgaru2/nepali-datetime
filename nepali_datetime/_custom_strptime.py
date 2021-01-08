@@ -4,9 +4,9 @@ import locale
 import calendar
 import _strptime as _actual_strptime
 
-from datetime import (date as datetime_date,
-                      timedelta as datetime_timedelta,
-                      timezone as datetime_timezone)
+from datetime import (timedelta as datetime_timedelta, timezone as datetime_timezone)
+
+from nepali_datetime import date as datetime_date
 
 try:
     from _thread import allocate_lock as _thread_allocate_lock
