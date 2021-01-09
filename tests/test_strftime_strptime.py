@@ -9,6 +9,9 @@ class TestStrftime:
         assert dt.strftime("%A of %B %d %y") == "Sunday of Aswin 04 77"
         assert dt.strftime("%a %b") == "Sun Asw"
 
+        dt = nepali_datetime.date(2077, 2, 32)
+        assert dt.strftime("%d-%m-%Y") == "32-02-2077"
+
     def test_strftime_datetime(self):
         dt = nepali_datetime.datetime(2052, 10, 29, 15, 22, 50, 2222)
         assert dt.strftime("%m/%d/%Y %I:%M:%S.%f %p %a %A") == "10/29/2052 03:22:50.002222 PM Mon Monday"
@@ -18,6 +21,7 @@ class TestStrptime:
 
     def test_strptime_date(self):
         assert nepali_datetime.datetime.strptime("2011-10-11", "%Y-%m-%d").date() == nepali_datetime.date(2011, 10, 11)
+        assert nepali_datetime.datetime.strptime("2077-02-32", "%Y-%m-%d").date() == nepali_datetime.date(2077, 2, 32)
 
     def test_strptime_datetime(self):
         assert nepali_datetime.datetime.strptime("Asar 23 2025 10:00:00",
