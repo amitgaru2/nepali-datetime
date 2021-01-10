@@ -5,7 +5,7 @@ nepali_datetime.
 
 Supports >= Python3.5
 """
-__version__ = "1.0.5"
+__version__ = "1.0.5.1"
 
 __author__ = "Amit Garu <amitgaru2@gmail.com>"
 
@@ -396,7 +396,7 @@ class date:
             cal.append([format_str.format(j) for j in range(cal_cursor, cal_cursor + 7)])
             cal_cursor += 7
 
-        if cal_cursor < total_days_month:
+        if cal_cursor <= total_days_month:
             cal.append([format_str.format(j) for j in range(cal_cursor, total_days_month + 1)])
             cal_range.append((cal_cursor, total_days_month))
 
