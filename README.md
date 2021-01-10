@@ -1,20 +1,21 @@
-# Nepali Datetime (Bikram Sambat B.S & Nepal Time NPT) 
+# Nepali Datetime (Bikram Sambat Date & Nepal Time) 
 
-The package similar to Python's core ``datetime`` package that
-operates on Bikram Sambat (B.S) date & Nepal Time ``+05:45``.
+The package inspired from Python's core ``datetime`` package that
+operates on top of Bikram Sambat (B.S) date & Nepal Time (NPT) ``+05:45``.
 
-## Usage
-The `Python3` core [``datetime``](https://docs.python.org/3.5/library/datetime.html) library usage _VS_ `nepali_datetime` usage.
+
+## Basic Usage
+
 ```python
-# importing the module
+# importing
 >>> import datetime
 >>> import nepali_datetime
 
-# getting today's date
+# today's date
 >>> datetime.date.today()
 >>> nepali_datetime.date.today()
 
-# getting now datetime
+# now datetime
 >>> datetime.datetime.now()
 >>> nepali_datetime.datetime.now()
 
@@ -37,7 +38,7 @@ The `Python3` core [``datetime``](https://docs.python.org/3.5/library/datetime.h
 # date/datetime formatting with Nepali month unicode support
 >>> nepali_datetime.date(2078, 1, 10).strftime('%N') # वैशाख
 
-# BS calendar
+# BS monthly calendar
 >>> nepali_datetime.date.today().calendar()
 
            Kartik 2077            
@@ -48,13 +49,7 @@ Sun  Mon  Tue  Wed  Thu  Fri  Sat
  16   17   18   19   20   21   22
  23   24   25   26   27   28   29
  30
-
-# ... and many more
 ```
-
-***Note**: The equivalence is not limited to just getting current datetime. Its 
-supports most of the methods from Python's core datetime library. Check 
-documentation for more details.
 
 
 ## Installation
