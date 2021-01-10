@@ -63,5 +63,4 @@ Complete documentations can be found [here](https://dxillar.github.io/nepali-dat
 
 
 ## Contribution
-
 For contribution check the guidelines in [CONTRIBUTING.md](https://github.com/dxillar/nepali-datetime/blob/master/CONTRIBUTING.md).
