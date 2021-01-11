@@ -154,7 +154,7 @@ def _bin_search(key, *arr):
 
 def _check_tzname(name):
     if name is not None and not isinstance(name, str):
-        raise TypeError(f"tzinfo.tzname() must return None or string, not {type(name)}")
+        raise TypeError("tzinfo.tzname() must return None or string, not {}".format(type(name)))
 
 
 def _check_utc_offset(name, offset):
