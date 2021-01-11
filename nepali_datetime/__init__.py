@@ -163,7 +163,7 @@ def _check_utc_offset(name, offset):
     if offset is None:
         return
     if not isinstance(offset, _actual_datetime.timedelta):
-        raise TypeError(f"tzinfo.{name}() must return None or _actual_datetime.timedelta, not '{type(offset)}'")
+        raise TypeError(f"tzinfo.{name}() must return None or _actual_datetime.timedelta, not {type(offset)}")
     if offset % _actual_datetime.timedelta(minutes=1) or offset.microseconds:
         raise ValueError(f"tzinfo.{name}() must return a whole number of minutes, got {offset}")
     if not -_actual_datetime.timedelta(1) < offset < _actual_datetime.timedelta(1):
