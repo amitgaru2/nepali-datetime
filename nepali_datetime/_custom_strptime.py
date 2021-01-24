@@ -1,12 +1,12 @@
 """Code derived form of  Python3.5 's _strptime.py core library to support nepali_datetime."""
 import time
 import locale
-from calendar import isleap
 import _strptime as _actual_strptime
 
-from datetime import (date as datetime_date,
-                      timedelta as datetime_timedelta,
-                      timezone as datetime_timezone)
+from calendar import isleap
+from datetime import (timedelta as datetime_timedelta, timezone as datetime_timezone)
+
+from nepali_datetime import date as datetime_date
 
 try:
     from _thread import allocate_lock as _thread_allocate_lock
@@ -132,16 +132,19 @@ def _strptime(data_string, format="%a %b %d %H:%M:%S %Y"):
                 if bad_directive == "\\":
                     bad_directive = "%"
                 del err
-                raise ValueError(f"'{bad_directive}' is a bad directive in format {format}") from None
+                raise ValueError("'%s' is a bad directive in format '%s'" %
+                                 (bad_directive, format)) from None
             # IndexError only occurs when the format string is "%"
             except IndexError:
-                raise ValueError(f"stray % in format '{format}'") from None
+                raise ValueError("stray %% in format '%s'" % format) from None
             _regex_cache[format] = format_regex
     found = format_regex.match(data_string)
     if not found:
-        raise ValueError(f"time data '{data_string}' does not match format '{format}'")
+        raise ValueError("time data %r does not match format %r" %
+                         (data_string, format))
     if len(data_string) != found.end():
-        raise ValueError(f"unconverted data remains: {data_string[found.end():]}")
+        raise ValueError("unconverted data remains: %s" %
+                         data_string[found.end():])
 
     year = None
     month = day = 1
