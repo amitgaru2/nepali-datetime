@@ -29,12 +29,16 @@ _MONTHNAMES_NP = [None, "वैशाख", "जेष्ठ", "असार", "�
                   "माघ", "फाल्गुण", "चैत्र"]
 _DAYNAMES = [None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 _FULLDAYNAMES = [None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+_FULLDAYNAMES_NP = [None, "सोमबार", "मंगलबार", "बुधवार", "बिहिबार", "शुक्रबार", "शनिबार", "आइतबार"]
+_DAY_NP = "०१२३४५६७८९"
 
 _STRFTIME_CUSTOM_MAP = {
     'a': lambda o: '%s' % _DAYNAMES[(o.weekday() % 7) or 7],
     'A': lambda o: '%s' % _FULLDAYNAMES[(o.weekday() % 7) or 7],
+    'G': lambda o: '%s' % _FULLDAYNAMES_NP[(o.weekday() % 7) or 7],
     'w': lambda o: '%d' % o.weekday(),
     'd': lambda o: '%02d' % o.day,
+    'D': lambda o: ''.join([_DAY_NP[int(i)] for i in '%02d' % o.day]),
     'b': lambda o: '%s' % _MONTHNAMES[o.month],
     'B': lambda o: '%s' % _FULLMONTHNAMES[o.month],
     'N': lambda o: '%s' % _MONTHNAMES_NP[o.month],
@@ -121,7 +125,7 @@ def _wrap_strftime(object, format, timetuple):
                                 # strftime is going to have at this: escape %
                                 Zreplace = s.replace('%', '%%')
                     newformat.append(Zreplace)
-                elif ch in ('a', 'A', 'w', 'd', 'b', 'B', 'N', 'm', 'y', 'Y', 'H', 'I', 'p', 'M', 'S'):
+                elif ch in {'a', 'A', 'G', 'w', 'd', 'D', 'b', 'B', 'N', 'm', 'y', 'Y', 'H', 'I', 'p', 'M', 'S'}:
                     newformat.append(_STRFTIME_CUSTOM_MAP[ch](object))
                 else:
                     push('%')
