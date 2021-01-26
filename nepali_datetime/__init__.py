@@ -38,13 +38,15 @@ _STRFTIME_CUSTOM_MAP = {
     'G': lambda o: '%s' % _FULLDAYNAMES_NP[(o.weekday() % 7) or 7],
     'w': lambda o: '%d' % o.weekday(),
     'd': lambda o: '%02d' % o.day,
-    'D': lambda o: ''.join([_DAY_NP[int(i)] for i in '%02d' % o.day]),
+    'D': lambda o: ''.join((_DAY_NP[int(i)] for i in '%02d' % o.day)),
     'b': lambda o: '%s' % _MONTHNAMES[o.month],
     'B': lambda o: '%s' % _FULLMONTHNAMES[o.month],
     'N': lambda o: '%s' % _MONTHNAMES_NP[o.month],
     'm': lambda o: '%02d' % o.month,
     'y': lambda o: '%02d' % (o.year % 100),
     'Y': lambda o: '%d' % o.year,
+    'k': lambda o: ''.join(_DAY_NP[int(i)] for i in '%02d' % (o.year % 100)),
+    'K': lambda o: ''.join(_DAY_NP[int(i)] for i in '%d' % o.year),
     'H': lambda o: '%02d' % getattr(o, 'hour', 0),
     'I': lambda o: '%02d' % (getattr(o, 'hour', 0) % 12,),
     'p': lambda o: 'AM' if getattr(o, 'hour', 0) < 12 else 'PM',
@@ -125,7 +127,8 @@ def _wrap_strftime(object, format, timetuple):
                                 # strftime is going to have at this: escape %
                                 Zreplace = s.replace('%', '%%')
                     newformat.append(Zreplace)
-                elif ch in {'a', 'A', 'G', 'w', 'd', 'D', 'b', 'B', 'N', 'm', 'y', 'Y', 'H', 'I', 'p', 'M', 'S'}:
+                elif ch in {'a', 'A', 'G', 'w', 'd', 'D', 'b', 'B', 'N', 'm', 'y', 'Y', 'k', 'K', 'H', 'I', 'p', 'M',
+                            'S'}:
                     newformat.append(_STRFTIME_CUSTOM_MAP[ch](object))
                 else:
                     push('%')

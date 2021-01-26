@@ -663,6 +663,14 @@ Directives   Meaning                          Example                  Notes
 ``%Y``       Year with century as a           1975, 1976, ..., 2020,   \(2) 
              decimal number.                  2021, ..., 2099, 2100         
 
+``%k``       Year without century as a        ००, ०१, ..., ९९               
+             zero-padded decimal number
+             in Nepali unicode.
+
+``%K``       Year with century as a           १९७५, १९७६, ...,         \(2) 
+             decimal number in                २०९९, २१००        
+             Nepali unicode.
+
 ``%H``       Hour (24-hour clock) as a        00, 01, ..., 23               
              zero-padded decimal number.
                      
