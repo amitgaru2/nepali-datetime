@@ -22,14 +22,14 @@ MAXYEAR = MAXDATE['year']
 
 NEPAL_TIME_UTC_OFFSET = 20700
 
-_MONTHNAMES = [None, "Bai", "Jes", "Asa", "Shr", "Bha", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha"]
-_FULLMONTHNAMES = [None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Aswin", "Kartik", "Mangsir", "Poush",
-                   "Magh", "Falgun", "Chaitra"]
-_MONTHNAMES_NP = [None, "वैशाख", "जेष्ठ", "असार", "श्रावण", "भदौ", "आश्विन", "कार्तिक", "मंसिर", "पौष",
-                  "माघ", "फाल्गुण", "चैत्र"]
-_DAYNAMES = [None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-_FULLDAYNAMES = [None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-_FULLDAYNAMES_NP = [None, "सोमबार", "मंगलबार", "बुधवार", "बिहिबार", "शुक्रबार", "शनिबार", "आइतबार"]
+_MONTHNAMES = (None, "Bai", "Jes", "Asa", "Shr", "Bha", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha")
+_FULLMONTHNAMES = (None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Aswin", "Kartik", "Mangsir", "Poush",
+                   "Magh", "Falgun", "Chaitra")
+_MONTHNAMES_NP = (None, "वैशाख", "जेष्ठ", "असार", "श्रावण", "भदौ", "आश्विन", "कार्तिक", "मंसिर", "पौष",
+                  "माघ", "फाल्गुण", "चैत्र")
+_DAYNAMES = (None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+_FULLDAYNAMES = (None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+_FULLDAYNAMES_NP = (None, "सोमबार", "मंगलबार", "बुधवार", "बिहिबार", "शुक्रबार", "शनिबार", "आइतबार")
 _DAY_NP = "०१२३४५६७८९"
 
 _STRFTIME_CUSTOM_MAP = {
@@ -38,7 +38,7 @@ _STRFTIME_CUSTOM_MAP = {
     'G': lambda o: '%s' % _FULLDAYNAMES_NP[(o.weekday() % 7) or 7],
     'w': lambda o: '%d' % o.weekday(),
     'd': lambda o: '%02d' % o.day,
-    'D': lambda o: ''.join((_DAY_NP[int(i)] for i in '%02d' % o.day)),
+    'D': lambda o: ''.join(_DAY_NP[int(i)] for i in '%02d' % o.day),
     'b': lambda o: '%s' % _MONTHNAMES[o.month],
     'B': lambda o: '%s' % _FULLMONTHNAMES[o.month],
     'N': lambda o: '%s' % _MONTHNAMES_NP[o.month],
@@ -81,7 +81,7 @@ def _format_time(hh, mm, ss, us):
     return result
 
 
-def _wrap_strftime(object, format, timetuple):
+def _wrap_strftime(object, format):
     # Don't call utcoffset() or tzname() unless actually needed.
     freplace = None  # the string to use for %f
     zreplace = None  # the string to use for %z
@@ -127,8 +127,7 @@ def _wrap_strftime(object, format, timetuple):
                                 # strftime is going to have at this: escape %
                                 Zreplace = s.replace('%', '%%')
                     newformat.append(Zreplace)
-                elif ch in {'a', 'A', 'G', 'w', 'd', 'D', 'b', 'B', 'N', 'm', 'y', 'Y', 'k', 'K', 'H', 'I', 'p', 'M',
-                            'S'}:
+                elif ch in _STRFTIME_CUSTOM_MAP.keys():
                     newformat.append(_STRFTIME_CUSTOM_MAP[ch](object))
                 else:
                     push('%')
@@ -433,7 +432,7 @@ class date:
 
     def strftime(self, fmt):
         """Format using strftime()."""
-        return _wrap_strftime(self, fmt, self.timetuple())
+        return _wrap_strftime(self, fmt)
 
     def __format__(self, fmt):
         if not isinstance(fmt, str):
