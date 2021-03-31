@@ -655,17 +655,20 @@ Directives   Meaning                          Example                  Notes
                                               फाल्गुण, चैत्र
 
 ``%m``       Month as a zero-padded           01, 02, ..., 12               
-             decimal number.                                               
+             decimal number.
+                                         
+``%n``       Month as a zero-padded           ०१, ०२,..., १२               
+             decimal number.                            
 
 ``%y``       Year without century as a        00, 01, ..., 99               
              zero-padded decimal number.
-                                   
-``%Y``       Year with century as a           1975, 1976, ..., 2020,   \(2) 
-             decimal number.                  2021, ..., 2099, 2100         
 
 ``%k``       Year without century as a        ००, ०१, ..., ९९               
              zero-padded decimal number
              in Nepali unicode.
+
+``%Y``       Year with century as a           1975, 1976, ..., 2077,   \(2) 
+             decimal number.                  2078, ..., 2099, 2100         
 
 ``%K``       Year with century as a           १९७५, १९७६, ...,         \(2) 
              decimal number in                २०९९, २१००        

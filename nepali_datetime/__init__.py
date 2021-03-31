@@ -15,7 +15,7 @@ import time as _time
 import math as _math
 import datetime as _actual_datetime
 
-from nepali_datetime.config import CALENDAR_PATH, MINDATE, MAXDATE, REFERENCE_DATE_AD
+from .config import CALENDAR_PATH, MINDATE, MAXDATE, REFERENCE_DATE_AD
 
 MINYEAR = MINDATE['year']
 MAXYEAR = MAXDATE['year']
@@ -43,6 +43,7 @@ _STRFTIME_CUSTOM_MAP = {
     'B': lambda o: '%s' % _FULLMONTHNAMES[o.month],
     'N': lambda o: '%s' % _MONTHNAMES_NP[o.month],
     'm': lambda o: '%02d' % o.month,
+    'n': lambda o: ''.join(_DAY_NP[int(i)] for i in '%02d' % o.month),
     'y': lambda o: '%02d' % (o.year % 100),
     'Y': lambda o: '%d' % o.year,
     'k': lambda o: ''.join(_DAY_NP[int(i)] for i in '%02d' % (o.year % 100)),
