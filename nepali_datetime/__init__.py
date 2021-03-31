@@ -583,7 +583,7 @@ date.resolution = _actual_datetime.timedelta(days=1)
 
 
 class datetime(date):
-    """datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])
+    """datetime(year, month, day[, hour[, minute[, second[, microsecond[, tzinfo]]]]])
 
     The year, month and day arguments are required. tzinfo may be None, or an
     instance of a tzinfo subclass. The remaining arguments may be ints.
@@ -648,7 +648,7 @@ class datetime(date):
 
         converter = _time.gmtime if utc else _time.localtime
         y, m, d, hh, mm, ss, weekday, jday, dst = converter(t)
-        dt = cls.from_datetime_date(_actual_datetime.date(y, m, d))
+        dt = super().from_datetime_date(_actual_datetime.date(y, m, d))
         y, m, d = dt.year, dt.month, dt.day
         ss = min(ss, 59)  # clamp out leap seconds if the platform has them
         return cls(y, m, d, hh, mm, ss, us, tz)
