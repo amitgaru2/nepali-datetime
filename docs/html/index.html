@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>nepali_datetime — Bikram Sambat Date and Nepal Time types &#8212; nepali_datetime 1.0.5.1 documentation</title>
+    <title>nepali_datetime — Bikram Sambat Date and Nepal Time types &#8212; nepali_datetime 1.0.6 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
     
@@ -36,7 +36,7 @@
              style="vertical-align: middle; margin-top: -1px"/></li>
     <li><a href="https://www.python.org/">Python</a> &#187;</li>
     
-    <a href="#">nepali_datetime 1.0.5.1 documentation</a> &#187;
+    <a href="#">nepali_datetime 1.0.6 documentation</a> &#187;
     
 
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Bikram Sambat Date and Nepal Time types</a></li>
@@ -737,17 +737,31 @@ abbreviated name.</p></td>
 Saturday</p></td>
 <td><p>(1)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%w</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%G</span></code></p></td>
+<td><p>Weekday as locale’s full name
+in Nepali unicode.</p></td>
+<td><p>आइतबार, सोमबार, …,
+शनिबार</p></td>
+<td><p>(1)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%w</span></code></p></td>
 <td><p>Weekday as a decimal number,
 where 0 is Sunday and 6 is
 Saturday.</p></td>
 <td><p>0, 1, …, 6</p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%d</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%d</span></code></p></td>
 <td><p>Day of the month as a
 zero-padded decimal number.</p></td>
 <td><p>01, 02, …, 32</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%D</span></code></p></td>
+<td><p>Day of the month as a
+zero-padded decimal number
+in Nepali unicode.</p></td>
+<td><p>०१, ०२, …, ३२</p></td>
 <td></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%b</span></code></p></td>
@@ -777,50 +791,71 @@ decimal number.</p></td>
 <td><p>01, 02, …, 12</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%y</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%n</span></code></p></td>
+<td><p>Month as a zero-padded
+decimal number.</p></td>
+<td><p>०१, ०२,…, १२</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%y</span></code></p></td>
 <td><p>Year without century as a
 zero-padded decimal number.</p></td>
 <td><p>00, 01, …, 99</p></td>
 <td></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%k</span></code></p></td>
+<td><p>Year without century as a
+zero-padded decimal number
+in Nepali unicode.</p></td>
+<td><p>००, ०१, …, ९९</p></td>
+<td></td>
+</tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%Y</span></code></p></td>
 <td><p>Year with century as a
 decimal number.</p></td>
-<td><p>1975, 1976, …, 2020,
-2021, …, 2099, 2100</p></td>
+<td><p>1975, 1976, …, 2077,
+2078, …, 2099, 2100</p></td>
 <td><p>(2)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%H</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%K</span></code></p></td>
+<td><p>Year with century as a
+decimal number in
+Nepali unicode.</p></td>
+<td><p>१९७५, १९७६, …,
+२०९९, २१००</p></td>
+<td><p>(2)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%H</span></code></p></td>
 <td><p>Hour (24-hour clock) as a
 zero-padded decimal number.</p></td>
 <td><p>00, 01, …, 23</p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%I</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%I</span></code></p></td>
 <td><p>Hour (12-hour clock) as a
 zero-padded decimal number.</p></td>
 <td><p>01, 02, …, 12</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%p</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%p</span></code></p></td>
 <td><p>Locale’s equivalent of either
 AM or PM.</p></td>
 <td><p>AM, PM</p></td>
 <td><p>(1)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%M</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%M</span></code></p></td>
 <td><p>Minute as a zero-padded
 decimal number.</p></td>
 <td><p>00, 01, …, 59</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%S</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%S</span></code></p></td>
 <td><p>Second as a zero-padded
 decimal number.</p></td>
 <td><p>00, 01, …, 59</p></td>
 <td><p>(4)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%f</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%f</span></code></p></td>
 <td><p>Microsecond as a decimal
 number, zero-padded on the
 left.</p></td>
@@ -828,7 +863,7 @@ left.</p></td>
 999999</p></td>
 <td><p>(5)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%z</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%z</span></code></p></td>
 <td><p>UTC offset in the form +HHMM
 or -HHMM (empty string if the
 object is naive).</p></td>
@@ -836,7 +871,7 @@ object is naive).</p></td>
 +1030</p></td>
 <td><p>(6)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%Z</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%Z</span></code></p></td>
 <td><p>Time zone name (empty string
 if the object is naive).</p></td>
 <td><p>(empty), UTC, EST, CST</p></td>
@@ -937,7 +972,7 @@ result will be set to a <code class="xref py py-class docutils literal notransla
              style="vertical-align: middle; margin-top: -1px"/></li>
     <li><a href="https://www.python.org/">Python</a> &#187;</li>
     
-    <a href="#">nepali_datetime 1.0.5.1 documentation</a> &#187;
+    <a href="#">nepali_datetime 1.0.6 documentation</a> &#187;
     
 
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">nepali_datetime</span></code> — Bikram Sambat Date and Nepal Time types</a></li>

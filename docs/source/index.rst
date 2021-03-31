@@ -629,24 +629,25 @@ Directives   Meaning                          Example                  Notes
 ``%A``       Weekday as locale's full name.   Sunday, Monday, ...,     \(1)  
                                               Saturday                     
                                                                           
-                                                                     
+``%G``       Weekday as locale's full name    आइतबार, सोमबार, ...,       \(1)  
+             in Nepali unicode.               शनिबार                     
+
 ``%w``       Weekday as a decimal number,     0, 1, ..., 6                  
              where 0 is Sunday and 6 is                                    
              Saturday.                         
 
-
 ``%d``       Day of the month as a            01, 02, ..., 32               
              zero-padded decimal number.                                   
 
+``%D``       Day of the month as a            ०१, ०२, ..., ३२               
+             zero-padded decimal number      
+             in Nepali unicode.
+
 ``%b``       Month as locale's abbreviated    Bai, Jes, ..., Cha       \(1)  
              name.                                                         
-                                                                          
-                                                                          
-
+                                                                                                                                                  
 ``%B``       Month as locale's full name.     Baishakh, Jestha,        \(1)  
-                                              ..., Chaitra                 
-                                                                          
-                                                                          
+                                              ..., Chaitra                                                                                                                                                              
 
 ``%N``       Month as locale's full name      वैशाख, जेष्ठ, असार,          \(1)
              in Nepali unicode.               श्रावण, भदौ, आश्विन,
@@ -654,13 +655,24 @@ Directives   Meaning                          Example                  Notes
                                               फाल्गुण, चैत्र
 
 ``%m``       Month as a zero-padded           01, 02, ..., 12               
-             decimal number.                                               
+             decimal number.
+                                         
+``%n``       Month as a zero-padded           ०१, ०२,..., १२               
+             decimal number.                            
 
 ``%y``       Year without century as a        00, 01, ..., 99               
              zero-padded decimal number.
-                                   
-``%Y``       Year with century as a           1975, 1976, ..., 2020,   \(2) 
-             decimal number.                  2021, ..., 2099, 2100         
+
+``%k``       Year without century as a        ००, ०१, ..., ९९               
+             zero-padded decimal number
+             in Nepali unicode.
+
+``%Y``       Year with century as a           1975, 1976, ..., 2077,   \(2) 
+             decimal number.                  2078, ..., 2099, 2100         
+
+``%K``       Year with century as a           १९७५, १९७६, ...,         \(2) 
+             decimal number in                २०९९, २१००        
+             Nepali unicode.
 
 ``%H``       Hour (24-hour clock) as a        00, 01, ..., 23               
              zero-padded decimal number.

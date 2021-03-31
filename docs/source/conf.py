@@ -22,7 +22,7 @@ copyright = '2021, Amit Garu'
 author = 'Amit Garu <amitgaru2@gmail.com>'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.5.1'
+release = '1.0.6'
 
 
 # -- General configuration ---------------------------------------------------

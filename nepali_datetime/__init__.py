@@ -5,7 +5,7 @@ nepali_datetime.
 
 Supports >= Python3.5
 """
-__version__ = "1.0.5.1"
+__version__ = "1.0.6"
 
 __author__ = "Amit Garu <amitgaru2@gmail.com>"
 
@@ -15,32 +15,39 @@ import time as _time
 import math as _math
 import datetime as _actual_datetime
 
-from nepali_datetime.config import CALENDAR_PATH, MINDATE, MAXDATE, REFERENCE_DATE_AD
+from .config import CALENDAR_PATH, MINDATE, MAXDATE, REFERENCE_DATE_AD
 
 MINYEAR = MINDATE['year']
 MAXYEAR = MAXDATE['year']
 
 NEPAL_TIME_UTC_OFFSET = 20700
 
-_MONTHNAMES = [None, "Bai", "Jes", "Asa", "Shr", "Bha", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha"]
-_FULLMONTHNAMES = [None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Aswin", "Kartik", "Mangsir", "Poush",
-                   "Magh", "Falgun", "Chaitra"]
-_MONTHNAMES_NP = [None, "वैशाख", "जेष्ठ", "असार", "श्रावण", "भदौ", "आश्विन", "कार्तिक", "मंसिर", "पौष",
-                  "माघ", "फाल्गुण", "चैत्र"]
-_DAYNAMES = [None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-_FULLDAYNAMES = [None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+_MONTHNAMES = (None, "Bai", "Jes", "Asa", "Shr", "Bha", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha")
+_FULLMONTHNAMES = (None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Aswin", "Kartik", "Mangsir", "Poush",
+                   "Magh", "Falgun", "Chaitra")
+_MONTHNAMES_NP = (None, "वैशाख", "जेष्ठ", "असार", "श्रावण", "भदौ", "आश्विन", "कार्तिक", "मंसिर", "पौष",
+                  "माघ", "फाल्गुण", "चैत्र")
+_DAYNAMES = (None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+_FULLDAYNAMES = (None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+_FULLDAYNAMES_NP = (None, "सोमबार", "मंगलबार", "बुधवार", "बिहिबार", "शुक्रबार", "शनिबार", "आइतबार")
+_DAY_NP = "०१२३४५६७८९"
 
 _STRFTIME_CUSTOM_MAP = {
     'a': lambda o: '%s' % _DAYNAMES[(o.weekday() % 7) or 7],
     'A': lambda o: '%s' % _FULLDAYNAMES[(o.weekday() % 7) or 7],
+    'G': lambda o: '%s' % _FULLDAYNAMES_NP[(o.weekday() % 7) or 7],
     'w': lambda o: '%d' % o.weekday(),
     'd': lambda o: '%02d' % o.day,
+    'D': lambda o: ''.join(_DAY_NP[int(i)] for i in '%02d' % o.day),
     'b': lambda o: '%s' % _MONTHNAMES[o.month],
     'B': lambda o: '%s' % _FULLMONTHNAMES[o.month],
     'N': lambda o: '%s' % _MONTHNAMES_NP[o.month],
     'm': lambda o: '%02d' % o.month,
+    'n': lambda o: ''.join(_DAY_NP[int(i)] for i in '%02d' % o.month),
     'y': lambda o: '%02d' % (o.year % 100),
     'Y': lambda o: '%d' % o.year,
+    'k': lambda o: ''.join(_DAY_NP[int(i)] for i in '%02d' % (o.year % 100)),
+    'K': lambda o: ''.join(_DAY_NP[int(i)] for i in '%d' % o.year),
     'H': lambda o: '%02d' % getattr(o, 'hour', 0),
     'I': lambda o: '%02d' % (getattr(o, 'hour', 0) % 12,),
     'p': lambda o: 'AM' if getattr(o, 'hour', 0) < 12 else 'PM',
@@ -75,7 +82,7 @@ def _format_time(hh, mm, ss, us):
     return result
 
 
-def _wrap_strftime(object, format, timetuple):
+def _wrap_strftime(object, format):
     # Don't call utcoffset() or tzname() unless actually needed.
     freplace = None  # the string to use for %f
     zreplace = None  # the string to use for %z
@@ -121,7 +128,7 @@ def _wrap_strftime(object, format, timetuple):
                                 # strftime is going to have at this: escape %
                                 Zreplace = s.replace('%', '%%')
                     newformat.append(Zreplace)
-                elif ch in ('a', 'A', 'w', 'd', 'b', 'B', 'N', 'm', 'y', 'Y', 'H', 'I', 'p', 'M', 'S'):
+                elif ch in _STRFTIME_CUSTOM_MAP.keys():
                     newformat.append(_STRFTIME_CUSTOM_MAP[ch](object))
                 else:
                     push('%')
@@ -426,7 +433,7 @@ class date:
 
     def strftime(self, fmt):
         """Format using strftime()."""
-        return _wrap_strftime(self, fmt, self.timetuple())
+        return _wrap_strftime(self, fmt)
 
     def __format__(self, fmt):
         if not isinstance(fmt, str):
@@ -577,7 +584,7 @@ date.resolution = _actual_datetime.timedelta(days=1)
 
 
 class datetime(date):
-    """datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])
+    """datetime(year, month, day[, hour[, minute[, second[, microsecond[, tzinfo]]]]])
 
     The year, month and day arguments are required. tzinfo may be None, or an
     instance of a tzinfo subclass. The remaining arguments may be ints.
@@ -642,7 +649,7 @@ class datetime(date):
 
         converter = _time.gmtime if utc else _time.localtime
         y, m, d, hh, mm, ss, weekday, jday, dst = converter(t)
-        dt = cls.from_datetime_date(_actual_datetime.date(y, m, d))
+        dt = super().from_datetime_date(_actual_datetime.date(y, m, d))
         y, m, d = dt.year, dt.month, dt.day
         ss = min(ss, 59)  # clamp out leap seconds if the platform has them
         return cls(y, m, d, hh, mm, ss, us, tz)
