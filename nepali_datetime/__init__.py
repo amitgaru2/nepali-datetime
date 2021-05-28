@@ -31,6 +31,7 @@ _DAYNAMES = (None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 _FULLDAYNAMES = (None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 _FULLDAYNAMES_NP = (None, "सोमबार", "मंगलबार", "बुधवार", "बिहिबार", "शुक्रबार", "शनिबार", "आइतबार")
 _DAY_NP = "०१२३४५६७८९"
+_EPOCH = _actual_datetime.datetime(1970, 1, 1, tzinfo=_actual_datetime.timezone.utc)
 
 _STRFTIME_CUSTOM_MAP = {
     'a': lambda o: '%s' % _DAYNAMES[(o.weekday() % 7) or 7],
@@ -297,8 +298,8 @@ class UTC0545(_actual_datetime.tzinfo):
     def fromutc(self, dt):
         """datetime in UTC -> datetime in local time."""
 
-        if not isinstance(dt, datetime):
-            raise TypeError("fromutc() requires a nepali_datetime.datetime argument")
+        if not isinstance(dt, datetime) and not isinstance(dt, _actual_datetime.datetime):
+            raise TypeError("fromutc() requires a nepali_datetime.datetime or datetime.datetime argument")
         if dt.tzinfo is not self:
             raise ValueError("dt.tzinfo is not self")
 
@@ -712,9 +713,74 @@ class datetime(date):
             dst
         )
 
+    @classmethod
+    def from_datetime_datetime(cls, from_datetime):
+        """Convert datetime.date to nepali_datetime.datetime (A.D datetime to B.S).
+
+        Parameters
+        ----------
+        from_date: datetime.datetime
+            The AD datetime object to be converted.
+
+        Returns
+        -------
+        nepali_datetime.datetime
+            The converted nepali_datetime.datetime object.
+        """
+        from_datetime = from_datetime.astimezone(UTC0545())
+        return cls.combine(cls.from_datetime_date(from_datetime.date()), from_datetime.time())
+
+    def to_datetime_datetime(self):
+        """Convert nepali_datetime.datetime to datetime.datetime (B.S datetime to A.D).
+
+        Returns
+        -------
+        datetime.datetime
+            The converted datetime.datetime object.
+        """
+        return _actual_datetime.datetime.fromtimestamp(self.timestamp())
+
+    def _mktime(self):
+        """Return integer POSIX timestamp."""
+        max_fold_seconds = 24 * 3600
+        t = (self - _EPOCH_BS) // _actual_datetime.timedelta(0, 1)
+
+        def local(u):
+            y, m, d, hh, mm, ss = _time.localtime(u)[:6]
+            return (datetime(y, m, d, hh, mm, ss) - _EPOCH_BS) // _actual_datetime.timedelta(0, 1)
+
+        # Our goal is to solve t = local(u) for u.
+        a = local(t) - t
+        u1 = t - a
+        t1 = local(u1)
+        if t1 == t:
+            # We found one solution, but it may not be the one we need.
+            # Look for an earlier solution (if `fold` is 0), or a
+            # later one (if `fold` is 1).
+            u2 = u1 + (-max_fold_seconds, max_fold_seconds)[self.fold]
+            b = local(u2) - u2
+            if a == b:
+                return u1
+        else:
+            b = t1 - u1
+            assert a != b
+        u2 = t - b
+        t2 = local(u2)
+        if t2 == t:
+            return u2
+        if t1 == t:
+            return u1
+        # We have found both offsets a and b, but neither t - a nor t - b is
+        # a solution.  This means t is in the gap.
+        return (max, min)[self.fold](u1, u2)
+
     def timestamp(self):
         """Return POSIX timestamp as float"""
-        return NotImplemented
+        if self._tzinfo is None:
+            s = self._mktime()
+            return s + self.microsecond / 1e6
+        else:
+            return (self - _EPOCH_BS).total_seconds()
 
     def utctimetuple(self):
         """Return UTC time tuple compatible with time.gmtime()."""
@@ -759,7 +825,27 @@ class datetime(date):
         return datetime(year, month, day, hour, minute, second, microsecond, tzinfo)
 
     def astimezone(self, tz=None):
-        return NotImplemented
+        if tz is None:
+            tz = UTC0545()
+        elif not isinstance(tz, _actual_datetime.tzinfo):
+            raise TypeError("tz argument must be an instance of tzinfo")
+
+        mytz = self.tzinfo
+        if mytz is None:
+            mytz = self._local_timezone()
+            myoffset = mytz.utcoffset(self)
+        else:
+            myoffset = mytz.utcoffset(self)
+            if myoffset is None:
+                mytz = self.replace(tzinfo=None)._local_timezone()
+                myoffset = mytz.utcoffset(self)
+
+        if tz is mytz:
+            return self
+
+        utc = (self - myoffset).replace(tzinfo=tz)
+
+        return tz.fromutc(utc)
 
     def ctime(self):
         """Return ctime() style string."""
@@ -995,3 +1081,5 @@ class datetime(date):
 datetime.min = datetime(1975, 1, 1)
 datetime.max = datetime(2100, 12, 30, 23, 59, 59, 999999)
 datetime.resolution = _actual_datetime.timedelta(microseconds=1)
+
+_EPOCH_BS = datetime.from_datetime_datetime(_actual_datetime.datetime(1970, 1, 1, tzinfo=_actual_datetime.timezone.utc))
