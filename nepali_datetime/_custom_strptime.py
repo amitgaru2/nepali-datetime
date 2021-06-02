@@ -170,7 +170,7 @@ def _strptime(data_string, format="%a %b %d %H:%M:%S %Y"):
             # Open Group specification for strptime() states that a %y
             # value in the range of [00, 68] is in the century 2000, while
             # [69,99] is in the century 1900
-            if year <= 68:
+            if year <= 89:
                 year += 2000
             else:
                 year += 1900
