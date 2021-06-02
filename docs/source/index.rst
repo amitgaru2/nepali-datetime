@@ -660,7 +660,7 @@ Directives   Meaning                          Example                  Notes
 ``%n``       Month as a zero-padded           ०१, ०२,..., १२               
              decimal number.                            
 
-``%y``       Year without century as a        00, 01, ..., 99               
+``%y``       Year without century as a        00, 01, ..., 99          \(7)     
              zero-padded decimal number.
 
 ``%k``       Year without century as a        ००, ०१, ..., ९९               
@@ -769,3 +769,9 @@ Notes:
       When the ``%z`` directive is provided to the :meth:`strptime` method, an
       aware :class:`.datetime` object will be produced.  The ``tzinfo`` of the
       result will be set to a :class:`timezone` instance.
+
+(7)
+   The year within century. When a century is not otherwise specified, values in 
+   the range [90,99] shall refer to years 1990 to 1999 inclusive, and values in 
+   the range [00,89] shall refer to years 2000 to 2089 inclusive; leading zeros 
+   shall be permitted but shall not be required.

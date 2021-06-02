@@ -858,7 +858,7 @@ decimal number.</p></td>
 <td><p>Year without century as a
 zero-padded decimal number.</p></td>
 <td><p>00, 01, …, 99</p></td>
-<td></td>
+<td><p>(7)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%k</span></code></p></td>
 <td><p>Year without century as a
@@ -1001,6 +1001,10 @@ result will be set to a <code class="xref py py-class docutils literal notransla
 </dd>
 </dl>
 </li>
+<li><p>The year within century. When a century is not otherwise specified, values in
+the range [90,99] shall refer to years 1990 to 1999 inclusive, and values in
+the range [00,89] shall refer to years 2000 to 2089 inclusive; leading zeros
+shall be permitted but shall not be required.</p></li>
 </ol>
 </section>
 </section>
