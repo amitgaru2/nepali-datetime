@@ -30,7 +30,7 @@ _MONTHNAMES_NP = (None, "वैशाख", "जेष्ठ", "असार", "�
 _DAYNAMES = (None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 _FULLDAYNAMES = (None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 _FULLDAYNAMES_NP = (None, "सोमबार", "मंगलबार", "बुधवार", "बिहिबार", "शुक्रबार", "शनिबार", "आइतबार")
-_DAY_NP = "०१२३४५६७८९"
+_DIGIT_NP = "०१२३४५६७८९"
 _EPOCH = _actual_datetime.datetime(1970, 1, 1, tzinfo=_actual_datetime.timezone.utc)
 
 _STRFTIME_CUSTOM_MAP = {
@@ -39,21 +39,25 @@ _STRFTIME_CUSTOM_MAP = {
     'G': lambda o: '%s' % _FULLDAYNAMES_NP[(o.weekday() % 7) or 7],
     'w': lambda o: '%d' % o.weekday(),
     'd': lambda o: '%02d' % o.day,
-    'D': lambda o: ''.join(_DAY_NP[int(i)] for i in '%02d' % o.day),
+    'D': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%02d' % o.day),
     'b': lambda o: '%s' % _MONTHNAMES[o.month],
     'B': lambda o: '%s' % _FULLMONTHNAMES[o.month],
     'N': lambda o: '%s' % _MONTHNAMES_NP[o.month],
     'm': lambda o: '%02d' % o.month,
-    'n': lambda o: ''.join(_DAY_NP[int(i)] for i in '%02d' % o.month),
+    'n': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%02d' % o.month),
     'y': lambda o: '%02d' % (o.year % 100),
     'Y': lambda o: '%d' % o.year,
-    'k': lambda o: ''.join(_DAY_NP[int(i)] for i in '%02d' % (o.year % 100)),
-    'K': lambda o: ''.join(_DAY_NP[int(i)] for i in '%d' % o.year),
+    'k': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%02d' % (o.year % 100)),
+    'K': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%d' % o.year),
     'H': lambda o: '%02d' % getattr(o, 'hour', 0),
+    'h': lambda o: ''.join(_DIGIT_NP[int(i)] for i in str(getattr(o, 'hour', 0))),
     'I': lambda o: '%02d' % (getattr(o, 'hour', 0) % 12,),
+    'i': lambda o: ''.join(_DIGIT_NP[int(i)] for i in str(getattr(o, 'hour', 0) % 12)),
     'p': lambda o: 'AM' if getattr(o, 'hour', 0) < 12 else 'PM',
     'M': lambda o: '%02d' % getattr(o, 'minute', 0),
+    'l': lambda o: ''.join(_DIGIT_NP[int(i)] for i in str(getattr(o, 'minute', 0))),
     'S': lambda o: '%02d' % getattr(o, 'second', 0),
+    's': lambda o: ''.join(_DIGIT_NP[int(i)] for i in str(getattr(o, 'second', 0))),
 }
 
 _CALENDAR = {}

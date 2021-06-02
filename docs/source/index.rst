@@ -676,9 +676,17 @@ Directives   Meaning                          Example                  Notes
 
 ``%H``       Hour (24-hour clock) as a        00, 01, ..., 23               
              zero-padded decimal number.
+
+``%h``       Hour (24-hour clock) as a        ००, ०१, ..., २३               
+             zero-padded decimal number
+             in Nepali unicode.
                      
 ``%I``       Hour (12-hour clock) as a        01, 02, ..., 12               
              zero-padded decimal number.                          
+
+``%i``       Hour (12-hour clock) as a        ०१, ०२, ..., १२               
+             zero-padded decimal number
+             in Nepali unicode.
 
 ``%p``       Locale's equivalent of either    AM, PM                   \(1)
              AM or PM.                                                     
@@ -686,8 +694,16 @@ Directives   Meaning                          Example                  Notes
 ``%M``       Minute as a zero-padded          00, 01, ..., 59               
              decimal number.                                               
 
+``%l``       Minute as a zero-padded          ००, ०१, ..., ५९               
+             decimal number in Nepali
+             unicode.                                               
+
 ``%S``       Second as a zero-padded          00, 01, ..., 59          \(4)  
              decimal number.                                               
+
+``%s``       Second as a zero-padded          ००, ०१, ..., ५९          \(4)  
+             decimal number in Nepali
+             unicode.                     
 
 ``%f``       Microsecond as a decimal         000000, 000001, ...,     \(5)  
              number, zero-padded on the       999999                        
