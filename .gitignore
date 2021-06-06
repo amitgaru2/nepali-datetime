@@ -11,3 +11,5 @@ docs/source/_*
 /build
 
 /*.egg-info/
+
+dist/

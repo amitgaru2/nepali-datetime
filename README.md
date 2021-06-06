@@ -1,7 +1,10 @@
 # Nepali Datetime (Bikram Sambat Date & Nepal Time)
 
-The package inspired from Python's core `datetime` that
-operates on top of Bikram Sambat (B.S) date & Nepal Time (NPT) `+05:45`.
+The package inspired from Python's core `datetime` package that
+operates on top of Bikram Sambat (B.S) Date & Nepal Time (NPT) `+05:45`.
+
+> Supports: **Python 3.5+**
+
 
 ## Basic Usage
 
@@ -27,18 +30,14 @@ operates on top of Bikram Sambat (B.S) date & Nepal Time (NPT) `+05:45`.
 >>> nepali_datetime.datetime(2077, 5, 19, 8, 26, 10, 123456)
 
 # date/datetime formatting
->>> datetime.datetime(2020, 9, 4, 8, 26, 10, 123456).strftime("%d %B %Y")
-# 04 September 2020
 >>> nepali_datetime.datetime(2077, 5, 19, 8, 26, 10, 123456).strftime("%d %B %Y")
 # 19 Bhadau 2077
 
 # datetime parsed from string (strptime)
->>> datetime.datetime.strptime('2020-12-27', '%Y-%m-%d')
-# datetime.datetime(2020, 12, 27, 0, 0)
 >>> nepali_datetime.datetime.strptime('2077-09-12', '%Y-%m-%d')
 # nepali_datetime.datetime(2077, 9, 12, 0, 0)
 
-# date/datetime formatting with Nepali month unicode support
+# date/datetime formatting with Nepali unicode support
 >>> nepali_datetime.date(1977, 10, 25).strftime('%K-%n-%D (%k %N %G)')
 # १९७७-१०-२५ (७७ माघ आइतबार)
 
@@ -48,8 +47,8 @@ operates on top of Bikram Sambat (B.S) date & Nepal Time (NPT) `+05:45`.
 >>> nepali_datetime.datetime(1990, 5, 10, 5, 10, 20) + datetime.timedelta(hours=3, minutes=15)
 # nepali_datetime.date(1990, 5, 10, 8, 25, 20)
 
-# BS monthly calendar
->>> nepali_datetime.date(2078, 1, 10).calendar()
+# Bikram Sambat monthly calendar
+>>> nepali_datetime.date(2078, 1, 1).calendar()
 
           Baishakh 2078
 Sun  Mon  Tue  Wed  Thu  Fri  Sat
@@ -68,8 +67,8 @@ $ pip install nepali-datetime
 
 ## Documentation
 
-Complete documentations can be found [here](https://dxillar.github.io/nepali-datetime/).
+Complete documentations is [here](https://dxillar.github.io/nepali-datetime/).
 
 ## Contribution
 
-For contribution check the guidelines in [CONTRIBUTING.md](https://github.com/dxillar/nepali-datetime/blob/master/CONTRIBUTING.md).
+Any contributions are most welcome. Do check the guidelines in [CONTRIBUTING.md](https://github.com/dxillar/nepali-datetime/blob/master/CONTRIBUTING.md).

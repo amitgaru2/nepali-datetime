@@ -57,3 +57,8 @@ class TestDatetimeMethods:
         assert dt.day == utc_545.day
         assert dt.hour == utc_545.hour
         assert dt.minute == utc_545.minute
+
+    def test_timestamp(self):
+        dt = nepali_datetime.datetime(2078, 2, 23)
+        ad_dt = datetime.datetime(2021, 6, 6, tzinfo=nepali_datetime.UTC0545())
+        assert dt.timestamp() == ad_dt.timestamp()

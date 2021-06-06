@@ -5,8 +5,8 @@ with open('README.md', encoding='utf-8') as readme_file:
 
 setup(
     name="nepali-datetime",
-    version="1.0.6",
-    description="Datetime module that operates on Bikram Sambat date & Nepal time.",
+    version="1.0.7",
+    description="Datetime module that operates on top of Bikram Sambat Date & Nepal Time.",
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/dxillar/nepali-datetime",

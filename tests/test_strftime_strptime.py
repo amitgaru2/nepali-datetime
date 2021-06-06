@@ -26,3 +26,8 @@ class TestStrptime:
     def test_strptime_datetime(self):
         assert nepali_datetime.datetime.strptime("Asar 23 2025 10:00:00",
                                                  "%B %d %Y %H:%M:%S") == nepali_datetime.datetime(2025, 3, 23, 10, 0, 0)
+
+    def test_strptime_year_special_case(self):
+        assert nepali_datetime.datetime.strptime("89", "%y") == nepali_datetime.datetime(2089, 1, 1)
+        assert nepali_datetime.datetime.strptime("90", "%y") == nepali_datetime.datetime(1990, 1, 1)
+        assert nepali_datetime.datetime.strptime("00", "%y") == nepali_datetime.datetime(2000, 1, 1)

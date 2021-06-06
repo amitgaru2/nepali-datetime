@@ -660,7 +660,7 @@ Directives   Meaning                          Example                  Notes
 ``%n``       Month as a zero-padded           ०१, ०२,..., १२               
              decimal number.                            
 
-``%y``       Year without century as a        00, 01, ..., 99               
+``%y``       Year without century as a        00, 01, ..., 99          \(7)     
              zero-padded decimal number.
 
 ``%k``       Year without century as a        ००, ०१, ..., ९९               
@@ -676,9 +676,17 @@ Directives   Meaning                          Example                  Notes
 
 ``%H``       Hour (24-hour clock) as a        00, 01, ..., 23               
              zero-padded decimal number.
+
+``%h``       Hour (24-hour clock) as a        ००, ०१, ..., २३               
+             zero-padded decimal number
+             in Nepali unicode.
                      
 ``%I``       Hour (12-hour clock) as a        01, 02, ..., 12               
              zero-padded decimal number.                          
+
+``%i``       Hour (12-hour clock) as a        ०१, ०२, ..., १२               
+             zero-padded decimal number
+             in Nepali unicode.
 
 ``%p``       Locale's equivalent of either    AM, PM                   \(1)
              AM or PM.                                                     
@@ -686,8 +694,16 @@ Directives   Meaning                          Example                  Notes
 ``%M``       Minute as a zero-padded          00, 01, ..., 59               
              decimal number.                                               
 
+``%l``       Minute as a zero-padded          ००, ०१, ..., ५९               
+             decimal number in Nepali
+             unicode.                                               
+
 ``%S``       Second as a zero-padded          00, 01, ..., 59          \(4)  
              decimal number.                                               
+
+``%s``       Second as a zero-padded          ००, ०१, ..., ५९          \(4)  
+             decimal number in Nepali
+             unicode.                     
 
 ``%f``       Microsecond as a decimal         000000, 000001, ...,     \(5)  
              number, zero-padded on the       999999                        
@@ -753,3 +769,9 @@ Notes:
       When the ``%z`` directive is provided to the :meth:`strptime` method, an
       aware :class:`.datetime` object will be produced.  The ``tzinfo`` of the
       result will be set to a :class:`timezone` instance.
+
+(7)
+   The year within century. When a century is not otherwise specified, values in 
+   the range [90,99] shall refer to years 1990 to 1999 inclusive, and values in 
+   the range [00,89] shall refer to years 2000 to 2089 inclusive; leading zeros 
+   shall be permitted but shall not be required.
