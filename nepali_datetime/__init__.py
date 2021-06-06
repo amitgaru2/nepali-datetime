@@ -50,14 +50,14 @@ _STRFTIME_CUSTOM_MAP = {
     'k': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%02d' % (o.year % 100)),
     'K': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%d' % o.year),
     'H': lambda o: '%02d' % getattr(o, 'hour', 0),
-    'h': lambda o: ''.join(_DIGIT_NP[int(i)] for i in str(getattr(o, 'hour', 0))),
+    'h': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%02d' % getattr(o, 'hour', 0)),
     'I': lambda o: '%02d' % (getattr(o, 'hour', 0) % 12,),
-    'i': lambda o: ''.join(_DIGIT_NP[int(i)] for i in str(getattr(o, 'hour', 0) % 12)),
+    'i': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%02d' % (getattr(o, 'hour', 0) % 12,)),
     'p': lambda o: 'AM' if getattr(o, 'hour', 0) < 12 else 'PM',
     'M': lambda o: '%02d' % getattr(o, 'minute', 0),
-    'l': lambda o: ''.join(_DIGIT_NP[int(i)] for i in str(getattr(o, 'minute', 0))),
+    'l': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%02d' % getattr(o, 'minute', 0)),
     'S': lambda o: '%02d' % getattr(o, 'second', 0),
-    's': lambda o: ''.join(_DIGIT_NP[int(i)] for i in str(getattr(o, 'second', 0))),
+    's': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%02d' % getattr(o, 'second', 0)),
 }
 
 _CALENDAR = {}
