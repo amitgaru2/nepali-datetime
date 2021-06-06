@@ -42,6 +42,8 @@ operates on top of Bikram Sambat (B.S) Date & Nepal Time (NPT) `+05:45`.
 # १९७७-१०-२५ (७७ माघ आइतबार)
 
 # datetime.timedelta addition/subtraction
+>>> nepali_datetime.date(1990, 5, 10) + datetime.timedelta(days=350)
+# nepali_datetime.date(1991, 4, 26)
 >>> nepali_datetime.datetime(1990, 5, 10, 5, 10, 20) + datetime.timedelta(hours=3, minutes=15)
 # nepali_datetime.date(1990, 5, 10, 8, 25, 20)
 
