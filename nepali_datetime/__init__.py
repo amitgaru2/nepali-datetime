@@ -385,6 +385,29 @@ class date:
             The converted datetime.date object.
         """
         return _actual_datetime.date(**REFERENCE_DATE_AD) + _actual_datetime.timedelta(days=self.toordinal() - 1)
+      
+    def get_fy_dates(nep=False):
+         """Convert nepali_datetime.date to datetime.date (B.S date to A.D). 
+         Returns -> 'nepali_datetime.date'
+             '2079-04-01', '2080-03-31'
+         """
+        curr_month_np = nepali_datetime.datetime.now().strftime("%m")
+        if int(curr_month_np) < 4:
+            curr_fy_year_np = nepali_datetime.date.today().year - 1
+            curr_fy_start_np = nepali_datetime.datetime.now().replace(year=curr_fy_year_np,month=4,day=1)
+            next_fy_start_np = nepali_datetime.datetime.now().replace(month=4,day=1)
+            next_fy_start_en = next_fy_start_np.to_datetime_date()
+        else:
+            curr_fy_year_np = nepali_datetime.date.today().year
+            curr_fy_start_np = nepali_datetime.datetime.now().replace(month=4,day=1)
+            next_fy_start_np = curr_fy_start_np.replace(year=curr_fy_year_np+1)
+        curr_fy_end_en = (next_fy_start_np- timedelta(1)).to_datetime_date()
+        curr_fy_end_np = nepali_datetime.date.from_datetime_date(curr_fy_end_en)
+
+        if nep:
+            return curr_fy_start_np.date(), curr_fy_end_np
+        curr_fy_start_en = curr_fy_start_np.to_datetime_date()
+        return curr_fy_start_en.date, curr_fy_end_en
 
     def calendar(self, justify=4):
         format_str = '{:>%s}' % justify
