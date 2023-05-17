@@ -1082,6 +1082,19 @@ class datetime(date):
         return NotImplemented
 
 
+class FiscalYear:
+    """A class representing a fiscal year."""
+    @classmethod
+    def now(cls) -> str:
+        """Return the fiscal year the date belongs to."""
+        current_datetime = datetime.now()
+        if current_datetime.month < 4:
+            current_fiscal_year = f"{current_datetime.year - 1}/{current_datetime.year}"
+        else:
+            current_fiscal_year = f"{current_datetime.year}/{current_datetime.year + 1}"
+        return current_fiscal_year
+
+
 datetime.min = datetime(1975, 1, 1)
 datetime.max = datetime(2100, 12, 30, 23, 59, 59, 999999)
 datetime.resolution = _actual_datetime.timedelta(microseconds=1)
