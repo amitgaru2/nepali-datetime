@@ -11,7 +11,7 @@ setup(
     description="Datetime module that operates on top of Bikram Sambat Date & Nepal Time.",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/dxillar/nepali-datetime",
+    url="https://github.com/amitgaru2/nepali-datetime",
     author=__author__,
     author_email="amitgaru2@gmail.com",
     license="MIT",
