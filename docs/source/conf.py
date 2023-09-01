@@ -13,17 +13,17 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-
+from datetime import date
+from nepali_datetime import __version__, __author__
 
 # -- Project information -----------------------------------------------------
 
 project = 'nepali_datetime'
-copyright = '2021, Amit Garu'
-author = 'Amit Garu <amitgaru2@gmail.com>'
+copyright = '%s, Amit Garu' % (date.today().year,)
+author = __author__
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.7'
-
+release = __version__
 
 # -- General configuration ---------------------------------------------------
 
@@ -41,7 +41,6 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
-
 
 # -- Options for HTML output -------------------------------------------------
 
