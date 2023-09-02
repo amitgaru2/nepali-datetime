@@ -77,4 +77,4 @@ Complete documentations is [here](https://amitgaru2.github.io/nepali-datetime/).
 
 ## Contribution
 
-Any contributions are most welcome. Do check the guidelines in [CONTRIBUTING.md](https://github.com/amitgaru2/nepali-datetime/blob/master/CONTRIBUTING.md).
+Any contributions are most welcome. Do check this guidelines [CONTRIBUTING.md](https://github.com/amitgaru2/nepali-datetime/blob/master/CONTRIBUTING.md) for code contribution.
