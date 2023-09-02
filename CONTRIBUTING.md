@@ -10,7 +10,7 @@
 - start contributing
 - before pushing the changes check again if the tests are passed ```$ pytest```
 - also check code formatting has any issues `$ flake8 nepali_datetime --max-line-length=120`
-- push your code and raise PR
+- push your code and raise the PR to `develop` branch
 
 **Note: If you're confused on what to contribute in for, you can search for *TODO's* in the code & pick up which ever
 you're comfortable with.**
