@@ -47,6 +47,12 @@ operates on top of Bikram Sambat (B.S) Date & Nepal Time (NPT) `+05:45`.
 >>> nepali_datetime.datetime(1990, 5, 10, 5, 10, 20) + datetime.timedelta(hours=3, minutes=15)
 # nepali_datetime.date(1990, 5, 10, 8, 25, 20)
 
+# convert B.S to A.D date and vice-versa
+>>> nepali_datetime.date(1999, 7, 25).to_datetime_date()
+# datetime.date(1942, 11, 10)
+>>> nepali_datetime.date.from_datetime_date(datetime.date(1942, 11, 10))
+# nepali_datetime.date(1999, 7, 25)
+
 # Bikram Sambat monthly calendar
 >>> nepali_datetime.date(2078, 1, 1).calendar()
 

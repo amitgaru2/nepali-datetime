@@ -5,7 +5,7 @@ nepali_datetime.
 
 Supports >= Python3.5
 """
-__version__ = "1.0.7"
+__version__ = "1.0.8"
 
 __author__ = "Amit Garu <amitgaru2@gmail.com>"
 
@@ -28,7 +28,7 @@ _FULLMONTHNAMES = (None, "Baishakh", "Jestha", "Asar", "Shrawan", "Bhadau", "Asw
 _MONTHNAMES_NP = (None, "वैशाख", "जेष्ठ", "असार", "श्रावण", "भदौ", "आश्विन", "कार्तिक", "मंसिर", "पौष",
                   "माघ", "फाल्गुण", "चैत्र")
 _DAYNAMES = (None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-_FULLDAYNAMES = (None, "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+_FULLDAYNAMES = (None, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 _FULLDAYNAMES_NP = (None, "सोमबार", "मंगलबार", "बुधवार", "बिहिबार", "शुक्रबार", "शनिबार", "आइतबार")
 _DIGIT_NP = "०१२३४५६७८९"
 _EPOCH = _actual_datetime.datetime(1970, 1, 1, tzinfo=_actual_datetime.timezone.utc)
