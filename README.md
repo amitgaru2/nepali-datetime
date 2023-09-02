@@ -73,7 +73,7 @@ $ pip install nepali-datetime
 
 ## Documentation
 
-Complete documentations is [here](https://amitgaru2.github.io/nepali-datetime/).
+Complete usage documentations can be found [here](https://amitgaru2.github.io/nepali-datetime/).
 
 ## Contribution
 
