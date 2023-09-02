@@ -702,6 +702,16 @@ class datetime(date):
             time.tzinfo
         )
 
+    @classmethod
+    def current_fiscal_year(cls):
+        """Return Current Fiscal Year"""
+        current_datetime = cls.now()
+        if current_datetime.month < 4:
+            current_fiscal_year = f"{current_datetime.year - 1}/{current_datetime.year}"
+        else:
+            current_fiscal_year = f"{current_datetime.year}/{current_datetime.year + 1}"
+        return current_fiscal_year
+
     def timetuple(self):
         """Return local time tuple compatible with time.localtime()."""
         dst = self.dst()
