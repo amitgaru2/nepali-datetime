@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  validate-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: pip install pytest
+
+      - name: Run test cases
+        run: pytest
+
+  deploy-test-pypi:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: pip install build twine
+
+      - name: Build the project
+        run: python -m build
+
+      - name: Check the build
+        run: twine check dist/*
+
+      - name: Publish to test PyPI
+        run: twine upload -r testpypi dist/*
