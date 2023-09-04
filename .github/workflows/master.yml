@@ -36,3 +36,14 @@ jobs:
 
       - name: Publish to PyPI
         run: twine upload dist/* -u xillar -p ${{ secrets.PYPI_PASSWORD }}
+
+      - name: Output new version
+        id: meta
+        run: |
+          echo "version=$(python -c 'import nepali_datetime; print(nepali_datetime.__version__)')" >> $GITHUB_OUTPUT
+
+      - name: Create a new github release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.meta.outputs.version }}
+          name: Release ${{ steps.meta.outputs.version }}
