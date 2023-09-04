@@ -713,8 +713,15 @@ Directives   Meaning                          Example                  Notes
              or -HHMM (empty string if the    +1030                         
              object is naive).                                             
 
-``%Z``       Time zone name (empty string     (empty), UTC, EST, CST        
+``%Z``       Time zone name (empty string     (empty), UTC, EST, CST
              if the object is naive).                                      
+
+``%U``       Week number of the year (Sunday  00, 01, ..., 53            \(7)
+             as the first day of the week)
+             as a zero padded decimal number.
+             All days in a new year preceding
+             the first Sunday are considered
+             to be in week 0.
 
 ===========  ================================ ======================== =======
 

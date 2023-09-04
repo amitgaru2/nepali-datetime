@@ -5,7 +5,7 @@ nepali_datetime.
 
 Supports >= Python3.5
 """
-__version__ = "1.0.8"
+__version__ = "1.0.8.1"
 
 __author__ = "Amit Garu <amitgaru2@gmail.com>"
 
@@ -58,6 +58,7 @@ _STRFTIME_CUSTOM_MAP = {
     'l': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%02d' % getattr(o, 'minute', 0)),
     'S': lambda o: '%02d' % getattr(o, 'second', 0),
     's': lambda o: ''.join(_DIGIT_NP[int(i)] for i in '%02d' % getattr(o, 'second', 0)),
+    'U': lambda o: '%02d' % ((o.timetuple().tm_yday + 7 - o.weekday()) // 7,),
 }
 
 _CALENDAR = {}
