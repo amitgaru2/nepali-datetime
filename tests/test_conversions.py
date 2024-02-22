@@ -28,5 +28,8 @@ class TestConversion:
 
     def test_random_conversions(self):
         for rd_maps in RANDOM_CONVERSION_MAPS:
-            dt = nepali_datetime.date.from_datetime_date(datetime.date(**rd_maps['ad']))
-            assert dt == nepali_datetime.date(**rd_maps['bs'])
+            np_dt = nepali_datetime.date.from_datetime_date(datetime.date(**rd_maps['ad']))
+            assert np_dt == nepali_datetime.date(**rd_maps['bs'])
+
+            dt = nepali_datetime.date.to_datetime_date(nepali_datetime.date(**rd_maps['bs']))
+            assert dt == datetime.date(**rd_maps['ad'])
