@@ -8,7 +8,8 @@ RANDOM_CONVERSION_MAPS = [
     {'bs': {'year': 2013, 'month': 2, 'day': 8}, 'ad': {'year': 1956, 'month': 5, 'day': 21}},
     {'bs': {'year': 2051, 'month': 10, 'day': 1}, 'ad': {'year': 1995, 'month': 1, 'day': 15}},
     {'bs': {'year': 2076, 'month': 6, 'day': 27}, 'ad': {'year': 2019, 'month': 10, 'day': 14}},
-    {'bs': {'year': 2077, 'month': 4, 'day': 4}, 'ad': {'year': 2020, 'month': 7, 'day': 19}}
+    {'bs': {'year': 2077, 'month': 4, 'day': 4}, 'ad': {'year': 2020, 'month': 7, 'day': 19}},
+    {'bs': {'year': 2081, 'month': 3, 'day': 31}, 'ad': {'year': 2024, 'month': 7, 'day': 15}}
 ]
 
 
