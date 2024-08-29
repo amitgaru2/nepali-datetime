@@ -377,6 +377,21 @@ class date:
             raise TypeError("Unsupported type {}.".format(type(from_date)))
         return cls(MINYEAR, 1, 1) + (from_date - _actual_datetime.date(**REFERENCE_DATE_AD))
 
+    @classmethod
+    def current_fiscal_year(cls):
+        """Return current fiscal year"""
+        current_date = cls.today()
+        return cls.get_fiscal_year_by_date(current_date)
+
+    @classmethod
+    def get_fiscal_year_by_date(cls, date_obj):
+        """Return fiscal year by given nepali datetime object"""
+        if date_obj.month < 4:
+            fiscal_year = (date_obj.year - 1, date_obj.year)
+        else:
+            fiscal_year = (date_obj.year, date_obj.year + 1)
+        return fiscal_year
+
     def to_datetime_date(self):
         """Convert nepali_datetime.date to datetime.date (B.S date to A.D).
 
@@ -702,6 +717,21 @@ class datetime(date):
             time.hour, time.minute, time.second, time.microsecond,
             time.tzinfo
         )
+
+    @classmethod
+    def current_fiscal_year(cls):
+        """Return current fiscal year"""
+        current_datetime = cls.now()
+        return cls.get_fiscal_year_by_date(current_datetime)
+
+    @classmethod
+    def get_fiscal_year_by_date(cls, datetime_obj):
+        """Return fiscal year by given nepali datetime object"""
+        if datetime_obj.month < 4:
+            fiscal_year = (datetime_obj.year - 1, datetime_obj.year)
+        else:
+            fiscal_year = (datetime_obj.year, datetime_obj.year + 1)
+        return fiscal_year
 
     def timetuple(self):
         """Return local time tuple compatible with time.localtime()."""
