@@ -16,4 +16,10 @@
 you're comfortable with.**
 
 
+## Preparing a new release
+- Checkout out from the `master` branch with the name of branch of the version like `v1.0.8.3`.
+- Update the release version in the `nepali_datetime/__init__.py` file name by updating the variable `__version__`.
+- Update the documentation to reflect the release version by rebuilding the documentation inside `docs/` using the command `make html`. Make sure you install all the documentation dependecies before rebuilding it, which is in `docs/requirements.txt`.
+
+
 #### *** HAPPY CONTRIBUTING ! ***
