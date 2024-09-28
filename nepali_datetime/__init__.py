@@ -5,7 +5,7 @@ nepali_datetime.
 
 Supports >= Python3.5
 """
-__version__ = "1.0.8.2"
+__version__ = "1.0.8.3"
 
 __author__ = "Amit Garu <amitgaru2@gmail.com>"
 
