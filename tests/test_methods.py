@@ -19,7 +19,7 @@ class TestDateMethods:
         assert 1 <= ndt.month <= 12
 
         dt = nepali_datetime.date.from_datetime_date(
-            (datetime.datetime.utcnow() + datetime.timedelta(seconds=nepali_datetime.NEPAL_TIME_UTC_OFFSET)).date()
+            (datetime.datetime.now(datetime.UTC) + datetime.timedelta(seconds=nepali_datetime.NEPAL_TIME_UTC_OFFSET)).date()
         )
         assert ndt == dt
 
