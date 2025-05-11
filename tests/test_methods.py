@@ -17,9 +17,18 @@ class TestDateMethods:
         assert nepali_datetime.MINYEAR <= ndt.year <= nepali_datetime.MAXYEAR
         assert 1 <= ndt.day <= 32
         assert 1 <= ndt.month <= 12
-
+        
+        """### Note on Python Version Compatibility
+        - The usage of `datetime.UTC` requires Python 3.11 or later.
+        - If the project must support Python 3.10 or earlier, an alternative implementation using `datetime.timezone.utc` can be provided.
+        """
+        if not hasattr(datetime, 'UTC'):
+          UTC = datetime.timezone.utc
+        else:
+          UTC = datetime.UTC
+        
         dt = nepali_datetime.date.from_datetime_date(
-            (datetime.datetime.utcnow() + datetime.timedelta(seconds=nepali_datetime.NEPAL_TIME_UTC_OFFSET)).date()
+            (datetime.datetime.now(UTC) + datetime.timedelta(seconds=nepali_datetime.NEPAL_TIME_UTC_OFFSET)).date()
         )
         assert ndt == dt
 
